@@ -20,3 +20,14 @@ C:\Source\CoreApplicationTest\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreAp
 C:\Source\CoreApplicationTest\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreApplicationTest.AssemblyInfo.cs
 C:\Source\CoreApplicationTest\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreApplicationTest.dll
 C:\Source\CoreApplicationTest\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreApplicationTest.pdb
+C:\Source\core\CoreApplicationTest\bin\Debug\netcoreapp2.0\CoreApplicationTest.deps.json
+C:\Source\core\CoreApplicationTest\bin\Debug\netcoreapp2.0\CoreApplicationTest.runtimeconfig.json
+C:\Source\core\CoreApplicationTest\bin\Debug\netcoreapp2.0\CoreApplicationTest.runtimeconfig.dev.json
+C:\Source\core\CoreApplicationTest\bin\Debug\netcoreapp2.0\CoreApplicationTest.dll
+C:\Source\core\CoreApplicationTest\bin\Debug\netcoreapp2.0\CoreApplicationTest.pdb
+C:\Source\core\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreApplicationTest.csprojResolveAssemblyReference.cache
+C:\Source\core\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreApplicationTest.csproj.CoreCompileInputs.cache
+C:\Source\core\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreApplicationTest.AssemblyInfoInputs.cache
+C:\Source\core\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreApplicationTest.AssemblyInfo.cs
+C:\Source\core\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreApplicationTest.dll
+C:\Source\core\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreApplicationTest.pdb
