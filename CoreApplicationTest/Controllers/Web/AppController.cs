@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using CoreApplicationTest.ViewModels;
 using CoreApplicationTest.Services;
 using Microsoft.Extensions.Configuration;
+using CoreApplicationTest.Models;
 
 namespace CoreApplicationTest.Controllers.Web
 {
@@ -13,14 +14,17 @@ namespace CoreApplicationTest.Controllers.Web
     {
         private IMailService _mailService;
         private IConfigurationRoot _config;
+        private CoreContext _context;
 
-        public AppController(IMailService service,IConfigurationRoot config)
+        public AppController(IMailService service,IConfigurationRoot config,CoreContext context)
         {
             _mailService = service;
             _config = config;
+            _context = context;
         }
         public IActionResult Index()
         {
+            var data = _context.Trips.ToList();
             return View();
         }
 
