@@ -1,15 +1,13 @@
 ﻿using CoreApplication.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 
 namespace CoreApplication.Data
 {
     public class CoreContext : DbContext
     {
-         private IConfigurationRoot _config;
+         private static IConfigurationRoot _config { get; set; }
 
         //public CoreContext(DbContextOptions<CoreContext> options)
         //    :base(options)
@@ -24,8 +22,9 @@ namespace CoreApplication.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+            var config = new Configuration(_config);
 
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDb;Database=AnotherCoreDb;Trusted_Connection=true;MultipleActiveResultSets=true;");
+            optionsBuilder.UseSqlServer(config.GetConnectionString());
 
         }
     }

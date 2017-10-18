@@ -33,3 +33,5 @@ C:\Source\core\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreApplicationTest.d
 C:\Source\core\CoreApplicationTest\obj\Debug\netcoreapp2.0\CoreApplicationTest.pdb
 C:\Source\core\CoreApplicationTest\bin\Debug\netcoreapp2.0\CoreApplication.Data.dll
 C:\Source\core\CoreApplicationTest\bin\Debug\netcoreapp2.0\CoreApplication.Data.pdb
+C:\Source\CoreApplicationTest\CoreApplicationTest\bin\Debug\netcoreapp2.0\CoreApplication.Data.dll
+C:\Source\CoreApplicationTest\CoreApplicationTest\bin\Debug\netcoreapp2.0\CoreApplication.Data.pdb

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "bb85cd58249cfbcf37fd34fa30df55ff044769bd"
+    "signature": "3de532486b446ecef84c48fce64f2ff0da9e4e8b"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,7 +9,8 @@
       "CoreApplication.Data/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Design": "2.0.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0"
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0",
+          "Microsoft.Extensions.Configuration": "2.0.0"
         },
         "runtime": {
           "CoreApplication.Data.dll": {}
@@ -74,6 +75,14 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Configuration/2.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "2.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration.Abstractions/2.0.0": {
@@ -488,6 +497,13 @@
       "sha512": "sha512-NqvVdYLbX7N2J2Wz9y3zjhE66JRdROiZZsGhA2u4a9IcIq/jzINC/cLM96BHA+TSOZFPxVdWneqB6/yt9u846A==",
       "path": "microsoft.extensions.caching.memory/2.0.0",
       "hashPath": "microsoft.extensions.caching.memory.2.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SsI4RqI8EH00+cYO96tbftlh87sNUv1eeyuBU1XZdQkG0RrHAOjWgl7P0FoLeTSMXJpOnfweeOWj2d1/5H3FxA==",
+      "path": "microsoft.extensions.configuration/2.0.0",
+      "hashPath": "microsoft.extensions.configuration.2.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration.Abstractions/2.0.0": {
       "type": "package",
