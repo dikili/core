@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreApplicationTest.Models
+namespace CoreApplication.Data.Models
 {
     public class Trip
     {

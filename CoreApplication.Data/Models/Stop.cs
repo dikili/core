@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace CoreApplicationTest.Models
+namespace CoreApplication.Data.Models
 {
     public class Stop
     {
@@ -19,6 +17,5 @@ namespace CoreApplicationTest.Models
         public int Order { get; set; }
 
         public DateTime Arrival { get; set; }
-            
     }
 }

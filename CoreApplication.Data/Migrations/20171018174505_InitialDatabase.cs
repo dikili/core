@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace CoreApplicationTest.Migrations
+namespace CoreApplication.Data.Migrations
 {
     public partial class InitialDatabase : Migration
     {

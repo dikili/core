@@ -1,0 +1,9 @@
+C:\Source\core\CoreApplication.Data\bin\Debug\netcoreapp2.0\CoreApplication.Data.deps.json
+C:\Source\core\CoreApplication.Data\bin\Debug\netcoreapp2.0\CoreApplication.Data.dll
+C:\Source\core\CoreApplication.Data\bin\Debug\netcoreapp2.0\CoreApplication.Data.pdb
+C:\Source\core\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.csproj.CoreCompileInputs.cache
+C:\Source\core\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.AssemblyInfoInputs.cache
+C:\Source\core\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.AssemblyInfo.cs
+C:\Source\core\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.dll
+C:\Source\core\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.pdb
+C:\Source\core\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.csprojResolveAssemblyReference.cache

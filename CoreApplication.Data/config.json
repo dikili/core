@@ -1,0 +1,8 @@
+﻿{
+  "MailSettings": {
+    "ToAddress": "dikili@outlook.com"
+  },
+  "ConnectionStrings": {
+    "CoreContextConnection": "Server=(localdb)\\MSSQLLocalDb;Database=AnotherCoreDb;Trusted_Connection=true;MultipleActiveResultSets=true;"
+  }
+}

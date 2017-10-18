@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using CoreApplicationTest.Services;
 using Microsoft.Extensions.Configuration;
-using CoreApplicationTest.Models;
 
 namespace CoreApplicationTest
 {
@@ -39,15 +38,15 @@ namespace CoreApplicationTest
             services.AddMvc();
             services.AddSingleton(_config);
 
-            services.AddDbContext<CoreContext>();
+            services.AddDbContext<CoreApplication.Data.CoreContext>();
 
-            services.AddTransient<ContextSeedData>();
+            //services.AddTransient<ContextSeedData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app,
-            IHostingEnvironment env,
-            ContextSeedData seeder)
+            IHostingEnvironment env)
+         //   ContextSeedData seeder)
         {
             if (env.IsDevelopment())
             {
@@ -65,7 +64,7 @@ namespace CoreApplicationTest
                 );
             });
 
-            seeder.EnsureDataSeed().Wait();
+          //  seeder.EnsureDataSeed().Wait();
         }
     }
 }

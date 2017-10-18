@@ -6,17 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using CoreApplicationTest.ViewModels;
 using CoreApplicationTest.Services;
 using Microsoft.Extensions.Configuration;
-using CoreApplicationTest.Models;
 
+using CoreApplication.Data;
 namespace CoreApplicationTest.Controllers.Web
 {
     public class AppController : Controller
     {
         private IMailService _mailService;
         private IConfigurationRoot _config;
-        private CoreContext _context;
+        private CoreApplication.Data.CoreContext _context;
 
-        public AppController(IMailService service,IConfigurationRoot config,CoreContext context)
+        public AppController(IMailService service,IConfigurationRoot config,CoreApplication.Data.CoreContext context)
         {
             _mailService = service;
             _config = config;

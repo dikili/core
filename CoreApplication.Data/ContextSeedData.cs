@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CoreApplication.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreApplicationTest.Models
+namespace CoreApplication.Data
 {
     public class ContextSeedData
     {
