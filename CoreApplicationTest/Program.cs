@@ -21,5 +21,8 @@ namespace CoreApplicationTest
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
+
+
+     
     }
 }
