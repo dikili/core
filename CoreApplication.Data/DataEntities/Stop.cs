@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CoreApplication.Data.DataEntities;
 
 namespace CoreApplication.Data.Models
 {
-    public class Stop
+    public class Stop :BaseEntity
     {
-        public int Id { get; set; }
 
         public string Name { get; set; }
 
