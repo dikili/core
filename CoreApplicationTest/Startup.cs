@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using CoreApplicationTest.Services;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace CoreApplicationTest
 {
@@ -15,7 +18,9 @@ namespace CoreApplicationTest
     {
         private IHostingEnvironment _env;
         private IConfigurationRoot _config;
+        
 
+        public IConfiguration Configuration { get; }
         public Startup(IHostingEnvironment env)
         {
             _env = env;
@@ -25,6 +30,7 @@ namespace CoreApplicationTest
                 .AddEnvironmentVariables();
 
             _config = builder.Build();
+            Configuration = _config;
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -38,7 +44,8 @@ namespace CoreApplicationTest
             services.AddMvc();
             services.AddSingleton(_config);
 
-            services.AddDbContext<CoreApplication.Data.CoreContext>();
+            services.AddDbContext<CoreApplication.Data.CoreContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("CoreContextConnection")));
 
             //services.AddTransient<ContextSeedData>();
         }
@@ -67,4 +74,7 @@ namespace CoreApplicationTest
           //  seeder.EnsureDataSeed().Wait();
         }
     }
+
+
+    
 }

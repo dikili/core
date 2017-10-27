@@ -14,18 +14,23 @@ namespace CoreApplication.Data
         //{
         //   // _config = config;
         //}
-        public CoreContext() { }
-       
+        public CoreContext(DbContextOptions<CoreContext> options)
+            : base(options)
+        {
+
+        }
+
+
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Stop> Stops { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            var config = new Configuration(_config);
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
+        //    var config = new Configuration(_config);
 
-            optionsBuilder.UseSqlServer(config.GetConnectionString());
+        //    optionsBuilder.UseSqlServer(config.GetConnectionString());
 
-        }
+        //}
     }
 }

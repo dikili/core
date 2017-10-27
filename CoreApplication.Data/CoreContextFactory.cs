@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace CoreApplication.Data
 {
-    public class CoreContextFactory //: IDesignTimeDbContextFactory<CoreContext>
-    {
+    //public class DesignTimeDbContextFactory //: IDesignTimeDbContextFactory<CoreContext>
+    //{
         //private IConfigurationRoot _config;
 
         //public CoreContextFactory(IConfigurationRoot config)
@@ -24,5 +25,20 @@ namespace CoreApplication.Data
            
         //    return new CoreContext(builder.Options);
         //}
+    //}
+
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<CoreApplication.Data.CoreContext>
+    {
+        public CoreApplication.Data.CoreContext CreateDbContext(string[] args)
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("config.json")
+                .Build();
+            var builder = new DbContextOptionsBuilder<CoreApplication.Data.CoreContext>();
+            var connectionString = configuration.GetConnectionString("CoreContextConnection");
+            builder.UseSqlServer(connectionString);
+            return new CoreApplication.Data.CoreContext(builder.Options);
+        }
     }
 }
