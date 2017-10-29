@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using CoreApplication.Data.DataEntities;
+using CoreApplication.Data.Settings;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -14,6 +15,7 @@ namespace CoreApplication.Data.Repositories
         /// </summary>
         /// <param name="settings">The MongoDb settings object to use to construct the connection string.</param>
         /// <returns>Returns the default connection string from the appsettings.json file.</returns>
+       // public static string GetConnectionString(IOptions<MongoSettings> settings)
         public static string GetConnectionString(IOptions<MongoSettings> settings)
         {
             if (settings == null)

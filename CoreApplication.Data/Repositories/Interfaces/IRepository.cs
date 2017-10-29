@@ -1,11 +1,8 @@
-﻿using System;
+﻿using CoreApplication.Data.DataEntities.Interfaces;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using CoreApplication.Data.DataEntities;
 using System.Threading.Tasks;
-using CoreApplication.Data.DataEntities.Interfaces;
 
 namespace CoreApplication.Data.Repositories.Interfaces
 {
