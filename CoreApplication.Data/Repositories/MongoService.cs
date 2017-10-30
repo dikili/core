@@ -26,6 +26,8 @@ namespace CoreApplication.Data.Repositories
             return $"mongodb://{mongo.User}:{mongo.Pass}@{mongo.Host}:{mongo.Port}/{mongo.Data}";
         }
 
+        
+            
         /// <summary>
         /// Creates and returns a MongoCollection from the specified type and connection string.
         /// </summary>
