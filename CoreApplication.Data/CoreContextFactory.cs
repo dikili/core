@@ -38,7 +38,12 @@ namespace CoreApplication.Data
             var builder = new DbContextOptionsBuilder<CoreApplication.Data.CoreContext>();
             var connectionString = configuration.GetConnectionString("CoreContextConnection");
             builder.UseSqlServer(connectionString);
-            return new CoreApplication.Data.CoreContext(builder.Options);
+            var coreContext= new CoreContext(builder.Options);
+
+            //var seeder = new ContextSeedData(coreContext);
+            //seeder.EnsureDataSeed().Wait();
+
+            return coreContext;
         }
     }
 }

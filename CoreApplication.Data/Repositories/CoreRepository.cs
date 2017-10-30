@@ -18,7 +18,69 @@ namespace CoreApplication.Data.Repositories
     /// <remarks>Mongo Entities are assumed to use strings for Id's.</remarks>
     public class CoreRepository<T> : IRepository<T, int> where T : IEntity<int>
     {
-       
+        private readonly  CoreContext _coreContext;
+
+        public CoreRepository(CoreContext coreContext)
+        {
+            coreContext = _coreContext;
+        }
+
+        public Task AddAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddAsync(IEnumerable<T> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long Count()
+        {
+            // throw new NotImplementedException();
+
+            return _coreContext.Trips.Count();
+        }
+
+        public Task DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Exists(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> GetAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<T>> GetAsync(Func<T, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(IEnumerable<T> entities)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

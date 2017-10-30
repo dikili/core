@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using Microsoft.EntityFrameworkCore.Design;
+using CoreApplication.Data.Repositories;
+using CoreApplication.Data.Repositories.Interfaces;
 
 namespace CoreApplicationTest
 {
@@ -46,6 +48,8 @@ namespace CoreApplicationTest
 
             services.AddDbContext<CoreApplication.Data.CoreContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("CoreContextConnection")));
+
+            services.AddScoped(typeof(IRepository<>), typeof(CoreRepository<>));
 
             //services.AddTransient<ContextSeedData>();
         }

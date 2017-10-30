@@ -17,7 +17,7 @@ namespace CoreApplication.Data
         public CoreContext(DbContextOptions<CoreContext> options)
             : base(options)
         {
-
+        
         }
 
 
@@ -32,5 +32,7 @@ namespace CoreApplication.Data
         //    optionsBuilder.UseSqlServer(config.GetConnectionString());
 
         //}
+
+
     }
 }

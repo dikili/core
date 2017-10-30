@@ -3,6 +3,6 @@
     "ToAddress": "dikili@outlook.com"
   },
   "ConnectionStrings": {
-    "CoreContextConnection": "Server=localhost\\SQLEXPRESS;Database=newone;Trusted_Connection=True;"
+    "CoreContextConnection": "Server=localhost\\SQLEXPRESS;Database=dikilitest;Trusted_Connection=True;"
   }
 }

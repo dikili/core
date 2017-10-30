@@ -8,23 +8,30 @@ using CoreApplicationTest.Services;
 using Microsoft.Extensions.Configuration;
 
 using CoreApplication.Data;
+using CoreApplication.Data.Repositories;
+using CoreApplication.Data.Models;
+using CoreApplication.Data.Repositories.Interfaces;
+
 namespace CoreApplicationTest.Controllers.Web
 {
     public class AppController : Controller
     {
         private IMailService _mailService;
         private IConfigurationRoot _config;
-        private CoreApplication.Data.CoreContext _context;
+        //  private CoreApplication.Data.CoreContext _context;
 
-        public AppController(IMailService service,IConfigurationRoot config,CoreApplication.Data.CoreContext context)
+        private IRepository<Trip,int> _coreRepo;
+
+        public AppController(IMailService service,IConfigurationRoot config, CoreRepository<Trip> coreRepo)
         {
             _mailService = service;
             _config = config;
-            _context = context;
+            _coreRepo = coreRepo;
         }
         public IActionResult Index()
         {
-            var data = _context.Trips.ToList();
+            //  var data = _context.Trips.ToList();
+            var result = _coreRepo.Count();
             return View();
         }
 

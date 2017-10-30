@@ -3,7 +3,7 @@
     "ToAddress": "dikili@outlook.com"
   },
   "ConnectionStrings": {
-    "CoreContextConnection": "Server=(localdb)\\MSSQLLocalDb;Database=AnotherCoreDb;Trusted_Connection=true;MultipleActiveResultSets=true;",
+    "CoreContextConnection": "Server=(localdb)\\MSSQLLocalDb;Database=dikilimain;Trusted_Connection=true;MultipleActiveResultSets=true;Integrated Security=True;",
     "ExpressConnection": "Server=localhost\\SQLEXPRESS;Database=newone;Trusted_Connection=True;"
   }
 }
