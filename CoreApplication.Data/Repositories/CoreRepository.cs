@@ -16,13 +16,13 @@ namespace CoreApplication.Data.Repositories
     /// </summary>
     /// <typeparam name="T">The type contained in the repository.</typeparam>
     /// <remarks>Mongo Entities are assumed to use strings for Id's.</remarks>
-    public class CoreRepository<T> : IRepository<T, int> where T : IEntity<int>
+    public class CoreRepository<T> : ICoreRepository<T> where T : IEntity<int>
     {
         private readonly  CoreContext _coreContext;
 
         public CoreRepository(CoreContext coreContext)
         {
-            coreContext = _coreContext;
+            _coreContext = coreContext;
         }
 
         public Task AddAsync(T entity)

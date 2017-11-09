@@ -49,7 +49,9 @@ namespace CoreApplicationTest
             services.AddDbContext<CoreApplication.Data.CoreContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("CoreContextConnection")));
 
-            services.AddScoped(typeof(IRepository<>), typeof(CoreRepository<>));
+            services.AddTransient(typeof(ICoreRepository<>), typeof(CoreRepository<>));
+
+           
 
             //services.AddTransient<ContextSeedData>();
         }

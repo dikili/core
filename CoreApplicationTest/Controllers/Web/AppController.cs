@@ -20,9 +20,9 @@ namespace CoreApplicationTest.Controllers.Web
         private IConfigurationRoot _config;
         //  private CoreApplication.Data.CoreContext _context;
 
-        private IRepository<Trip,int> _coreRepo;
+        private ICoreRepository<Trip> _coreRepo;
 
-        public AppController(IMailService service,IConfigurationRoot config, CoreRepository<Trip> coreRepo)
+        public AppController(IMailService service,IConfigurationRoot config, ICoreRepository<Trip> coreRepo)
         {
             _mailService = service;
             _config = config;
