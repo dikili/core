@@ -11,8 +11,8 @@ using System;
 namespace CoreApplication.Data.Migrations
 {
     [DbContext(typeof(CoreContext))]
-    [Migration("20171030135124_InitialDbCre")]
-    partial class InitialDbCre
+    [Migration("20171110170955_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

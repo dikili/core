@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CoreApplication.Data.Migrations
 {
-    public partial class InitialDbCre : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

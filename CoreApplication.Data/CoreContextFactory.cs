@@ -31,18 +31,20 @@ namespace CoreApplication.Data
     {
         public CoreApplication.Data.CoreContext CreateDbContext(string[] args)
         {
+            var currentPath = Directory.GetCurrentDirectory();
+
+            var mainDir = Directory.GetDirectoryRoot(currentPath);
+
             IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("config.json")
+                .SetBasePath(currentPath)
+                .AddJsonFile("C:/Source/core/CoreApplicationTest/config.json" )
                 .Build();
             var builder = new DbContextOptionsBuilder<CoreApplication.Data.CoreContext>();
             var connectionString = configuration.GetConnectionString("CoreContextConnection");
             builder.UseSqlServer(connectionString);
             var coreContext= new CoreContext(builder.Options);
-
             //var seeder = new ContextSeedData(coreContext);
             //seeder.EnsureDataSeed().Wait();
-
             return coreContext;
         }
     }
