@@ -17,12 +17,12 @@ namespace CoreApplicationTest.Controllers.Web
     public class AppController : Controller
     {
         private IMailService _mailService;
-        private IConfigurationRoot _config;
+        private IConfiguration _config;
         //  private CoreApplication.Data.CoreContext _context;
 
         private ICoreRepository<Trip> _coreRepo;
 
-        public AppController(IMailService service,IConfigurationRoot config, ICoreRepository<Trip> coreRepo)
+        public AppController(IMailService service,IConfiguration config, ICoreRepository<Trip> coreRepo)
         {
             _mailService = service;
             _config = config;

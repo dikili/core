@@ -19,35 +19,36 @@ namespace CoreApplicationTest
     public class Startup
     {
         private IHostingEnvironment _env;
-        private IConfigurationRoot _config;
+       // private IConfigurationRoot _config;
         
 
-        public IConfiguration Configuration { get; }
-        public Startup(IHostingEnvironment env)
+        private  IConfiguration _config { get; }
+        public Startup(IConfiguration config,IHostingEnvironment env)
         {
             _env = env;
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(_env.ContentRootPath)
-                .AddJsonFile("config.json")
-                .AddEnvironmentVariables();
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(_env.ContentRootPath)
+            //    .AddJsonFile("config.json")
+            //    .AddEnvironmentVariables();
 
-            _config = builder.Build();
-            Configuration = _config;
+            _config = config;
+           // Configuration = config;
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            if(_env.IsEnvironment("Development") || _env.IsEnvironment("Testing"))
+            if (_env.IsEnvironment("Development") || _env.IsEnvironment("Testing"))
             {
                 services.AddScoped<IMailService, DebugMailService>();
             }
-           //else implement a production one for the mail service here
+
+            //else implement a production one for the mail service here
             services.AddMvc();
             services.AddSingleton(_config);
 
             services.AddDbContext<CoreApplication.Data.CoreContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("CoreContextConnection")));
+            options.UseSqlServer(_config.GetConnectionString("CoreContextConnection")));
 
             services.AddTransient(typeof(ICoreRepository<>), typeof(CoreRepository<>));
 
