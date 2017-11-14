@@ -1,0 +1,58 @@
+﻿[
+  {
+    "Name": "Stop One",
+    "Latitude": 12.6,
+    "Longtitude": 18.9,
+    "Order": 1,
+    "Arrival": "2018-01-02T23:28:56.782Z"
+  },
+  {
+    "Name": "Stop Two",
+    "Latitude": 15.4,
+    "Longtitude": 18.9,
+    "Order": 2,
+    "Arrival": "2018-01-03T23:28:56.782Z"
+  },
+  {
+    "Name": "Stop Three",
+    "Latitude": 15.4,
+    "Longtitude": 20.9,
+    "Order": 3,
+    "Arrival": "2018-01-04T23:28:56.782Z"
+  },
+  {
+    "Name": "Stop Four",
+    "Latitude": 35.4,
+    "Longtitude": 18.9,
+    "Order": 4,
+    "Arrival": "2018-01-05T23:28:56.782Z"
+  },
+  {
+    "Name": "Stop Five",
+    "Latitude": 15.65,
+    "Longtitude": 17.29,
+    "Order": 5,
+    "Arrival": "2018-01-06T23:28:56.782Z"
+  },
+  {
+    "Name": "Stop Six",
+    "Latitude": 15.4,
+    "Longtitude": 18.9,
+    "Order": 6,
+    "Arrival": "2018-02-01T23:28:56.782Z"
+  },
+  {
+    "Name": "Stop Seven",
+    "Latitude": 15.4,
+    "Longtitude": 18.9,
+    "Order": 7,
+    "Arrival": "2018-03-01T23:28:56.782Z"
+  },
+  {
+    "Name": "Stop Eight",
+    "Latitude": 10.4,
+    "Longtitude": 14.9,
+    "Order": 8,
+    "Arrival": "2018-04-01T23:28:56.782Z"
+  }
+]

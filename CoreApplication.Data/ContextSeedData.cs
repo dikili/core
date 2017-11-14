@@ -1,6 +1,9 @@
 ﻿using CoreApplication.Data.Models;
+using Microsoft.AspNetCore.Hosting;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,15 +12,41 @@ namespace CoreApplication.Data
 {
     public class ContextSeedData
     {
-        private CoreContext _context;
+        private readonly CoreContext _context;
+        private readonly IHostingEnvironment _env;
 
-        public ContextSeedData(CoreContext context)
+        public ContextSeedData(CoreContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
+        public void Seed()
+        {
+           // Ensure that database is created ..
+            _context.Database.EnsureCreated();
 
+            // Need to read from a file for the sample data
+
+            var filePath = Path.Combine(Directory.GetParent(_env.ContentRootPath).ToString(), @"CoreApplication.Data/Stop.json");
+            var json = File.ReadAllText(filePath);
+            var stops = JsonConvert.DeserializeObject<IEnumerable<Stop>>(json);
+            _context.AddRange(stops);
+
+            var trip = new Trip()
+            {
+                DateCreated = DateTime.Now,
+                Stops = stops.ToList(),
+                Name = "Belarus",
+                UserName = "Dikili"
+            };
+            _context.Trips.Add(trip);
+            _context.SaveChanges();
+
+        }
         public async Task EnsureDataSeed()
         {
+          
+
             if(!_context.Trips.Any())
             {
                 var usTrip = new Trip()
