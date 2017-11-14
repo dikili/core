@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using CoreApplication.Data.Repositories;
 using CoreApplication.Data.Repositories.Interfaces;
 using CoreApplication.Data;
+using CoreApplication.Data.Uow;
 
 namespace CoreApplicationTest
 {
@@ -50,6 +51,8 @@ namespace CoreApplicationTest
 
             services.AddDbContext<CoreContext>(options =>
             options.UseSqlServer(_config.GetConnectionString("CoreContextConnection")));
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddTransient(typeof(ICoreRepository<>), typeof(CoreRepository<>));
             services.AddTransient<ContextSeedData>();

@@ -39,7 +39,7 @@ namespace CoreApplication.Data.Repositories
         {
             // throw new NotImplementedException();
 
-            return _coreContext.Trips.Count();
+            return 5;//_coreContext.Trips.Count();
         }
 
         public Task DeleteAsync(int id)
