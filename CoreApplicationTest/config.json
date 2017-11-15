@@ -4,5 +4,11 @@
   },
   "ConnectionStrings": {
     "CoreContextConnection": "Server=(localdb)\\MSSQLLocalDb;Database=dikilitest;Trusted_Connection=True;MultipleActiveResultSets=true"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information", //we could have used our project name since loggings will be written out with that
+      "Microsoft": "Warning"  // everything that starts with Microsoft will have warning level logging
+    }
   }
 }

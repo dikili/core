@@ -1,7 +1,7 @@
 ﻿using CoreApplication.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.IO;
+
 
 namespace CoreApplication.Data
 {

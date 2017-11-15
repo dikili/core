@@ -12,7 +12,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0",
           "Microsoft.Extensions.Configuration": "2.0.0",
           "Microsoft.Extensions.Configuration.Json": "2.0.0",
-          "MongoDB.Driver": "2.4.4"
+          "MongoDB.Driver": "2.4.4",
+          "Microsoft.AspNetCore.Hosting.Abstractions": "2.0.0.0"
         },
         "runtime": {
           "CoreApplication.Data.dll": {}
@@ -1176,6 +1177,11 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
+      },
+      "Microsoft.AspNetCore.Hosting.Abstractions/2.0.0.0": {
+        "runtime": {
+          "Microsoft.AspNetCore.Hosting.Abstractions.dll": {}
+        }
       }
     }
   },
@@ -1933,6 +1939,11 @@
       "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Hosting.Abstractions/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }
