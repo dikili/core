@@ -13,6 +13,8 @@ using System.IO;
 using Microsoft.EntityFrameworkCore.Design;
 using CoreApplication.Data.Repositories;
 using CoreApplication.Data.Repositories.Interfaces;
+using CoreApplication.Data;
+using CoreApplication.Data.Uow;
 
 namespace CoreApplicationTest
 {
@@ -47,11 +49,13 @@ namespace CoreApplicationTest
             services.AddMvc();
             services.AddSingleton(_config);
 
-            services.AddDbContext<CoreApplication.Data.CoreContext>(options =>
+            services.AddDbContext<CoreContext>(options =>
             options.UseSqlServer(_config.GetConnectionString("CoreContextConnection")));
 
-            services.AddTransient(typeof(ICoreRepository<>), typeof(CoreRepository<>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
+            services.AddTransient(typeof(ICoreRepository<>), typeof(CoreRepository<>));
+            services.AddTransient<ContextSeedData>();
            
 
             //services.AddTransient<ContextSeedData>();
@@ -79,6 +83,18 @@ namespace CoreApplicationTest
             });
 
           //  seeder.EnsureDataSeed().Wait();
+
+            if(_env.IsDevelopment())
+            {
+                //Seed the database
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+
+                    var service = scope.ServiceProvider.GetService<ContextSeedData>();
+                    service.Seed();
+
+                }
+            }
         }
     }
 

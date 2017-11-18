@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using CoreApplicationTest.ViewModels;
 using CoreApplicationTest.Services;
 using Microsoft.Extensions.Configuration;
-
-using CoreApplication.Data;
-using CoreApplication.Data.Repositories;
-using CoreApplication.Data.Models;
-using CoreApplication.Data.Repositories.Interfaces;
+using CoreApplication.Data.Uow;
 
 namespace CoreApplicationTest.Controllers.Web
 {
@@ -20,18 +12,18 @@ namespace CoreApplicationTest.Controllers.Web
         private IConfiguration _config;
         //  private CoreApplication.Data.CoreContext _context;
 
-        private ICoreRepository<Trip> _coreRepo;
+        private IUnitOfWork _uow;
 
-        public AppController(IMailService service,IConfiguration config, ICoreRepository<Trip> coreRepo)
+        public AppController(IMailService service,IConfiguration config, IUnitOfWork uow)
         {
             _mailService = service;
             _config = config;
-            _coreRepo = coreRepo;
+            _uow = uow;
         }
         public IActionResult Index()
         {
             //  var data = _context.Trips.ToList();
-            var result = _coreRepo.Count();
+            var result = _uow.TripRepository.Count(); //_coreRepo.Count();
             return View();
         }
 

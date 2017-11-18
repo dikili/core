@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using CoreApplication.Data.DataEntities;
 using CoreApplication.Data.DataEntities.Interfaces;
 using CoreApplication.Data.Repositories.Interfaces;
-using CoreApplication.Data.Settings;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 
 namespace CoreApplication.Data.Repositories
 {
@@ -19,10 +18,12 @@ namespace CoreApplication.Data.Repositories
     public class CoreRepository<T> : ICoreRepository<T> where T : IEntity<int>
     {
         private readonly  CoreContext _coreContext;
+        private readonly ILogger<CoreRepository<BaseEntity>> _logger;
 
-        public CoreRepository(CoreContext coreContext)
+        public CoreRepository(CoreContext coreContext,ILogger<CoreRepository<BaseEntity>> logger)
         {
             _coreContext = coreContext;
+            _logger = logger;
         }
 
         public Task AddAsync(T entity)
@@ -39,6 +40,7 @@ namespace CoreApplication.Data.Repositories
         {
             // throw new NotImplementedException();
 
+            _logger.LogInformation("log something");
             return _coreContext.Trips.Count();
         }
 
