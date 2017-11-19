@@ -41,7 +41,7 @@ namespace CoreApplication.Data.Repositories
             // throw new NotImplementedException();
 
             _logger.LogInformation("log something");
-            return _coreContext.Trips.Count();
+            return _coreContext.Categories.Count();
         }
 
         public Task DeleteAsync(int id)

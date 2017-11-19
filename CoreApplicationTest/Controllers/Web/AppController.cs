@@ -3,6 +3,7 @@ using CoreApplicationTest.ViewModels;
 using CoreApplicationTest.Services;
 using Microsoft.Extensions.Configuration;
 using CoreApplication.Data.Uow;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CoreApplicationTest.Controllers.Web
 {
@@ -20,10 +21,12 @@ namespace CoreApplicationTest.Controllers.Web
             _config = config;
             _uow = uow;
         }
+
+        [Authorize]
         public IActionResult Index()
         {
             //  var data = _context.Trips.ToList();
-            var result = _uow.TripRepository.Count(); //_coreRepo.Count();
+            var result = _uow.AdRepository.Count(); //_coreRepo.Count();
             return View();
         }
 

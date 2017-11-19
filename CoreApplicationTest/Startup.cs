@@ -14,7 +14,9 @@ using Microsoft.EntityFrameworkCore.Design;
 using CoreApplication.Data.Repositories;
 using CoreApplication.Data.Repositories.Interfaces;
 using CoreApplication.Data;
+using CoreApplication.Data.DataEntities;
 using CoreApplication.Data.Uow;
+using Microsoft.AspNetCore.Identity;
 
 namespace CoreApplicationTest
 {
@@ -40,10 +42,19 @@ namespace CoreApplicationTest
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<AdUser, IdentityRole>(cfg =>
+                {
+                    cfg.User.RequireUniqueEmail = true;
+                    cfg.Password.RequireDigit = true;
+                }
+            ).AddEntityFrameworkStores<CoreContext>();
+
             if (_env.IsEnvironment("Development") || _env.IsEnvironment("Testing"))
             {
                 services.AddScoped<IMailService, DebugMailService>();
             }
+
+            
 
             //else implement a production one for the mail service here
             services.AddMvc();
@@ -72,6 +83,8 @@ namespace CoreApplicationTest
             }
 
             app.UseStaticFiles();
+            //authentication needs to be before MVC in the asp.net pipeline
+            app.UseAuthentication();
 
             app.UseMvc(config =>
             {
@@ -91,7 +104,7 @@ namespace CoreApplicationTest
                 {
 
                     var service = scope.ServiceProvider.GetService<ContextSeedData>();
-                    service.Seed();
+                    service.Seed().Wait();
 
                 }
             }

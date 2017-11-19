@@ -11,9 +11,10 @@ using System;
 namespace CoreApplication.Data.Migrations
 {
     [DbContext(typeof(CoreContext))]
-    partial class CoreContextModelSnapshot : ModelSnapshot
+    [Migration("20171119175959_InitialAllandIdentity")]
+    partial class InitialAllandIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,22 +76,6 @@ namespace CoreApplication.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("CoreApplication.Data.DataEntities.Attachment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("AdId");
-
-                    b.Property<string>("ImagePath");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdId");
-
-                    b.ToTable("Attachment");
-                });
-
             modelBuilder.Entity("CoreApplication.Data.DataEntities.Response", b =>
                 {
                     b.Property<int>("Id")
@@ -117,6 +102,8 @@ namespace CoreApplication.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("AdPostDate");
+
+                    b.Property<Guid>("AttachmentId");
 
                     b.Property<int>("CategoryId");
 
@@ -267,16 +254,9 @@ namespace CoreApplication.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CoreApplication.Data.DataEntities.Attachment", b =>
-                {
-                    b.HasOne("CoreApplication.Data.Models.Ad", "Ad")
-                        .WithMany("Attachments")
-                        .HasForeignKey("AdId");
-                });
-
             modelBuilder.Entity("CoreApplication.Data.DataEntities.Response", b =>
                 {
-                    b.HasOne("CoreApplication.Data.Models.Ad", "Ad")
+                    b.HasOne("CoreApplication.Data.Models.Ad")
                         .WithMany("Responses")
                         .HasForeignKey("AdId")
                         .OnDelete(DeleteBehavior.Cascade);
