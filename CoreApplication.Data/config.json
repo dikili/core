@@ -1,8 +1,8 @@
 ﻿{
   "MailSettings": {
     "ToAddress": "dikili@outlook.com"
-  },
-  "ConnectionStrings": {
-    "ExpressConnection": "Server=localhost\\SQLEXPRESS;Database=newone;Trusted_Connection=True;"
   }
+  //"ConnectionStrings": {
+  //  "ExpressConnection": "Server=localhost\\SQLEXPRESS;Database=newone;Trusted_Connection=True;"
+  //}
 }
