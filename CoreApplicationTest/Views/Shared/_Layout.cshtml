@@ -47,6 +47,16 @@
                             <i class="fa fa-print"></i> Print
                         </a>
                     </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a class="btn btn-sm btn-info" asp-controller="Account" asp-action="Logout"><i class="fa fa-print">LogOut</i></a></li>
+                    }
+                    else
+                    {
+                        <li><a class="btn btn-sm btn-info" asp-controller="Account" asp-action="Login"><i class="fa fa-print">Login</i></a></li>
+                       
+                    }
+                    
                 </ul>
             </div>
         </nav>

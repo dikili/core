@@ -17,6 +17,7 @@ using CoreApplication.Data;
 using CoreApplication.Data.DataEntities;
 using CoreApplication.Data.Uow;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoreApplicationTest
 {
@@ -57,7 +58,25 @@ namespace CoreApplicationTest
             
 
             //else implement a production one for the mail service here
+
+            // if the environment is production use https rather than http
+            //below is a sample
+
+            // RequireHttpsAttribute can be used in certain controllers
+            // In certain Actions ...
+            // but for our case below it will be through out the site...
+            
+            //services.AddMvc(opt =>
+            //{
+            //    if (_env.IsProduction())
+            //    {
+            //        opt.Filters.Add(new RequireHttpsAttribute());
+            //    }
+            //});
+
             services.AddMvc();
+
+
             services.AddSingleton(_config);
 
             services.AddDbContext<CoreContext>(options =>
