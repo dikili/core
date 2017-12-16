@@ -3,10 +3,13 @@ using CoreApplicationTest.ViewModels;
 using CoreApplicationTest.Services;
 using Microsoft.Extensions.Configuration;
 using CoreApplication.Data.Uow;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 
 namespace CoreApplicationTest.Controllers.Web
 {
+    [Route("api/[Controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AppController : Controller
     {
         private IMailService _mailService;
@@ -22,7 +25,7 @@ namespace CoreApplicationTest.Controllers.Web
             _uow = uow;
         }
 
-        [Authorize]
+      [HttpGet]
         public IActionResult Index()
         {
             //  var data = _context.Trips.ToList();

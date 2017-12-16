@@ -10,6 +10,7 @@ using CoreApplicationTest.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
+using System.Text;
 using Microsoft.EntityFrameworkCore.Design;
 using CoreApplication.Data.Repositories;
 using CoreApplication.Data.Repositories.Interfaces;
@@ -18,6 +19,7 @@ using CoreApplication.Data.DataEntities;
 using CoreApplication.Data.Uow;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CoreApplicationTest
 {
@@ -49,6 +51,19 @@ namespace CoreApplicationTest
                     cfg.Password.RequireDigit = true;
                 }
             ).AddEntityFrameworkStores<CoreContext>();
+
+           // last bit to add token authentication
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>//json web token authentication enabling after setting the token generation up we need to tell startup.cs what should the token be like
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = _config["Tokens:Issuer"],
+                        ValidAudience = _config["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
+                    };
+                });
 
             if (_env.IsEnvironment("Development") || _env.IsEnvironment("Testing"))
             {
@@ -103,6 +118,7 @@ namespace CoreApplicationTest
 
             app.UseStaticFiles();
             //authentication needs to be before MVC in the asp.net pipeline
+            // this default assumes cookie based authentication..
             app.UseAuthentication();
 
             app.UseMvc(config =>
