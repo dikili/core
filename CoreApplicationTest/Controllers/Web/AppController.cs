@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CoreApplicationTest.Controllers.Web
 {
-    [Route("api/[Controller]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Route("api/[Controller]")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AppController : Controller
     {
         private IMailService _mailService;
