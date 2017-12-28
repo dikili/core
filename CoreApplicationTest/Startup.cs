@@ -101,8 +101,8 @@ namespace CoreApplicationTest
 
             services.AddTransient(typeof(ICoreRepository<>), typeof(CoreRepository<>));
             services.AddTransient<ContextSeedData>();
-           
 
+            services.AddCors();
             //services.AddTransient<ContextSeedData>();
         }
 
@@ -120,6 +120,9 @@ namespace CoreApplicationTest
             //authentication needs to be before MVC in the asp.net pipeline
             // this default assumes cookie based authentication..
             app.UseAuthentication();
+
+            //For development reasons only we are allowing any request basically
+            app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
 
             app.UseMvc(config =>
             {

@@ -1,0 +1,10 @@
+C:\Source\CoreApplicationTest\CoreApplication.API\bin\Debug\netcoreapp2.0\CoreApplication.API.deps.json
+C:\Source\CoreApplicationTest\CoreApplication.API\bin\Debug\netcoreapp2.0\CoreApplication.API.runtimeconfig.json
+C:\Source\CoreApplicationTest\CoreApplication.API\bin\Debug\netcoreapp2.0\CoreApplication.API.runtimeconfig.dev.json
+C:\Source\CoreApplicationTest\CoreApplication.API\bin\Debug\netcoreapp2.0\CoreApplication.API.dll
+C:\Source\CoreApplicationTest\CoreApplication.API\bin\Debug\netcoreapp2.0\CoreApplication.API.pdb
+C:\Source\CoreApplicationTest\CoreApplication.API\obj\Debug\netcoreapp2.0\CoreApplication.API.csproj.CoreCompileInputs.cache
+C:\Source\CoreApplicationTest\CoreApplication.API\obj\Debug\netcoreapp2.0\CoreApplication.API.AssemblyInfoInputs.cache
+C:\Source\CoreApplicationTest\CoreApplication.API\obj\Debug\netcoreapp2.0\CoreApplication.API.AssemblyInfo.cs
+C:\Source\CoreApplicationTest\CoreApplication.API\obj\Debug\netcoreapp2.0\CoreApplication.API.dll
+C:\Source\CoreApplicationTest\CoreApplication.API\obj\Debug\netcoreapp2.0\CoreApplication.API.pdb
