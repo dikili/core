@@ -26,6 +26,8 @@ namespace CoreApplication.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Response> Responses { get; set; }
 
+        public DbSet<LoginUser> LoginUsers{get;set;}
+        
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    base.OnConfiguring(optionsBuilder);

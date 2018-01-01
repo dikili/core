@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CoreApplication.API.Models;
+using CoreApplication.Data.DataEntities;
 
 namespace CoreApplication.API.Controllers
 {
@@ -12,6 +13,9 @@ namespace CoreApplication.API.Controllers
     { 
         List<CoreTest> tests=new List<CoreTest>();
         CoreTest test=new CoreTest();
+
+        AdUser adUser=new AdUser();
+        
         public  ValuesController()
         {    
             test=new CoreTest{Id=3,Name="hello"};

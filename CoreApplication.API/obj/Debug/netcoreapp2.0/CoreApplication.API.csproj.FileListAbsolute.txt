@@ -9,3 +9,5 @@ C:\Source\CoreApplicationTest\CoreApplication.API\obj\Debug\netcoreapp2.0\CoreAp
 C:\Source\CoreApplicationTest\CoreApplication.API\obj\Debug\netcoreapp2.0\CoreApplication.API.pdb
 C:\Source\CoreApplicationTest\CoreApplication.API\bin\Debug\netcoreapp2.0\CoreApplication.API.pdb
 C:\Source\CoreApplicationTest\CoreApplication.API\obj\Debug\netcoreapp2.0\CoreApplication.API.csprojResolveAssemblyReference.cache
+C:\Source\CoreApplicationTest\CoreApplication.API\bin\Debug\netcoreapp2.0\CoreApplication.Data.dll
+C:\Source\CoreApplicationTest\CoreApplication.API\bin\Debug\netcoreapp2.0\CoreApplication.Data.pdb

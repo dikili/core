@@ -8,14 +8,32 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using CoreApplication.Data.Repositories;
+using CoreApplication.Data.Repositories.Interfaces;
+using CoreApplication.Data;
+using CoreApplication.Data.DataEntities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoreApplication.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+                private IHostingEnvironment _env;
+       // private IConfigurationRoot _config;
+        
+
+        private  IConfiguration _config { get; }
+        
+         public Startup(IConfiguration config,IHostingEnvironment env)
         {
-            Configuration = configuration;
+            _env = env;
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(_env.ContentRootPath)
+            //    .AddJsonFile("config.json")
+            //    .AddEnvironmentVariables();
+
+            _config = config;
+           // Configuration = config;
         }
 
         public IConfiguration Configuration { get; }
@@ -23,8 +41,15 @@ namespace CoreApplication.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+          //  services.AddDbContext<CoreContext>(x=>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddDbContext<CoreContext>(options =>
+            options.UseSqlServer(_config.GetConnectionString("CoreContextConnection")));
+
             services.AddMvc();
             services.AddCors();
+
+            services.AddScoped<IAuthRepository,AuthRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
