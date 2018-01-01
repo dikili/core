@@ -12538,6 +12538,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "C:\\Source\\CoreApplicationTest\\CoreApplication.API\\CoreApplication.API.csproj",
       "projectName": "CoreApplication.API",
