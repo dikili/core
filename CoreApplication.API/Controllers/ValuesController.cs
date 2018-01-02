@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CoreApplication.API.Models;
 using CoreApplication.Data.DataEntities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CoreApplication.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     { 

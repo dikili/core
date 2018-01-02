@@ -47,7 +47,7 @@ namespace CoreApplication.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserForLoginDto user)
+        public async Task<IActionResult> Login([FromBody]UserForLoginDto user)
         {
              var userFromRepo=await _repo.Login(user.UserName,user.Password);
 
