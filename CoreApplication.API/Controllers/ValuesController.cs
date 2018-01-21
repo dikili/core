@@ -21,7 +21,7 @@ namespace CoreApplication.API.Controllers
         public  ValuesController()
         {    
             test=new CoreTest{Id=3,Name="hello"};
-           var test2=new CoreTest{Id=4,Name="mello"};
+             var test2=new CoreTest{Id=4,Name="mello"};
             tests.Add(test);
              tests.Add(test2);
         }
