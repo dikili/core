@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-home',
@@ -6,15 +7,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-registerMode= false;
-
-  constructor() { }
+  registerMode= false;
+  values: any;
+  constructor(private http: Http) { }
 
   ngOnInit() {
+    this.getValues();
   }
 
   registerToggle() {
-    this.registerMode = !this.registerMode;
+    this.registerMode = true;
+  }
+  getValues() {
+    this.http.get('http://localhost:49242/api/values').subscribe(response => {
+      console.log(response);
+
+      this.values = response.json();
+    });
   }
 
+  cancelRegister(cancelFlag: boolean) {
+   this.registerMode = cancelFlag;
+  }
 }
