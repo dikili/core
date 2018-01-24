@@ -23,9 +23,10 @@ namespace CoreApplication.API.Controllers
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]UserForRegisterDto user)
-        {
-
-            var username=user.Username.ToLower();
+        { 
+           string username="";
+           if(!string.IsNullOrEmpty(user.Username))
+                 username=user.Username.ToLower();
               
             if(await _repo.UserExists(username))
               ModelState.AddModelError("Username","Username already exists");

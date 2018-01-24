@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+import { Observable } from 'rxjs/Observable';
+import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
 
 @Injectable()
 export class AuthService {
@@ -10,20 +14,18 @@ export class AuthService {
 constructor(private http: Http) { }
 
 login(model: any) {
-
    return this.http.post(this.baseUrl + 'login', model, this.getRequestOptions()).map((response: Response) => {
     const user = response.json();
     if (user) {
         localStorage.setItem('token', user.tokenString);
         this.userToken = user.tokenString;
     }
-
-});
+}).catch(this.handleError);
 }
 
 register(model: any) {
 
-  return  this.http.post(this.baseUrl + 'register', model, this.getRequestOptions());
+  return  this.http.post(this.baseUrl + 'register', model, this.getRequestOptions()).catch(this.handleError);
 }
 
 logout() {
@@ -35,7 +37,27 @@ logout() {
 private getRequestOptions() {
     const headers = new Headers({'Content-type': 'application/json'});
    return new RequestOptions({headers: headers});
-
 }
 
+private handleError(error: any) {
+
+const applicationError = error.headers.get('Application-Error');
+if (applicationError) {
+  return Observable.throw(applicationError);
+}
+
+const serverError = error.json();
+let modelStateErrors = '';
+
+if (serverError) {
+    for (const key in serverError) {
+        if (serverError[key]) {
+            modelStateErrors += serverError[key] + '\n';
+        }
+    }
+}
+return Observable.throw(
+ modelStateErrors || 'Server Error'
+);
+ }
 }
