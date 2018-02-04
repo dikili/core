@@ -13,7 +13,7 @@ model: any = {};
 @Input() ValuesFromHome: any;
 @Output() cancelRegister= new EventEmitter();
 
-  constructor(private authService: AuthService , private alertify: AlertifyService) { }
+  constructor(private authService: AuthService , private alertifier: AlertifyService) { }
 
   ngOnInit() {
   }
@@ -21,21 +21,21 @@ model: any = {};
   register() {
      this.authService.register(this.model).subscribe(() => {
         //  console.log('registration success');
-        this.alertify.success('Registered Successfully');
+        this.alertifier.success('Registered Successfully');
      }, error => {
       //  console.log(error);
-      this.alertify.error('failed to register');
+      this.alertifier.error('failed to register');
      });
 
     //  console.log(this.model);
     if (this.model.password != null) {
-      this.alertify.message(this.model);
+      this.alertifier.message(this.model);
     }
    }
 
    cancel() {
      this.cancelRegister.emit(false);
     //  console.log('cancelled');
-    this.alertify.warning('cancelled warning');
+    this.alertifier.warning('cancelled warning');
    }
 }
