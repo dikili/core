@@ -52,8 +52,9 @@ namespace CoreApplication.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserForLoginDto user)
         {
-         
-            if(!ModelState.IsValid)
+           throw new Exception("Computer says no");
+
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
              var userFromRepo=await _repo.Login(user.UserName,user.Password);
