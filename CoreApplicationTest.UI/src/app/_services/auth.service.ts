@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
@@ -24,8 +25,11 @@ login(model: any) {
 }
 
 register(model: any) {
-
   return  this.http.post(this.baseUrl + 'register', model, this.getRequestOptions()).catch(this.handleError);
+}
+
+loggedIn() {
+    return tokenNotExpired('token');
 }
 
 logout() {

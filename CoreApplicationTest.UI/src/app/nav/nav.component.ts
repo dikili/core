@@ -29,8 +29,11 @@ model: any= {};
   }
 
   loggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+    // changing this implementation to use angular2-jwt
+    // const token = localStorage.getItem('token');
+    // return !!token;
+
+    return this.authService.loggedIn();
 
   }
 
