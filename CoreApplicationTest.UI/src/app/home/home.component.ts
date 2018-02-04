@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     this.registerMode = true;
   }
   getValues() {
-    this.http.get('http://localhost:49242/api/values').subscribe(response => {
+    this.http.get('http://localhost:8000/api/values').subscribe(response => {
       console.log(response);
 
       this.values = response.json();

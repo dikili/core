@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using CoreApplication.API.DTOs;
 using CoreApplication.Data.DataEntities;
 using CoreApplication.Data.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 namespace CoreApplication.API.Controllers
 {
     [Route("api/[Controller]")]
+    [AllowAnonymous]
     public class AuthController :Controller
     {
         private readonly IAuthRepository _repo;
@@ -50,6 +52,8 @@ namespace CoreApplication.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserForLoginDto user)
         {
+            throw new Exception("Computer says no");
+   
              var userFromRepo=await _repo.Login(user.UserName,user.Password);
 
              if(userFromRepo==null)

@@ -12881,12 +12881,15 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "c:\\Source\\CoreApplicationTest\\CoreApplicationTest\\CoreApplicationTest.csproj",
+      "projectUniqueName": "C:\\Source\\CoreApplicationTest\\CoreApplicationTest\\CoreApplicationTest.csproj",
       "projectName": "CoreApplicationTest",
-      "projectPath": "c:\\Source\\CoreApplicationTest\\CoreApplicationTest\\CoreApplicationTest.csproj",
+      "projectPath": "C:\\Source\\CoreApplicationTest\\CoreApplicationTest\\CoreApplicationTest.csproj",
       "packagesPath": "C:\\Users\\Fatih\\.nuget\\packages\\",
-      "outputPath": "c:\\Source\\CoreApplicationTest\\CoreApplicationTest\\obj\\",
+      "outputPath": "C:\\Source\\CoreApplicationTest\\CoreApplicationTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12906,8 +12909,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "c:\\Source\\CoreApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj": {
-              "projectPath": "c:\\Source\\CoreApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj"
+            "C:\\Source\\CoreApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj": {
+              "projectPath": "C:\\Source\\CoreApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj"
             }
           }
         }

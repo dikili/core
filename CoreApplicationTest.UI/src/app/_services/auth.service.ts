@@ -8,7 +8,7 @@ import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group
 
 @Injectable()
 export class AuthService {
- baseUrl = 'http://localhost:49242/api/auth/';
+ baseUrl = 'http://localhost:8000/api/auth/';
  userToken: any = {};
 
 constructor(private http: Http) { }
