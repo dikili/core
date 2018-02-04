@@ -5,12 +5,14 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
-import { tokenNotExpired } from 'angular2-jwt';
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
  baseUrl = 'http://localhost:8000/api/auth/';
  userToken: any = {};
+ decodedToken: any;
+ JwtHelper: JwtHelper = new JwtHelper();
 
 constructor(private http: Http) { }
 
@@ -20,6 +22,8 @@ login(model: any) {
     if (user) {
         localStorage.setItem('token', user.tokenString);
         this.userToken = user.tokenString;
+        this.decodedToken = this.JwtHelper.decodeToken(this.userToken);
+        console.log(this.decodedToken);
     }
 }).catch(this.handleError);
 }

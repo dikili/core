@@ -24,7 +24,7 @@ model: any = {};
         this.alertifier.success('Registered Successfully');
      }, error => {
       //  console.log(error);
-      this.alertifier.error('failed to register');
+      this.alertifier.error(error);
      });
 
     //  console.log(this.model);
