@@ -9,7 +9,7 @@
       </button>
       <a class="navbar-brand" href="#">Dating App</a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse" *ngIf="!loggedIn()" >
+    <div id="navbar" class="navbar-collapse collapse" *ngIf="loggedIn()" >
       <ul class="nav navbar-nav">
         <li><a href="#">Matches</a></li>
         <li><a href="#">Lists</a></li>
@@ -24,7 +24,6 @@
         </div>
         <button type="submit" class="btn btn-success">Sign in</button>
       </form>
-
       <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
           <!-- <li><a (click)="logout()">Logout</a></li> -->
           <li class="dropdown" dropdown>
