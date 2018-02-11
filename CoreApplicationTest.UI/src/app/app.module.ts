@@ -1,3 +1,4 @@
+import { AuthGuard } from './_guards/auth.guard';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +17,7 @@ import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { Routes, RouterModule } from '@angular/router';
+
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { Routes, RouterModule } from '@angular/router';
   ],
   providers: [
      AuthService,
-     AlertifyService
+     AlertifyService,
+     AuthGuard
     ],
   bootstrap: [AppComponent]
 })
