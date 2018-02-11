@@ -7,8 +7,21 @@ import { AuthGuard } from './_guards/auth.guard';
 
 export const appRoutes: Routes = [
 {path: 'home', component: HomeComponent},
-{path: 'lists', component: ListsComponent, canActivate: [AuthGuard]},
-{path: 'members', component: MemberListComponent, canActivate: [AuthGuard]},
-{path: 'messages', component: MessagesComponent, canActivate: [AuthGuard]},
+{
+path: '',
+runGuardsAndResolvers: 'always',
+canActivate: [AuthGuard],
+children: [
+    {path: 'lists', component: ListsComponent},
+    {path: 'members', component: MemberListComponent},
+    {path: 'messages', component: MessagesComponent}
+]
+},
+
 {path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];
+
+// if not children used it could have been used as below to implement the authentication on the URL
+// {path: 'lists', component: ListsComponent, canActivate: [AuthGuard]},
+// {path: 'members', component: MemberListComponent, canActivate: [AuthGuard]},
+// {path: 'messages', component: MessagesComponent, canActivate: [AuthGuard] }
