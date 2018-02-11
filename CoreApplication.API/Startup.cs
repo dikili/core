@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using CoreApplication.API.Helpers;
 using CoreApplication.Data.Settings;
+using AutoMapper;
 
 namespace CoreApplication.API
 {
@@ -59,10 +60,14 @@ namespace CoreApplication.API
             services.AddDbContext<CoreContext>(options =>
             options.UseSqlServer(_config.GetConnectionString("CoreContextConnection")));
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(opt => 
+            {
+              opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddCors();
-
+            
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDatingRepository,DatingRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>
@@ -77,6 +82,8 @@ namespace CoreApplication.API
                });
 
                services.AddTransient<Seed>();
+
+               services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
