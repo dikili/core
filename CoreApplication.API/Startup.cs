@@ -20,6 +20,7 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using CoreApplication.API.Helpers;
+using CoreApplication.Data.Settings;
 
 namespace CoreApplication.API
 {
@@ -74,10 +75,12 @@ namespace CoreApplication.API
                        ValidateAudience = false
                    };
                });
+
+               services.AddTransient<Seed>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -105,9 +108,13 @@ namespace CoreApplication.API
                     });
                 });
             }
+           // just enable if you want the seed data to work...
+           // seeder.SeedData();
             app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
             app.UseMvc();
+
+           
         }
     }
 }

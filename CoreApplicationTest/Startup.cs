@@ -20,6 +20,7 @@ using CoreApplication.Data.Uow;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using CoreApplication.Data.Settings;
 
 namespace CoreApplicationTest
 {
@@ -101,14 +102,13 @@ namespace CoreApplicationTest
 
             services.AddTransient(typeof(ICoreRepository<>), typeof(CoreRepository<>));
             services.AddTransient<ContextSeedData>();
-
+          
             services.AddCors();
             //services.AddTransient<ContextSeedData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app,
-            IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
          //   ContextSeedData seeder)
         {
             if (env.IsDevelopment())
@@ -134,7 +134,7 @@ namespace CoreApplicationTest
             });
 
           //  seeder.EnsureDataSeed().Wait();
-
+        
             if(_env.IsDevelopment())
             {
                 //Seed the database

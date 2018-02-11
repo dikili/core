@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using CoreApplication.API.Models;
 using CoreApplication.Data.DataEntities;
 using Microsoft.AspNetCore.Authorization;
+using CoreApplication.Data.Settings;
+using Microsoft.EntityFrameworkCore;
+using CoreApplication.Data;
 
 namespace CoreApplication.API.Controllers
 {
@@ -28,8 +31,12 @@ namespace CoreApplication.API.Controllers
         // GET api/values
         [HttpGet]
         public IActionResult GetValues()
-        {
-            
+        {   // In case you want to test seed data stuff...
+            // DesignTimeDbContextFactory fact=new DesignTimeDbContextFactory();
+            // var context=fact.CreateDbContext(new string[] {});
+            // Seed seeder=new Seed(context);
+
+            // seeder.SeedData();
             // return new string[] { "value1", "value2" };
             return Ok(tests);
         }

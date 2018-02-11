@@ -27,6 +27,8 @@ namespace CoreApplication.Data
         public DbSet<Response> Responses { get; set; }
 
         public DbSet<LoginUser> LoginUsers{get;set;}
+
+        public DbSet<Photo> Photos {get;set;}
         
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
