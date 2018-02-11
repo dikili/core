@@ -37,6 +37,7 @@ loggedIn() {
 }
 
 logout() {
+   // when the token is removed it automatically becomes expired..
     localStorage.removeItem('token');
     this.userToken = null;
     console.log('logged out');

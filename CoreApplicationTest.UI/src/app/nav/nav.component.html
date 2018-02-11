@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -21,19 +21,11 @@
           <a [routerLink]="['/messages']" routerLinkActive="router-link-active" >Messages</a>
         </li>               
       </ul>
-      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="navbar-form navbar-right" (ngSubmit)="login()">
-        <div class="form-group">
-          <input type="text" placeholder="Email" #username="ngModel" required [(ngModel)]="model.username" name="username" class="form-control">
-        </div>
-        <div class="form-group">
-          <input type="password" placeholder="Password" #password="ngModel" required [(ngModel)]="model.password" name="password" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-success">Sign in</button>
-      </form>
+      
       <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
           <!-- <li><a (click)="logout()">Logout</a></li> -->
           <li class="dropdown" dropdown>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" dropdownToggle  aria-haspopup="true" aria-expanded="false">Welcome {{ this.authService.decodedToken?.unique_name | titlecase }} <span class="caret"></span></a>
+            <a (click)=false class="dropdown-toggle" data-toggle="dropdown" role="button" dropdownToggle  aria-haspopup="true" aria-expanded="false">Welcome {{ this.authService.decodedToken?.unique_name | titlecase }} <span class="caret"></span></a>
             <ul class="dropdown-menu" *dropdownMenu>
               <li><a href="#"><i class="fa fa-user"></i>Edit Profile</a></li>
               <li role="separator" class="divider"></li>
@@ -44,6 +36,17 @@
 
 
     </div><!--/.navbar-collapse -->
+    <div>
+        <form *ngIf="!loggedIn()" #loginForm="ngForm" class="navbar-form navbar-right" (ngSubmit)="login()">
+            <div class="form-group">
+              <input type="text" placeholder="Email" #username="ngModel" required [(ngModel)]="model.username" name="username" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" #password="ngModel" required [(ngModel)]="model.password" name="password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+    </div>
   </div>
 </nav>
 <!-- 
