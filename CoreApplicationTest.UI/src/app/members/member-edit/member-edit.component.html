@@ -1,6 +1,14 @@
 <div class="container">
   <div class="row">
-    <h1>Your Profile</h1>
+    <div class="col-sm-4">
+        <h1>Your Profile</h1>
+    </div>
+    <div class="col-sm-8">
+      <div class="alert alert-info" [hidden]="!editForm.dirty">
+         <p><strong>Information:</strong>You have made changes. Any unsaved changes will be lost!</p>
+
+      </div>
+    </div>
   </div>
    <div class="row">
      <div class="col-sm-4">
@@ -25,14 +33,9 @@
             </div>
           </div>
           <div class="panel-footer">
-              <div class="btn-group-justified">
-                <div class="btn-group">
-                  <button class="btn btn-primary">Like</button>
-                </div>
-                <div class="btn-group">
-                  <button class="btn btn-success">Message</button>
-                </div>
-              </div>  
+            <!-- if the button is outside of the form tags then you tie these with giving a form to the button and id to the form with same  -->
+            <!-- to tie these together and button submit to call the component -->
+            <button [disabled] ="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
           
           </div>
           </div>
@@ -43,12 +46,14 @@
        <div class="tab-panel">
           <tabset class="member-tabset">
               <tab heading="Edit Profile">
+                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
                   <h4>Description</h4>
                  <textarea name="introduction" rows="6" class="form-control" [(ngModel)]="user.introduction"></textarea>
                   <h4>Looking For:</h4>
                   <textarea name="lookingFor" rows="6" class="form-control" [(ngModel)]="user.lookingFor"></textarea>
                   <h4>Interests</h4>
                   <textarea name="interests" rows="6" class="form-control" [(ngModel)]="user.interests"></textarea>
+                  <h4>Location Details:</h4>
                   <div class="form-inline">
                     <label for="city">
                      City:
@@ -58,7 +63,8 @@
                       Country:
                      </label>
                       <input type="text" class="form-control" name="country" [(ngModel)]="user.country"/>
-                  </div>                 
+                  </div>  
+                </form>               
               </tab>
               <tab heading="Edit Photos">
                <p>Edit photos will go here !</p>
