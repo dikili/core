@@ -12,6 +12,8 @@ namespace CoreApplication.Data.DataEntities
 
         public bool IsMain { get; set; }
 
+        public string PublicId { get; set; }
+
         public LoginUser User { get; set; }
 
         public int LoginUserId { get; set; }
