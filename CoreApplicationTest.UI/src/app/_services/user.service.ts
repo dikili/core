@@ -26,6 +26,11 @@ getUser(id): Observable<User> {
     .catch(this.handleError);
 }
 
+updateUser(id: number, user: User) {
+   return this.http.put(this.baseUrl + 'users/' + id, user, this.jwt())
+    .catch(this.handleError);
+
+}
 // constructor(private authHttp: AuthHttp) { }
 
 // getUsers(): Observable<User[]> {
