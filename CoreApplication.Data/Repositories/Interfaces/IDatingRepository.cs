@@ -10,10 +10,10 @@ namespace CoreApplication.Data.Repositories.Interfaces
 
          void Delete<T>(T entity) where T: class;
 
-         Task<bool> SaveAll();
+         bool SaveAll();
 
-         Task<IEnumerable<LoginUser>> GetUsers();
+         IEnumerable<LoginUser> GetUsers();
 
-         Task<LoginUser> GetUser(int id);
+         LoginUser GetUser(int id);
     }
 }

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using CoreApplication.API.DTOs;
@@ -22,9 +24,9 @@ namespace CoreApplication.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public IActionResult GetUsers()
         {
-            var users=await _userRepo.GetUsers();
+            var users= _userRepo.GetUsers();
 
             var userToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
 
@@ -32,13 +34,40 @@ namespace CoreApplication.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser(int id)
+        public IActionResult GetUser(int id)
         {
-            var user=await _userRepo.GetUser(id);
+            var user= _userRepo.GetUser(id);
 
             var userToReturn=_mapper.Map<UserForDetailedDto>(user);
 
             return Ok(userToReturn);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(int id,[FromBody] UserForUpdateDto user)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+           
+           // Get the current logged in user's id
+
+            var currentUserId=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+           
+            var mainUser=_userRepo.GetUser(id);
+
+            if(mainUser.Id!=currentUserId)
+            {
+                return Unauthorized();
+            }
+
+             _mapper.Map(user, mainUser);
+
+            if( _userRepo.SaveAll())
+                return NoContent();
+           
+           throw new Exception($"Update for userid {id} failed");
         }
         
     }
