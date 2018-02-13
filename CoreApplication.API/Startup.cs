@@ -59,7 +59,9 @@ namespace CoreApplication.API
             var key = Encoding.ASCII.GetBytes(_config.GetSection("AppSettings:Token").Value);
             services.AddDbContext<CoreContext>(options =>
             options.UseSqlServer(_config.GetConnectionString("CoreContextConnection")));
-
+           
+            // services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+            
             services.AddMvc().AddJsonOptions(opt => 
             {
               opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -85,7 +87,7 @@ namespace CoreApplication.API
 
                services.AddAutoMapper();
 
-               services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+               
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
