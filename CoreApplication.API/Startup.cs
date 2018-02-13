@@ -60,7 +60,7 @@ namespace CoreApplication.API
             services.AddDbContext<CoreContext>(options =>
             options.UseSqlServer(_config.GetConnectionString("CoreContextConnection")));
            
-            // services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+             services.Configure<CloudinarySettings>(_config.GetSection("CloudinarySettings"));
             
             services.AddMvc().AddJsonOptions(opt => 
             {
