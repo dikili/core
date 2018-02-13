@@ -1,26 +1,116 @@
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using AutoMapper;
 using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using CoreApplication.API.DTOs;
 using CoreApplication.API.Helpers;
+using CoreApplication.Data.DataEntities;
 using CoreApplication.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Extensions.Options;
 
 namespace CoreApplication.API.Controllers
 {
     // uploading the photos functionality for the users
     [Authorize]
-    [Route("users/{userid}/photos")]
+    [Route("api/users/{userId}/photos")]
     public class PhotosController : Controller
     {
-        private readonly Mapper _mapper;
-        private readonly CloudinarySettings _cloudinaryConfig;
-        public PhotosController(Mapper mapper, CloudinarySettings cloudinaryConfig,IDatingRepository userRepo)
+        private readonly IMapper _mapper;
+        private readonly IDatingRepository _userRepo;
+        private readonly IOptions<CloudinarySettings> _options;
+        private Cloudinary _cloudinary;
+
+        public PhotosController(IMapper mapper, IDatingRepository userRepo, IOptions<CloudinarySettings> options)
         {
-            _cloudinaryConfig = cloudinaryConfig;
+            _options = options;
+            _userRepo = userRepo;
             _mapper = mapper;
+
+            var acc = new Account{
+                Cloud=_options.Value.CloudName,
+                ApiSecret=_options.Value.ApiSecret,
+                ApiKey=_options.Value.ApiKey
+            };
             
-            Account account=new Account();
+            _cloudinary=new Cloudinary(acc);
+
         }
+      
+      [HttpGet("{id}",Name="GetPhoto")]
+      public IActionResult GetPhoto(int id)
+      {
+        var photoFromRepo=_userRepo.GetPhoto(id);
+        
+        var photo= _mapper.Map<PhotoForReturnDto>(photoFromRepo);
+        
+        return Ok(photo);
+      }
+
+
+
+      [HttpPost]
+      public IActionResult AddPhotoForUser(int userId, PhotoForCreationDto photoDto)
+      {
+          var user=_userRepo.GetUser(userId);
+
+          if(user==null)
+            return BadRequest("Can not find user");
+
+          var currentUserId= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+          if(currentUserId!= user.Id)
+           return Unauthorized();
+
+          // Now time to upload the photo to cloudinary
+            
+           var file=photoDto.File;
+
+           var uploadResult= new ImageUploadResult(); 
+
+           if(file.Length>0)
+           {
+               using(var stream = file.OpenReadStream())
+               {
+                   var uploadParams= new ImageUploadParams()
+                   {
+                       File= new FileDescription(file.Name,stream)
+                   };
+
+                   uploadResult = _cloudinary.Upload(uploadParams);
+               }
+           }
+
+           photoDto.Url= uploadResult.Uri.ToString();
+           photoDto.PublicId=uploadResult.PublicId;
+
+           var photo= _mapper.Map<Photo>(photoDto);
+          
+           photo.User=user;
+
+           if(!user.Photos.Any())
+           {
+               photo.IsMain=true;
+           } 
+
+           user.Photos.Add(photo);
+           
+           var photoReturnDto=_mapper.Map<PhotoForReturnDto>(photo);
+
+           if(_userRepo.SaveAll())
+           {
+                return CreatedAtRoute("GetPhoto",new { id= photo.Id} ,photoReturnDto);
+           }
+
+           return BadRequest("Could not upload the photo for some reason");
+
+
+
+
+      }
+
     }
 }

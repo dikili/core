@@ -57,5 +57,10 @@ namespace CoreApplication.Data.Repositories
 
 
         }
+
+        public Photo GetPhoto(int id)
+        {
+            return _coreContext.Photos.FirstOrDefault(p=>p.Id==id);
+        }
     }
 }

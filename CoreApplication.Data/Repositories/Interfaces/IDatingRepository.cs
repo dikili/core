@@ -15,5 +15,7 @@ namespace CoreApplication.Data.Repositories.Interfaces
          IEnumerable<LoginUser> GetUsers();
 
          LoginUser GetUser(int id);
+
+         Photo GetPhoto(int id);
     }
 }
