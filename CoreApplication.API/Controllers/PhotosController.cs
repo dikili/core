@@ -24,7 +24,9 @@ namespace CoreApplication.API.Controllers
         private readonly IOptions<CloudinarySettings> _options;
         private Cloudinary _cloudinary;
 
-        public PhotosController(IMapper mapper, IDatingRepository userRepo, IOptions<CloudinarySettings> options)
+        public PhotosController(IMapper mapper, 
+                                IDatingRepository userRepo,
+                                IOptions<CloudinarySettings> options)
         {
             _options = options;
             _userRepo = userRepo;

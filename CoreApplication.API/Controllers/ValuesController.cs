@@ -19,7 +19,7 @@ namespace CoreApplication.API.Controllers
         List<CoreTest> tests=new List<CoreTest>();
         CoreTest test=new CoreTest();
 
-        AdUser adUser=new AdUser();
+       // AdUser adUser=new AdUser();
         
         public  ValuesController()
         {    

@@ -18,7 +18,7 @@ namespace CoreApplication.Data.Models
         public int CategoryId { get; set; }
         public double Rating { get; set; }
         public bool IsActive { get; set; }
-        public virtual AdUser User { get; set; }
+       // public virtual AdUser User { get; set; }
         public virtual ICollection<Response> Responses { get; set; }
         public virtual ICollection<Attachment> Attachments { get; set; }
     }

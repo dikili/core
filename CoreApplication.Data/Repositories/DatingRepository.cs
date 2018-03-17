@@ -5,6 +5,7 @@ using CoreApplication.Data.Repositories.Interfaces;
 using CoreApplication.Data.DataEntities;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace CoreApplication.Data.Repositories
 {

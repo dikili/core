@@ -46,12 +46,12 @@ namespace CoreApplicationTest
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<AdUser, IdentityRole>(cfg =>
-                {
-                    cfg.User.RequireUniqueEmail = true;
-                    cfg.Password.RequireDigit = true;
-                }
-            ).AddEntityFrameworkStores<CoreContext>();
+            // services.AddIdentity<AdUser, IdentityRole>(cfg =>
+            //     {
+            //         cfg.User.RequireUniqueEmail = true;
+            //         cfg.Password.RequireDigit = true;
+            //     }
+            // ).AddEntityFrameworkStores<CoreContext>();
 
            // last bit to add token authentication
             services.AddAuthentication()
@@ -142,7 +142,7 @@ namespace CoreApplicationTest
                 {
 
                     var service = scope.ServiceProvider.GetService<ContextSeedData>();
-                    service.Seed().Wait();
+                    //service.Seed().Wait();
 
                 }
             }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace CoreApplication.Data
 {
-    public class CoreContext : IdentityDbContext<AdUser>
+    public class CoreContext : DbContext//IdentityDbContext<AdUser>
     {
          private static IConfigurationRoot _config { get; set; }
 
@@ -26,7 +26,7 @@ namespace CoreApplication.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Response> Responses { get; set; }
 
-        public DbSet<LoginUser> LoginUsers{get;set;}
+         public DbSet<LoginUser> LoginUsers{get;set;}
 
         public DbSet<Photo> Photos {get;set;}
         

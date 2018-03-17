@@ -18,6 +18,7 @@ namespace CoreApplication.Data.Repositories
         }
         public async Task<LoginUser> Login(string userName, string password)
         {
+            
           var user=await _coreContext.LoginUsers.FirstOrDefaultAsync(x=>x.UserName==userName);
 
           if(user==null)
