@@ -31,10 +31,10 @@ namespace CoreApplication.Data.Repositories
           _coreContext.Remove(entity);
         }
 
-        public bool SaveAll()
+        public async Task<bool> SaveAll()
         {
          
-            var updated=_coreContext.SaveChanges();
+            var updated=await _coreContext.SaveChangesAsync();
             return updated > 0;
         }
 
@@ -47,21 +47,21 @@ namespace CoreApplication.Data.Repositories
            return _coreContext.LoginUsers.Include(p=>p.Photos);
         }
 
-        public LoginUser GetUser(int id)
+        public async Task<LoginUser> GetUser(int id)
         {  
              //context is correctly injected by the DI but somehow async methods seem to have
              // issues so got rid of those
             
            return
-                _coreContext.LoginUsers.Include(p => p.Photos)
-                  .FirstOrDefault(p=>p.Id==id); //await ctx.LoginUsers.Include(p=>p.Photos).FirstOrDefaultAsync(x=>x.Id==id); //.Find(id); //.Where(p=> p.Id == id);
+                await _coreContext.LoginUsers.Include(p => p.Photos)
+                  .FirstOrDefaultAsync(p => p.Id == id); //await ctx.LoginUsers.Include(p=>p.Photos).FirstOrDefaultAsync(x=>x.Id==id); //.Find(id); //.Where(p=> p.Id == id);
 
 
         }
 
-        public Photo GetPhoto(int id)
+        public async Task<Photo> GetPhoto(int id)
         {
-            return _coreContext.Photos.FirstOrDefault(p=>p.Id==id);
+            return await _coreContext.Photos.FirstOrDefaultAsync(p=>p.Id==id);
         }
     }
 }

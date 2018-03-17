@@ -34,9 +34,9 @@ namespace CoreApplication.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
+        public async Task<IActionResult> GetUser(int id)
         {
-            var user= _userRepo.GetUser(id);
+            var user=await _userRepo.GetUser(id);
 
             var userToReturn=_mapper.Map<UserForDetailedDto>(user);
 
@@ -44,7 +44,7 @@ namespace CoreApplication.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(int id,[FromBody] UserForUpdateDto user)
+        public async Task<IActionResult> UpdateUser(int id,[FromBody] UserForUpdateDto user)
         {
             if(!ModelState.IsValid)
             {
@@ -55,7 +55,7 @@ namespace CoreApplication.API.Controllers
 
             var currentUserId=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
            
-            var mainUser=_userRepo.GetUser(id);
+            var mainUser=await _userRepo.GetUser(id);
 
             if(mainUser.Id!=currentUserId)
             {
@@ -64,7 +64,7 @@ namespace CoreApplication.API.Controllers
 
              _mapper.Map(user, mainUser);
 
-            if( _userRepo.SaveAll())
+            if(await _userRepo.SaveAll())
                 return NoContent();
            
            throw new Exception($"Update for userid {id} failed");

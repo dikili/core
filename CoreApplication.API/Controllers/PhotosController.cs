@@ -43,9 +43,9 @@ namespace CoreApplication.API.Controllers
         }
       
       [HttpGet("{id}",Name="GetPhoto")]
-      public IActionResult GetPhoto(int id)
+      public async Task<IActionResult> GetPhoto(int id)
       {
-        var photoFromRepo=_userRepo.GetPhoto(id);
+        var photoFromRepo=await _userRepo.GetPhoto(id);
         
         var photo= _mapper.Map<PhotoForReturnDto>(photoFromRepo);
         
@@ -55,9 +55,9 @@ namespace CoreApplication.API.Controllers
 
 
       [HttpPost]
-      public IActionResult AddPhotoForUser(int userId, PhotoForCreationDto photoDto)
+      public async Task<IActionResult> AddPhotoForUser(int userId, PhotoForCreationDto photoDto)
       {
-          var user=_userRepo.GetUser(userId);
+          var user=await _userRepo.GetUser(userId);
 
           if(user==null)
             return BadRequest("Can not find user");
@@ -93,7 +93,7 @@ namespace CoreApplication.API.Controllers
           
            photo.User=user;
 
-           if(!user.Photos.Any())
+           if(!user.Photos.Any(m=>m.IsMain))
            {
                photo.IsMain=true;
            } 
@@ -102,9 +102,9 @@ namespace CoreApplication.API.Controllers
            
            var photoReturnDto=_mapper.Map<PhotoForReturnDto>(photo);
 
-           if(_userRepo.SaveAll())
+           if(await _userRepo.SaveAll())
            {
-                return CreatedAtRoute("GetPhoto",new { id= photo.Id} ,photoReturnDto);
+                return  CreatedAtRoute("GetPhoto",new { id= photo.Id} ,photoReturnDto);
            }
 
            return BadRequest("Could not upload the photo for some reason");
