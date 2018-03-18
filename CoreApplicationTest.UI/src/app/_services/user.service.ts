@@ -31,6 +31,11 @@ updateUser(id: number, user: User) {
     .catch(this.handleError);
 
 }
+
+setMainPhoto(userid: number, id: number) {
+    console.log('set main photo called and id is ', id);
+    return this.http.post(this.baseUrl + 'users/' + userid + '/photos/' + id + '/setMain', {}, this.jwt()).catch(this.handleError);
+}
 // constructor(private authHttp: AuthHttp) { }
 
 // getUsers(): Observable<User[]> {
