@@ -113,6 +113,33 @@ namespace CoreApplication.API.Controllers
 
 
       }
+      //change the isMain property on the photo,this is for the Main btn on the clientside
+      [HttpPost("{id}/setMain")]
+      public async Task<IActionResult> SetMainPhoto(int userId,int id) 
+      {
+          if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+             return Unauthorized();
+          
+          var photoFromRepo = await _userRepo.GetPhoto(id);
 
+          if(photoFromRepo==null) return NotFound();
+
+          if(photoFromRepo.IsMain) return BadRequest("This is already main photo");
+
+          var currentMainPhoto= await _userRepo.GetMainPhoto(userId);
+
+          if(currentMainPhoto!=null)
+            currentMainPhoto.IsMain =false;
+
+        photoFromRepo.IsMain=true;
+
+        if(await _userRepo.SaveAll())
+           return NoContent();
+
+         return BadRequest("Could not set to main photo");  
+
+
+
+      }
     }
 }

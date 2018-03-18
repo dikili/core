@@ -63,5 +63,10 @@ namespace CoreApplication.Data.Repositories
         {
             return await _coreContext.Photos.FirstOrDefaultAsync(p=>p.Id==id);
         }
+
+        public Task<Photo> GetMainPhoto(int userId)
+        {
+          return  _coreContext.Photos.FirstOrDefaultAsync(p=>p.IsMain && p.LoginUserId==userId);
+        }
     }
 }
