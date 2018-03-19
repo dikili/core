@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { AuthService } from '../../_services/auth.service';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
-
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-photo-editor',
@@ -17,6 +17,7 @@ export class PhotoEditorComponent implements OnInit {
   uploader: FileUploader = new FileUploader({});
   hasBaseDropZoneOver= false;
   baseUrl= environment.apiUrl;
+  currentMainPhoto: Photo;
 
   constructor(private authService: AuthService , private userService: UserService ,  private alertifyService: AlertifyService) { }
 
@@ -56,6 +57,9 @@ export class PhotoEditorComponent implements OnInit {
   setMainPhoto(photo: Photo) {
     this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe(() => {
       console.log('successfully changed the main photo');
+      this.currentMainPhoto = _.findWhere(this.photos, { isMain: true});
+      this.currentMainPhoto.isMain = false;
+      photo.isMain = true;
     }, error => this.alertifyService.error(error));
   }
 }
