@@ -68,7 +68,7 @@
               </tab>
               <tab heading="Edit Photos">
                <!-- <p>Edit photos will go here !</p> -->
-               <app-photo-editor [photos]="user.photos" ></app-photo-editor>
+               <app-photo-editor [photos]="user.photos" (getMainPhotoChange)= updateParentCompPhoto($event) ></app-photo-editor>
               </tab>
              
             </tabset>

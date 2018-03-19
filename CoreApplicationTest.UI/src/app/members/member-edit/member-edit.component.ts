@@ -46,4 +46,8 @@ user: User;
     });
   }
 
+  updateParentCompPhoto (photoUrl) {
+    this.user.photoUrl = photoUrl;
+  }
+
 }
