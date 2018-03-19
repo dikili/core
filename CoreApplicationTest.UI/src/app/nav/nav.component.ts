@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router/src/directives/router_link';
 export class NavComponent implements OnInit {
 model: any= {};
 
-  constructor(private authService: AuthService, private alertifyService: AlertifyService, private routerService: Router) { }
+  constructor(public authService: AuthService, private alertifyService: AlertifyService, private routerService: Router) { }
 
   ngOnInit() {
   }
@@ -31,6 +31,9 @@ model: any= {};
    });
   }
   logout() {
+    this.authService.userToken = null;
+    this.authService.currentUser = null;
+    localStorage.removeItem('token');
     this.alertifyService.message('logged out');
     this.authService.logout();
     this.routerService.navigate(['/home']);

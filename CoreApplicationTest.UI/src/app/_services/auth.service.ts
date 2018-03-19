@@ -6,6 +6,7 @@ import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
+import { User } from '../_models/User';
 
 @Injectable()
 export class AuthService {
@@ -13,17 +14,20 @@ export class AuthService {
  userToken: any = {};
  decodedToken: any;
  JwtHelper: JwtHelper = new JwtHelper();
-
+ currentUser: User;
 constructor(private http: Http) { }
 
 login(model: any) {
    return this.http.post(this.baseUrl + 'login', model, this.getRequestOptions()).map((response: Response) => {
     const user = response.json();
-    if (user) {
+    if (user && user.tokenString)  {
         localStorage.setItem('token', user.tokenString);
         this.userToken = user.tokenString;
         this.decodedToken = this.JwtHelper.decodeToken(this.userToken);
+        localStorage.setItem('user', JSON.stringify(user.mappedUser));
+        this.currentUser = user.mappedUser;
         console.log(this.decodedToken);
+        console.log(user.mappedUser);
     }
 }).catch(this.handleError);
 }

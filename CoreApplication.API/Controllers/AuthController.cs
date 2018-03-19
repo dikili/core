@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using CoreApplication.API.DTOs;
 using CoreApplication.Data.DataEntities;
 using CoreApplication.Data.Repositories.Interfaces;
@@ -17,9 +18,12 @@ namespace CoreApplication.API.Controllers
     public class AuthController :Controller
     {
         private readonly IAuthRepository _repo;
-        public AuthController(IAuthRepository repo)
+        private readonly IMapper _mapper;
+
+        public AuthController(IAuthRepository repo,IMapper mapper)
         {
             _repo = repo;
+            _mapper=mapper;
             
         }
 
@@ -76,9 +80,11 @@ namespace CoreApplication.API.Controllers
 
              var token=tokenHandler.CreateToken(tokenDescriptor);
 
+             var mappedUser = _mapper.Map<UserForListDto>(userFromRepo);
+
              var tokenString=tokenHandler.WriteToken(token);
 
-             return Ok(new {tokenString}); 
+             return Ok(new {tokenString,mappedUser}); 
          
         }
 
