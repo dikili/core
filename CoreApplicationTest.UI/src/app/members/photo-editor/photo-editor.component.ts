@@ -52,8 +52,15 @@ export class PhotoEditorComponent implements OnInit {
        isMain : res.isMain
      };
      this.photos.push(photo);
-   }
-  };
+     if (photo.isMain) {
+      this.authService.changeMemberPhoto(photo.url);
+      this.authService.currentUser.photoUrl = photo.url;
+      localStorage.setItem('user',
+      JSON.stringify(this.authService.currentUser)
+       );
+      }
+     }
+   };
   }
 
   setMainPhoto(photo: Photo) {
@@ -62,7 +69,10 @@ export class PhotoEditorComponent implements OnInit {
       this.currentMainPhoto = _.findWhere(this.photos, { isMain: true});
       this.currentMainPhoto.isMain = false;
       photo.isMain = true;
-      this.getMainPhotoChange.emit(photo.url);
+      // this.getMainPhotoChange.emit(photo.url);
+      this.authService.changeMemberPhoto(photo.url);
+      this.authService.currentUser.photoUrl = photo.url;
+      localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
     }, error => this.alertifyService.error(error));
   }
 }

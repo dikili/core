@@ -27,7 +27,9 @@ namespace CoreApplication.API.Helpers
           CreateMap<Photo,PhotosForDetailedDto>(); 
           CreateMap<UserForUpdateDto,LoginUser>();
           CreateMap<PhotoForCreationDto,Photo>();
-          CreateMap<Photo,PhotoForReturnDto>(); 
+          CreateMap<Photo,PhotoForReturnDto>();
+
+          CreateMap<UserForRegisterDto,LoginUser>(); 
         }
         
     }

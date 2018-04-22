@@ -41,16 +41,23 @@ namespace CoreApplication.API.Controllers
            if(!ModelState.IsValid)
               return BadRequest(ModelState);
 
-            var userToCreate = new LoginUser
-            {
-                UserName = username
-            };
+            // var userToCreate = new LoginUser
+            // {
+            //     UserName = username
+            // };
 
+             var userToCreate =  _mapper.Map<LoginUser>(user);
+             
+             // created user has password etc.. which we do not want to return
+             // so we make another conversion
+              var createUser=await _repo.Register(userToCreate,user.Password); 
 
-              var createUser=await _repo.Register(userToCreate,user.Password);
+            var userToReturn = _mapper.Map<UserForDetailedDto>(createUser);
+
+              return CreatedAtRoute("GetUser",new { controller="Users", Id= userToReturn.Id },userToReturn);
            // return CreatedAtRoute()
 
-           return StatusCode(201);
+           // return StatusCode(201);
         }
 
         [HttpPost("login")]

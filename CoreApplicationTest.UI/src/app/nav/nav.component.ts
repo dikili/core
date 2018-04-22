@@ -11,10 +11,11 @@ import { RouterLink } from '@angular/router/src/directives/router_link';
 })
 export class NavComponent implements OnInit {
 model: any= {};
-
+photoUrl: string;
   constructor(public authService: AuthService, private alertifyService: AlertifyService, private routerService: Router) { }
 
   ngOnInit() {
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   login() {

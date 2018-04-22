@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { User } from '../_models/User';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +16,14 @@ export class AuthService {
  decodedToken: any;
  JwtHelper: JwtHelper = new JwtHelper();
  currentUser: User;
+ private photoUrl = new BehaviorSubject<string>('../../assets/user.png');
+currentPhotoUrl = this.photoUrl.asObservable();
+
 constructor(private http: Http) { }
+
+changeMemberPhoto(photoUrl: string) {
+    this.photoUrl.next(photoUrl);
+}
 
 login(model: any) {
    return this.http.post(this.baseUrl + 'login', model, this.getRequestOptions()).map((response: Response) => {
@@ -26,14 +34,20 @@ login(model: any) {
         this.decodedToken = this.JwtHelper.decodeToken(this.userToken);
         localStorage.setItem('user', JSON.stringify(user.mappedUser));
         this.currentUser = user.mappedUser;
+        this.userToken = user.tokenString;
+        if (this.currentUser.photoUrl !== null) {
+          this.changeMemberPhoto(this.currentUser.photoUrl);
+        } else {
+          this.changeMemberPhoto('../../assets/user.png');
+        }
         console.log(this.decodedToken);
         console.log(user.mappedUser);
     }
 }).catch(this.handleError);
 }
 
-register(model: any) {
-  return  this.http.post(this.baseUrl + 'register', model, this.getRequestOptions()).catch(this.handleError);
+register(user: User) {
+  return  this.http.post(this.baseUrl + 'register', user, this.getRequestOptions()).catch(this.handleError);
 }
 
 loggedIn() {

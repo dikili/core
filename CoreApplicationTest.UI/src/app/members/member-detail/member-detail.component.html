@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
-    <h1>{{user.knownAs}}'s Profile</h1>
+    <h1> {{user.knownAs ? user.knownAs : user.username}} 's Profile</h1>
   </div>
    <div class="row">
      <div class="col-sm-4">
         <div class="panel panel-default">
-           <img  class="profile-image thumbnail" src="{{user.photoUrl}}" alt="{{user.knownAs}}">
+           <img  class="profile-image thumbnail" src="{{user.photoUrl ? user.photoUrl : '../../../assets/user.png' }}" alt="{{user.knownAs}}">
            <div class="panel-body">
             <div>
               <strong>Location:</strong>
