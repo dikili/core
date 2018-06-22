@@ -45,7 +45,7 @@ namespace CoreApplication.Data.Repositories
             // {
             //      return  ctx.LoginUsers.Include(p=>p.Photos);   
             // }
-           var users= _coreContext.LoginUsers.Include(p=>p.Photos).AsQueryable();
+           var users= _coreContext.LoginUsers.Include(p=>p.Photos).OrderByDescending(x=>x.LastActive).AsQueryable();
 
            users = users.Where(x=>x.Id!= userParams.UserId);
 
@@ -54,6 +54,19 @@ namespace CoreApplication.Data.Repositories
            if(userParams.MinAge != 18 || userParams.MaxAge != 99) {
                users = users.Where(x=> CalculateAge(x.DateOfBirth) >= userParams.MinAge 
                && CalculateAge(x.DateOfBirth) <= userParams.MaxAge);
+           }
+
+           if (!string.IsNullOrEmpty(userParams.OrderBy))
+           {
+               switch(userParams.OrderBy)
+               {
+                   case "created":
+                     users= users.OrderByDescending(x=>x.Created);
+                     break;
+                   default :
+                      users.OrderByDescending(x=>x.LastActive);
+                      break;  
+               }
            }
 
            return await PagedList<LoginUser>.CreateAsycn(users,userParams.PageNumber,userParams.PageSize);
