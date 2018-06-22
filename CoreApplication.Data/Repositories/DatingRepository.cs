@@ -45,7 +45,11 @@ namespace CoreApplication.Data.Repositories
             // {
             //      return  ctx.LoginUsers.Include(p=>p.Photos);   
             // }
-           var users= _coreContext.LoginUsers.Include(p=>p.Photos);
+           var users= _coreContext.LoginUsers.Include(p=>p.Photos).AsQueryable();
+
+           users = users.Where(x=>x.Id!= userParams.UserId);
+
+           users = users.Where(x=>x.Gender == userParams.Gender);
 
            return await PagedList<LoginUser>.CreateAsycn(users,userParams.PageNumber,userParams.PageSize);
         }

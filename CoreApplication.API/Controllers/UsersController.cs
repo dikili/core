@@ -28,6 +28,18 @@ namespace CoreApplication.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers(UserParams userParams)
         {
+
+            var currentUserId=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+           
+            var currentUser=await _userRepo.GetUser(currentUserId);
+
+            userParams.UserId = currentUserId;
+
+            if(string.IsNullOrEmpty(userParams.Gender))
+            { 
+              userParams.Gender= currentUser.Gender == "male" ? "female" : "male"; 
+            }
+
             var users= _userRepo.GetUsers(userParams).Result;
 
             var userToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
