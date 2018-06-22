@@ -4,6 +4,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using CoreApplication.API.DTOs;
+using CoreApplication.API.Helpers;
+using CoreApplication.Data.Helpers;
 using CoreApplication.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,11 +26,13 @@ namespace CoreApplication.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetUsers()
+        public async Task<IActionResult> GetUsers(UserParams userParams)
         {
-            var users= _userRepo.GetUsers();
+            var users= _userRepo.GetUsers(userParams).Result;
 
             var userToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
+
+            Response.AddPagination(users.CurrentPage,users.PageSize,users.TotalCount,users.TotalPages);
 
             return Ok(userToReturn);
         }

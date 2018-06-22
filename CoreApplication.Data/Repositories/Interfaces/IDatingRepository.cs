@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CoreApplication.Data.DataEntities;
+using CoreApplication.Data.Helpers;
 
 namespace CoreApplication.Data.Repositories.Interfaces
 {
@@ -12,9 +13,10 @@ namespace CoreApplication.Data.Repositories.Interfaces
 
          //bool SaveAll();
         Task<bool> SaveAll();
-         IEnumerable<LoginUser> GetUsers();
-        // Task<IEnumerable<LoginUser>> GetUsers();
-
+        // IEnumerable<LoginUser> GetUsers();
+         Task<PagedList<LoginUser>> GetUsers(UserParams userParams);
+         
+        // PagedList<LoginUser> GetUsers();
         // LoginUser GetUser(int id);
          Task<LoginUser> GetUser(int id);
         // Photo GetPhoto(int id);

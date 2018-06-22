@@ -6,6 +6,7 @@ using CoreApplication.Data.DataEntities;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using System;
+using CoreApplication.Data.Helpers;
 
 namespace CoreApplication.Data.Repositories
 {
@@ -38,15 +39,15 @@ namespace CoreApplication.Data.Repositories
             return updated > 0;
         }
 
-        public IEnumerable<LoginUser> GetUsers()
+        public async Task<PagedList<LoginUser>> GetUsers(UserParams userParams)
         {
             // using(var ctx=_fact.CreateDbContext(new string[] {}))
             // {
             //      return  ctx.LoginUsers.Include(p=>p.Photos);   
             // }
-           var users= _coreContext.LoginUsers.Include(p=>p.Photos).ToList();
+           var users= _coreContext.LoginUsers.Include(p=>p.Photos);
 
-           return users;
+           return await PagedList<LoginUser>.CreateAsycn(users,userParams.PageNumber,userParams.PageSize);
         }
 
         public async Task<LoginUser> GetUser(int id)
