@@ -13,6 +13,7 @@ namespace CoreApplication.Data.Repositories.Interfaces
          //bool SaveAll();
         Task<bool> SaveAll();
          IEnumerable<LoginUser> GetUsers();
+        // Task<IEnumerable<LoginUser>> GetUsers();
 
         // LoginUser GetUser(int id);
          Task<LoginUser> GetUser(int id);

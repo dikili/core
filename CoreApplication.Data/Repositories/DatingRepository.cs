@@ -44,7 +44,9 @@ namespace CoreApplication.Data.Repositories
             // {
             //      return  ctx.LoginUsers.Include(p=>p.Photos);   
             // }
-           return _coreContext.LoginUsers.Include(p=>p.Photos);
+           var users= _coreContext.LoginUsers.Include(p=>p.Photos).ToList();
+
+           return users;
         }
 
         public async Task<LoginUser> GetUser(int id)

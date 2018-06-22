@@ -36,6 +36,11 @@ setMainPhoto(userid: number, id: number) {
     console.log('set main photo called and id is ', id);
     return this.http.post(this.baseUrl + 'users/' + userid + '/photos/' + id + '/setMain', {}, this.jwt()).catch(this.handleError);
 }
+
+deletePhoto(userid: number, id: number) {
+  console.log('delete photo function is called and id id ', id);
+  return this.http.delete(this.baseUrl + 'users/' + userid + '/photos/' + id, this.jwt()).catch(this.handleError);
+}
 // constructor(private authHttp: AuthHttp) { }
 
 // getUsers(): Observable<User[]> {

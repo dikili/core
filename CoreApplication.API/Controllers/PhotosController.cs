@@ -101,10 +101,11 @@ namespace CoreApplication.API.Controllers
 
            user.Photos.Add(photo);
            
-           var photoReturnDto=_mapper.Map<PhotoForReturnDto>(photo);
-
+          
            if(await _userRepo.SaveAll())
            {
+                var photoReturnDto=_mapper.Map<PhotoForReturnDto>(photo);
+
                 return  CreatedAtRoute("GetPhoto",new { id= photo.Id} ,photoReturnDto);
            }
 
@@ -128,11 +129,7 @@ namespace CoreApplication.API.Controllers
           if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
              return Unauthorized();
           
-          if(id==0)
-          {
-              //this has fixed the issue but a better solution is needed here...
-               id=_userRepo.GetLastAddedPhoto(userId);        
-          }
+         
           var photoFromRepo = await _userRepo.GetPhoto(id);
 
           if(photoFromRepo==null) return NotFound();
@@ -154,5 +151,44 @@ namespace CoreApplication.API.Controllers
 
 
       }
+
+     [HttpDelete("{id}")]
+      public async Task<IActionResult> DeletePhoto(int userId,int id)
+      {
+        if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+          return Unauthorized();
+          
+          var photoFromRepo = await _userRepo.GetPhoto(id);
+
+          if(photoFromRepo==null) return NotFound();
+
+          if(photoFromRepo.IsMain) return BadRequest("You can not delete the main photo");
+
+
+          if(photoFromRepo.PublicId!=null)
+          {
+              var deleteParams= new DeletionParams(photoFromRepo.PublicId);
+
+              var result = _cloudinary.Destroy(deleteParams);
+
+              if(result.Result=="ok"){
+                  _userRepo.Delete(photoFromRepo);
+              }
+          }
+
+          if(photoFromRepo.PublicId==null)
+          {
+              _userRepo.Delete(photoFromRepo);
+          }
+
+          if(await _userRepo.SaveAll())
+          {
+              return Ok();
+          }
+
+          return BadRequest("Failed to delete the photo");
+
+      }
+
     }
 }
