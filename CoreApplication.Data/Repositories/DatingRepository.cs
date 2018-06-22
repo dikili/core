@@ -66,7 +66,7 @@ namespace CoreApplication.Data.Repositories
 
         public Task<Photo> GetMainPhoto(int userId)
         {
-          return  _coreContext.Photos.FirstOrDefaultAsync(p=>p.IsMain && p.LoginUserId==userId);
+          return  _coreContext.Photos.Where(p=>p.LoginUserId==userId).FirstOrDefaultAsync(p=>p.IsMain);
         }
     }
 }
