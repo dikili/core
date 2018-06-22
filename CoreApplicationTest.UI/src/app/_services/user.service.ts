@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { PaginatedResult } from '../_models/Pagination';
+import { query } from '@angular/core/src/animation/dsl';
 
 @Injectable()
 export class UserService {
@@ -15,13 +16,20 @@ export class UserService {
 // if http were used instead of angular 2 jwt lib. no need to send the token now
 constructor(private http: Http) { }
 
-getUsers(page?: number, itemsPerPage?: number) {
+getUsers(page?: number, itemsPerPage?: number, userParams?: any) {
   const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
   let queryString = '?';
 
   if (page != null && itemsPerPage != null) {
-      queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage;
+      queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
   }
+
+if(userParams != null)
+{
+    queryString += 'minAge=' + userParams.minAge +
+    '&maxAge=' + userParams.maxAge +
+    '&gender=' + userParams.gender;
+}
 
   return this.http.get(this.baseUrl + 'users' + queryString, this.jwt())
   .map(response => {
