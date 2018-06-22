@@ -118,9 +118,21 @@ namespace CoreApplication.API.Controllers
       [HttpPost("{id}/setMain")]
       public async Task<IActionResult> SetMainPhoto(int userId,int id) 
       {
+         // There is an issue with the id itself , if a new photo is uploaded and instantly
+         // Main button is clicked then id comes as 0 as it is not yet gets refreshed to get its own id
+         // So I am thinking a solution where if id is 0 get the last added photo to be the id
+         // so that it can be changed to the latest main photo
+
+         
+
           if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
              return Unauthorized();
           
+          if(id==0)
+          {
+              //this has fixed the issue but a better solution is needed here...
+               id=_userRepo.GetLastAddedPhoto(userId);        
+          }
           var photoFromRepo = await _userRepo.GetPhoto(id);
 
           if(photoFromRepo==null) return NotFound();

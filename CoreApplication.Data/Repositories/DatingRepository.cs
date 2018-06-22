@@ -68,5 +68,10 @@ namespace CoreApplication.Data.Repositories
         {
           return  _coreContext.Photos.Where(p=>p.LoginUserId==userId).FirstOrDefaultAsync(p=>p.IsMain);
         }
+
+        public int GetLastAddedPhoto(int userId)
+        {
+            return  _coreContext.Photos.Where(p=>p.LoginUserId==userId).LastOrDefault().Id;
+        }
     }
 }

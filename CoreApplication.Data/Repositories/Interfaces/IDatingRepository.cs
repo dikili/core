@@ -21,5 +21,7 @@ namespace CoreApplication.Data.Repositories.Interfaces
         Task<Photo> GetPhoto(int id);
 
         Task<Photo> GetMainPhoto(int userId);
+
+        int GetLastAddedPhoto(int userId);
     }
 }
