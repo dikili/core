@@ -12,7 +12,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class MemberListResolver implements Resolve<User[]> {
-
+pageSize = 5;
+pageNumber = 1;
 /**
  *
  */
@@ -21,10 +22,10 @@ constructor(private userService: UserService, private router: Router , private a
 }
 
 resolve(route: ActivatedRouteSnapshot): Observable<User[]>  {
-  return this.userService.getUsers()
+  return this.userService.getUsers(this.pageNumber, this.pageSize)
         .catch(error => {
       this.alertify.error('Problem retrieving data');
-      this.router.navigate(['/members']);
+      this.router.navigate(['/home']);
       return Observable.of(null);
   });
 }
