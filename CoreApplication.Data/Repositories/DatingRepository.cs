@@ -51,6 +51,11 @@ namespace CoreApplication.Data.Repositories
 
            users = users.Where(x=>x.Gender == userParams.Gender);
 
+           if(userParams.MinAge != 18 || userParams.MaxAge != 99) {
+               users = users.Where(x=> CalculateAge(x.DateOfBirth) >= userParams.MinAge 
+               && CalculateAge(x.DateOfBirth) <= userParams.MaxAge);
+           }
+
            return await PagedList<LoginUser>.CreateAsycn(users,userParams.PageNumber,userParams.PageSize);
         }
 
@@ -79,6 +84,16 @@ namespace CoreApplication.Data.Repositories
         public int GetLastAddedPhoto(int userId)
         {
             return  _coreContext.Photos.Where(p=>p.LoginUserId==userId).LastOrDefault().Id;
+        }
+
+           private  int CalculateAge(DateTime theDateTime)
+        {
+            var age= DateTime.Today.Year - theDateTime.Year;
+
+            if(theDateTime.AddYears(age) > DateTime.Today)
+                    age--;
+
+            return age;
         }
     }
 }
