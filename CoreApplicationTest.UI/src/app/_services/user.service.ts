@@ -21,14 +21,16 @@ getUsers(page?: number, itemsPerPage?: number, userParams?: any) {
   let queryString = '?';
 
   if (page != null && itemsPerPage != null) {
-      queryString += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
+      queryString += 'pageNumber=' +
+       page + '&pageSize=' +
+       itemsPerPage + '&';
   }
 
-if(userParams != null)
-{
+if (userParams != null) {
     queryString += 'minAge=' + userParams.minAge +
     '&maxAge=' + userParams.maxAge +
-    '&gender=' + userParams.gender;
+    '&gender=' + userParams.gender +
+    '&orderBy=' + userParams.orderBy;
 }
 
   return this.http.get(this.baseUrl + 'users' + queryString, this.jwt())
