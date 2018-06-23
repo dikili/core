@@ -51,6 +51,19 @@ namespace CoreApplication.Data.Repositories
 
            users = users.Where(x=>x.Gender == userParams.Gender);
 
+            if(userParams.Likers)
+            {
+                var userLikers= await GetUserLikes(userParams.UserId,userParams.Likers);
+                users= users.Where(u=>userLikers.Any(likers=>likers.LikerId==u.Id));
+            }
+
+            if(userParams.Likees)
+            {
+                var userLikees= await GetUserLikes(userParams.UserId,userParams.Likers);
+                users= users.Where(u=>userLikees.Any(likees=>likees.LikeeId==u.Id));
+            }
+
+
            if(userParams.MinAge != 18 || userParams.MaxAge != 99) {
                users = users.Where(x=> CalculateAge(x.DateOfBirth) >= userParams.MinAge 
                && CalculateAge(x.DateOfBirth) <= userParams.MaxAge);
@@ -68,6 +81,8 @@ namespace CoreApplication.Data.Repositories
                       break;  
                }
            }
+
+           
 
            return await PagedList<LoginUser>.CreateAsycn(users,userParams.PageNumber,userParams.PageSize);
         }
@@ -89,9 +104,9 @@ namespace CoreApplication.Data.Repositories
             return await _coreContext.Photos.FirstOrDefaultAsync(p=>p.Id==id);
         }
 
-        public Task<Photo> GetMainPhoto(int userId)
+        public async Task<Photo> GetMainPhoto(int userId)
         {
-          return  _coreContext.Photos.Where(p=>p.LoginUserId==userId).FirstOrDefaultAsync(p=>p.IsMain);
+          return await  _coreContext.Photos.Where(p=>p.LoginUserId==userId).FirstOrDefaultAsync(p=>p.IsMain);
         }
 
         public int GetLastAddedPhoto(int userId)
@@ -108,5 +123,27 @@ namespace CoreApplication.Data.Repositories
 
             return age;
         }
+
+        public async Task<Like> GetLike(int userId, int recepientId)
+        {
+            return await _coreContext.Likes.FirstOrDefaultAsync(x=>x.LikerId==userId && x.LikeeId==recepientId);
+        }
+
+          private async Task<IEnumerable<Like>> GetUserLikes(int id, bool likers)
+        {
+            var user = await _coreContext.LoginUsers
+            .Include(x=>x.Likee)
+            .Include(x=>x.Liker)
+            .FirstOrDefaultAsync(u=>u.Id==id);
+
+            if(!likers)
+            {
+                return user.Likee.Where(u=>u.LikeeId==id);
+            }
+            else{
+                return user.Liker.Where(u=>u.LikerId==id);
+            }
+        }
+        
     }
 }

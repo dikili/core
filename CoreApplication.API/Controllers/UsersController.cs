@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CoreApplication.API.DTOs;
 using CoreApplication.API.Helpers;
+using CoreApplication.Data.DataEntities;
 using CoreApplication.Data.Helpers;
 using CoreApplication.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -39,6 +40,7 @@ namespace CoreApplication.API.Controllers
             { 
               userParams.Gender= currentUser.Gender == "male" ? "female" : "male"; 
             }
+           
 
             var users= _userRepo.GetUsers(userParams).Result;
 
@@ -85,6 +87,36 @@ namespace CoreApplication.API.Controllers
            
            throw new Exception($"Update for userid {id} failed");
         }
-        
+
+        [HttpPost("{id}/like/{recepientId")]
+        public async Task<IActionResult> LikeUser(int id,int recepientId)
+        {
+             var currentUserId=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+             if(id!=currentUserId)
+               return Unauthorized();
+
+             var like=_userRepo.GetLike(id,recepientId).Result;  
+
+             if(like!=null)
+               return NotFound();
+
+              like  = new Like
+              {
+                  LikerId=id,
+                  LikeeId=recepientId  
+              }; 
+            
+              _userRepo.Add<Like>(like);
+
+              if(await _userRepo.SaveAll())
+              return Ok();
+
+              return BadRequest("Failed to add user");
+
+
+        }
+
+  
     }
 }

@@ -15,6 +15,8 @@ namespace CoreApplication.Data.Repositories.Interfaces
         Task<bool> SaveAll();
         // IEnumerable<LoginUser> GetUsers();
          Task<PagedList<LoginUser>> GetUsers(UserParams userParams);
+
+         Task<Like> GetLike(int userId,int recepientId);
          
         // PagedList<LoginUser> GetUsers();
         // LoginUser GetUser(int id);

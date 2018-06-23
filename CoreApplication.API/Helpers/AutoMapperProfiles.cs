@@ -30,6 +30,7 @@ namespace CoreApplication.API.Helpers
           CreateMap<Photo,PhotoForReturnDto>();
 
           CreateMap<UserForRegisterDto,LoginUser>(); 
+          CreateMap<Like,LikeForCreationDto>(); 
         }
         
     }
