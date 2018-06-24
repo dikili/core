@@ -44,7 +44,9 @@ if (userParams != null) {
   .catch(this.handleError);
 }
 
-
+sendLike(id: number, receipentId: number) {
+    return this.http.post(this.baseUrl + 'users/' + id + '/like/' + receipentId, {}, this.jwt()).catch(this.handleError);
+}
 getUser(id): Observable<User> {
     return this.http.get(this.baseUrl + 'users/' + id, this.jwt())
     .map((response: Response) => <User>response.json())
@@ -91,6 +93,9 @@ jwt() {
  }
 
 private handleError(error: any) {
+    if (error.status === 400) {
+     return Observable.throw(error._body);
+    }
     const applicationError = error.headers.get('Application-Error');
     if (applicationError) {
       return Observable.throw(applicationError);

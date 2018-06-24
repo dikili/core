@@ -136,7 +136,7 @@ namespace CoreApplication.Data.Repositories
             .Include(x=>x.Liker)
             .FirstOrDefaultAsync(u=>u.Id==id);
 
-            if(!likers)
+            if(likers)
             {
                 return user.Likee.Where(u=>u.LikeeId==id);
             }

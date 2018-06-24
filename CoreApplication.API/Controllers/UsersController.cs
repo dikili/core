@@ -88,7 +88,7 @@ namespace CoreApplication.API.Controllers
            throw new Exception($"Update for userid {id} failed");
         }
 
-        [HttpPost("{id}/like/{recepientId")]
+        [HttpPost("{id}/like/{recepientId}")]
         public async Task<IActionResult> LikeUser(int id,int recepientId)
         {
              var currentUserId=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -99,7 +99,7 @@ namespace CoreApplication.API.Controllers
              var like=_userRepo.GetLike(id,recepientId).Result;  
 
              if(like!=null)
-               return NotFound();
+               return BadRequest("You already liked this user!!");
 
               like  = new Like
               {
@@ -113,10 +113,9 @@ namespace CoreApplication.API.Controllers
               return Ok();
 
               return BadRequest("Failed to add user");
-
+        }
 
         }
 
   
     }
-}
