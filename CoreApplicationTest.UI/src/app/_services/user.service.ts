@@ -16,7 +16,7 @@ export class UserService {
 // if http were used instead of angular 2 jwt lib. no need to send the token now
 constructor(private http: Http) { }
 
-getUsers(page?: number, itemsPerPage?: number, userParams?: any) {
+getUsers(page?: number, itemsPerPage?: number, userParams?: any, likeParams?: any) {
   const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
   let queryString = '?';
 
@@ -32,7 +32,13 @@ if (userParams != null) {
     '&gender=' + userParams.gender +
     '&orderBy=' + userParams.orderBy;
 }
+if (likeParams === 'Likers') {
+    queryString += 'Likers=true&';
+}
 
+if (likeParams === 'Likees') {
+    queryString += 'Likees=true&';
+}
   return this.http.get(this.baseUrl + 'users' + queryString, this.jwt())
   .map(response => {
       paginatedResult.result = response.json();
