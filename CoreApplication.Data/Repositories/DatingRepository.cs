@@ -144,6 +144,20 @@ namespace CoreApplication.Data.Repositories
                 return user.Liker.Where(u=>u.LikerId==id);
             }
         }
-        
+
+        public async Task<Message> GetMessage(int id)
+        {
+            return await _coreContext.Messages.FirstOrDefaultAsync(m=>m.Id==id);
+        }
+
+        public Task<PagedList<Message>> GetMessagesForUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Message>> GetMessageThread(int userId, int recepientId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

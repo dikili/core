@@ -31,6 +31,7 @@ namespace CoreApplication.API.Helpers
 
           CreateMap<UserForRegisterDto,LoginUser>(); 
           CreateMap<Like,LikeForCreationDto>(); 
+          CreateMap<MessageForCreationDto,Message>().ReverseMap();
         }
         
     }

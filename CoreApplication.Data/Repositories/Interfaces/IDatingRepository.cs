@@ -28,5 +28,11 @@ namespace CoreApplication.Data.Repositories.Interfaces
         Task<Photo> GetMainPhoto(int userId);
 
         int GetLastAddedPhoto(int userId);
+
+        Task<Message> GetMessage(int id);
+
+        Task<PagedList<Message>> GetMessagesForUser();
+
+        Task<IEnumerable<Message>> GetMessageThread(int userId, int recepientId);
     }
 }
