@@ -41,6 +41,11 @@ namespace CoreApplication.Data.DataEntities
 
        public ICollection<Like> Liker { get; set; } //one user can have multiple users likes
 
+    public ICollection<Message> MessagesSent { get; set; }
+
+    public ICollection<Message> MessagesReceived { get; set; }
+
+    
        public LoginUser()
        {
            Photos=new Collection<Photo>();

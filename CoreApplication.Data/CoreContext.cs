@@ -32,6 +32,8 @@ namespace CoreApplication.Data
 
         public DbSet<Like> Likes { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Like>()
@@ -47,6 +49,16 @@ namespace CoreApplication.Data
             .HasOne(u=>u.Liker)
             .WithMany(u=>u.Likee)
             .HasForeignKey(u=>u.LikeeId)      
+            .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Message>()
+            .HasOne(x=>x.Sender)
+            .WithMany(p=>p.MessagesSent)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Message>()
+            .HasOne(p=>p.Receiver)
+            .WithMany(x=>x.MessagesReceived)
             .OnDelete(DeleteBehavior.Restrict);
 
 
