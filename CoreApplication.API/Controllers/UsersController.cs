@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreApplication.API.Controllers
 {
+   // [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     public class UsersController :Controller

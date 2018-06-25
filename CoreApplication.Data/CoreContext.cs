@@ -32,7 +32,7 @@ namespace CoreApplication.Data
 
         public DbSet<Like> Likes { get; set; }
 
-        public DbSet<Message> Messages { get; set; }
+        public DbSet<Message> AllMessages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

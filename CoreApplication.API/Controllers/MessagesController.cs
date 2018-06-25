@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using CoreApplication.API.DTOs;
+using CoreApplication.API.Helpers;
 using CoreApplication.Data.DataEntities;
 using CoreApplication.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -38,6 +40,25 @@ namespace CoreApplication.API.Controllers
              return Ok(messageFromRepo);
        }
 
+       [HttpGet]
+
+       public IActionResult GetMessagesForUser(int userId,CoreApplication.Data.Helpers.MessageParams messageParams)
+       {
+               if(userId!= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            return Unauthorized();
+
+        //   var messeageParamsForDb=_mapper.Map<CoreApplication.Data.Helpers.MessageParams>(messageParams);
+
+
+            var messagesFromRepo= _userRepo.GetMessagesForUser(messageParams);
+
+            var messages=_mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
+
+            Response.AddPagination(messagesFromRepo.CurrentPage,messagesFromRepo.PageSize,messagesFromRepo.TotalCount,messagesFromRepo.TotalPages);
+
+            return Ok(messages);
+       }
+
         [HttpPost]
         public async Task<IActionResult> CreateMessage(int userId, [FromBody] MessageForCreationDto messageForCreationDto) {
            
@@ -47,7 +68,7 @@ namespace CoreApplication.API.Controllers
 
             messageForCreationDto.SenderId= userId;
 
-            var recipient = await _userRepo.GetUser(messageForCreationDto.ReceipentId);
+            var recipient = await _userRepo.GetUser(messageForCreationDto.ReceiverId);
 
             if(recipient==null)
                 return BadRequest("Could not find user");

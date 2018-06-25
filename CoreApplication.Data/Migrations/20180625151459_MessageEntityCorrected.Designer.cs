@@ -11,8 +11,8 @@ using System;
 namespace CoreApplication.Data.Migrations
 {
     [DbContext(typeof(CoreContext))]
-    [Migration("20180624140652_MessageEntityAddded")]
-    partial class MessageEntityAddded
+    [Migration("20180625151459_MessageEntityCorrected")]
+    partial class MessageEntityCorrected
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -99,11 +99,9 @@ namespace CoreApplication.Data.Migrations
 
                     b.Property<DateTime>("MessageSent");
 
-                    b.Property<int?>("ReceiverId");
+                    b.Property<int>("ReceiverId");
 
                     b.Property<bool>("ReciepentDeleted");
-
-                    b.Property<int>("ReciepentId");
 
                     b.Property<bool>("SenderDeleted");
 
@@ -115,7 +113,7 @@ namespace CoreApplication.Data.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("AllMessages");
                 });
 
             modelBuilder.Entity("CoreApplication.Data.DataEntities.Photo", b =>

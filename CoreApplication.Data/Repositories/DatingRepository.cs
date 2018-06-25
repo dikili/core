@@ -147,17 +147,41 @@ namespace CoreApplication.Data.Repositories
 
         public async Task<Message> GetMessage(int id)
         {
-            return await _coreContext.Messages.FirstOrDefaultAsync(m=>m.Id==id);
-        }
-
-        public Task<PagedList<Message>> GetMessagesForUser()
-        {
-            throw new NotImplementedException();
+            return await _coreContext.AllMessages.FirstOrDefaultAsync(m=>m.Id==id);
         }
 
         public Task<IEnumerable<Message>> GetMessageThread(int userId, int recepientId)
         {
             throw new NotImplementedException();
+        }
+
+        public PagedList<Message> GetMessagesForUser(MessageParams messageParams)
+        {
+           var messages=_coreContext.AllMessages
+                        .Include(u=>u.Receiver).ThenInclude(p=>p.Photos)
+                        .Include(x=>x.Sender).ThenInclude(z=>z.Photos)
+                        .AsQueryable();
+
+
+             switch (messageParams.MessageContainer)
+             {
+                 case "Inbox":
+                   // messages=messages.Where(u=>u.ReceiverId==messageParams.UserId);
+                    break;
+                 case "Outbox" :
+                    messages= messages.Where(u=>u.SenderId==messageParams.UserId);
+                    break;
+                  default : 
+                     //  messages=messages.Where(u=>u.ReceiverId==messageParams.UserId && u.IsRead==false);
+                       break;
+             }
+               
+            messages=messages.OrderByDescending(d=>d.MessageSent);
+
+            return PagedList<Message>.Create(messages,messageParams.PageNumber,messageParams.PageSize);
+
+
+
         }
     }
 }

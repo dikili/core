@@ -10,21 +10,24 @@ namespace CoreApplication.Data.DataEntities
 
        public LoginUser Sender { get; set; }
 
-        public int ReciepentId { get; set; }
-
+        public int ReceiverId { get; set; } 
         public LoginUser Receiver { get; set; }
 
         public string Content { get; set; }
 
         public bool IsRead { get; set; }
 
-        public bool SenderDeleted { get; set; }
 
-        public bool ReciepentDeleted { get; set; }
 
         public DateTime MessageSent { get; set; }
 
         public DateTime? DateRead { get; set; }
+
+         public bool SenderDeleted { get; set; }
+
+        public bool ReciepentDeleted { get; set; }
+
+        public DateTime? LastActivity { get; set; }
         
     }
 }
