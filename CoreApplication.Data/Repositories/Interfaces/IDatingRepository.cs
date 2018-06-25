@@ -31,7 +31,7 @@ namespace CoreApplication.Data.Repositories.Interfaces
 
         Task<Message> GetMessage(int id);
 
-        PagedList<Message> GetMessagesForUser(MessageParams messageParams);
+        Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
 
         Task<IEnumerable<Message>> GetMessageThread(int userId, int recepientId);
     }

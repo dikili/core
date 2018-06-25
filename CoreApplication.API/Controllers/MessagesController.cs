@@ -42,15 +42,14 @@ namespace CoreApplication.API.Controllers
 
        [HttpGet]
 
-       public IActionResult GetMessagesForUser(int userId,CoreApplication.Data.Helpers.MessageParams messageParams)
+       public async Task<IActionResult> GetMessagesForUser(int userId,CoreApplication.Data.Helpers.MessageParams messageParams)
        {
                if(userId!= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             return Unauthorized();
 
         //   var messeageParamsForDb=_mapper.Map<CoreApplication.Data.Helpers.MessageParams>(messageParams);
 
-
-            var messagesFromRepo= _userRepo.GetMessagesForUser(messageParams);
+            var messagesFromRepo=await _userRepo.GetMessagesForUser(messageParams);
 
             var messages=_mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
 
@@ -60,9 +59,8 @@ namespace CoreApplication.API.Controllers
        }
 
         [HttpPost]
-        public async Task<IActionResult> CreateMessage(int userId, [FromBody] MessageForCreationDto messageForCreationDto) {
-           
-
+        public async Task<IActionResult> CreateMessage(int userId, [FromBody] MessageForCreationDto messageForCreationDto) 
+        {
            if(userId!= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             return Unauthorized();
 
@@ -83,6 +81,23 @@ namespace CoreApplication.API.Controllers
                 return CreatedAtRoute("GetMessage",new {id=message.Id},messageToReturn);
 
                 throw new Exception("Creating the message failed on save");
+        }
+
+        [HttpGet("thread/{id}")]
+        public async Task<IActionResult> GetMessageThread(int userId,int id)
+        {
+
+            if(userId!= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            return Unauthorized();
+
+            var messagesFromRepo = await _userRepo.GetMessageThread(userId,id);
+
+            var messageThread= _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
+
+            return Ok(messageThread);
+
+
+         
         }
     }
 }

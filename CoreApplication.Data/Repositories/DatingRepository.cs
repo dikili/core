@@ -150,12 +150,20 @@ namespace CoreApplication.Data.Repositories
             return await _coreContext.AllMessages.FirstOrDefaultAsync(m=>m.Id==id);
         }
 
-        public Task<IEnumerable<Message>> GetMessageThread(int userId, int recepientId)
+        public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recepientId)
         {
-            throw new NotImplementedException();
+            var messages=await _coreContext.AllMessages
+                        .Include(u=>u.Receiver).ThenInclude(p=>p.Photos)
+                        .Include(x=>x.Sender).ThenInclude(z=>z.Photos)
+                        .Where(m=>(m.ReceiverId==userId && m.SenderId==recepientId)
+                               || (m.ReceiverId==recepientId && m.SenderId==userId))
+                               .OrderByDescending(x=>x.MessageSent)
+                               .ToListAsync();
+
+              return messages;                 
         }
 
-        public PagedList<Message> GetMessagesForUser(MessageParams messageParams)
+        public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
         {
            var messages=_coreContext.AllMessages
                         .Include(u=>u.Receiver).ThenInclude(p=>p.Photos)
@@ -178,7 +186,7 @@ namespace CoreApplication.Data.Repositories
                
             messages=messages.OrderByDescending(d=>d.MessageSent);
 
-            return PagedList<Message>.Create(messages,messageParams.PageNumber,messageParams.PageSize);
+            return await PagedList<Message>.CreateAsycn(messages,messageParams.PageNumber,messageParams.PageSize);
 
 
 
