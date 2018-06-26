@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { PaginatedResult } from '../_models/Pagination';
 import { query } from '@angular/core/src/animation/dsl';
+import { Message } from '../_models/message';
 
 @Injectable()
 export class UserService {
@@ -53,6 +54,28 @@ if (likeParams === 'Likees') {
 sendLike(id: number, receipentId: number) {
     return this.http.post(this.baseUrl + 'users/' + id + '/like/' + receipentId, {}, this.jwt()).catch(this.handleError);
 }
+
+getMessages(id: number, page?: number, itemsPerPage?: number, messageContainer?: string) {
+const paginatedResult: PaginatedResult<Message[]> = new PaginatedResult<Message[]>();
+
+let queryString = '?MessageContainer=' + messageContainer;
+
+if (page != null && itemsPerPage != null) {
+queryString += '&pageNumber=' + page + '&pageSize=' + itemsPerPage;
+}
+
+return this.http.get(this.baseUrl + 'users/' + id + '/messages' + queryString, this.jwt())
+.map(resp => {
+paginatedResult.result = resp.json();
+if (resp.headers.get('Pagination') != null) {
+paginatedResult.pagination = JSON.parse(resp.headers.get('Pagination'));
+}
+
+return paginatedResult;
+}).catch(this.handleError);
+
+}
+
 getUser(id): Observable<User> {
     return this.http.get(this.baseUrl + 'users/' + id, this.jwt())
     .map((response: Response) => <User>response.json())
