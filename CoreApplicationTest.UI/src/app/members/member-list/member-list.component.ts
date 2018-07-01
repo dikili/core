@@ -49,6 +49,16 @@ this.users = res.result;
   });
 }
 
+loadUsers2() {
+  this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
+  .subscribe((res: PaginatedResult<User[]>) => {
+this.pagination.currentPage = res.pagination.currentPage;
+this.users = res.result;
+  }, error => {
+    this.alertifyService.error(error);
+  });
+}
+
 resetFilters() {
   this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
 this.userParams.minAge = 18;

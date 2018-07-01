@@ -67,7 +67,8 @@ namespace CoreApplication.API.Controllers
             messageForCreationDto.SenderId= userId;
 
             var recipient = await _userRepo.GetUser(messageForCreationDto.ReceiverId);
-
+             var sender = await _userRepo.GetUser(messageForCreationDto.SenderId);
+          
             if(recipient==null)
                 return BadRequest("Could not find user");
 
@@ -75,7 +76,7 @@ namespace CoreApplication.API.Controllers
 
             _userRepo.Add(message);
 
-            var messageToReturn= _mapper.Map<MessageForCreationDto>(message);
+            var messageToReturn= _mapper.Map<MessageToReturnDto>(message);
 
             if(await _userRepo.SaveAll())
                 return CreatedAtRoute("GetMessage",new {id=message.Id},messageToReturn);
@@ -98,6 +99,33 @@ namespace CoreApplication.API.Controllers
 
 
          
+        }
+
+        [HttpPost("{id}")]
+
+        public async Task<IActionResult> DeleteMessage(int id, int userId)
+        {
+
+            if(userId!= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                 return Unauthorized();
+
+            var messageFromRepo = _userRepo.GetMessage(id).Result;
+
+            if(messageFromRepo.SenderId == userId)
+              messageFromRepo.SenderDeleted = true;
+
+               if(messageFromRepo.ReceiverId == userId)
+              messageFromRepo.ReciepentDeleted = true; 
+
+             if(messageFromRepo.SenderDeleted && messageFromRepo.ReciepentDeleted)
+              _userRepo.Delete(messageFromRepo);
+
+              if(await _userRepo.SaveAll())
+                 return NoContent();
+
+               throw new Exception("Error deleting the message");  
+
+
         }
     }
 }

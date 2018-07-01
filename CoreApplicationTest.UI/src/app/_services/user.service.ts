@@ -76,6 +76,23 @@ return paginatedResult;
 
 }
 
+
+getMessageThread(id: number, receiverId: number) {
+   return this.http.get(this.baseUrl + 'users/' + id + '/messages/thread/' + receiverId, this.jwt()).map((response: Response) => {
+        return response.json();
+    }).catch(this.handleError);
+}
+
+sendMessage(id: number, message: Message) {
+    return this.http.post(this.baseUrl + 'users/' + id + '/messages', message, this.jwt()).map((response: Response) => {
+return response.json();
+    }).catch(this.handleError);
+}
+
+deleteMessage(id: number, userId: number) {
+    return this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + id, {}, this.jwt()).map(response => {}).catch(this.handleError);
+}
+
 getUser(id): Observable<User> {
     return this.http.get(this.baseUrl + 'users/' + id, this.jwt())
     .map((response: Response) => <User>response.json())

@@ -9,7 +9,6 @@ namespace CoreApplication.API.DTOs
         public int ReceiverId { get; set; }
 
        public DateTime MessageSent { get; set; }
-
        public string Content { get; set; }
 
        public MessageForCreationDto()
