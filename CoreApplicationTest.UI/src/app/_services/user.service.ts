@@ -93,6 +93,10 @@ deleteMessage(id: number, userId: number) {
     return this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + id, {}, this.jwt()).map(response => {}).catch(this.handleError);
 }
 
+markAsRead(userId: number, messageId: number) {
+    return this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + messageId + '/read', {} , this.jwt()).subscribe();
+}
+
 getUser(id): Observable<User> {
     return this.http.get(this.baseUrl + 'users/' + id, this.jwt())
     .map((response: Response) => <User>response.json())

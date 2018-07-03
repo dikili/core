@@ -102,7 +102,6 @@ namespace CoreApplication.API.Controllers
         }
 
         [HttpPost("{id}")]
-
         public async Task<IActionResult> DeleteMessage(int id, int userId)
         {
 
@@ -125,6 +124,26 @@ namespace CoreApplication.API.Controllers
 
                throw new Exception("Error deleting the message");  
 
+
+        }
+
+        [HttpPost("{id}/read")]
+        public async Task<IActionResult> MarkMessageAsRead(int userId, int id) {
+
+             if(userId!= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                 return Unauthorized();
+
+              var message = await _userRepo.GetMessage(id);
+
+              if(message.ReceiverId != userId)
+                  return BadRequest("Failed to mark message as read");
+
+               message.IsRead= true;
+               message.DateRead = DateTime.Now;
+
+               await _userRepo.SaveAll();
+
+               return NoContent();      
 
         }
     }
