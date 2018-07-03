@@ -32,7 +32,7 @@ namespace CoreApplication.Data
 
         public DbSet<Like> Likes { get; set; }
 
-        public DbSet<Message> AllMessages { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -52,13 +52,13 @@ namespace CoreApplication.Data
             .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Message>()
-            .HasOne(x=>x.Sender)
-            .WithMany(p=>p.MessagesSent)
+            .HasOne(x => x.Sender)
+            .WithMany(p => p.MessagesSent)
             .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Message>()
-            .HasOne(p=>p.Receiver)
-            .WithMany(x=>x.MessagesReceived)
+            .HasOne(p => p.Receiver)
+            .WithMany(x => x.MessagesReceived)
             .OnDelete(DeleteBehavior.Restrict);
 
 

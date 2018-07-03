@@ -2,9 +2,9 @@ using System;
 
 namespace CoreApplication.Data.DataEntities
 {
-    public class Message
+    public class OneMessage
     {
-         public int Id { get; set; }
+        public int Id { get; set; }
 
         public int SenderId { get; set; }
 
@@ -28,5 +28,6 @@ namespace CoreApplication.Data.DataEntities
         public bool ReciepentDeleted { get; set; }
 
         public DateTime? LastActivity { get; set; }
+        
     }
 }

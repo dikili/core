@@ -3,12 +3,12 @@
     "ToAddress": "dikili@outlook.com"
   },
   "ConnectionStrings": {
-    "CoreContextConnection": "Server=localhost\\SQLEXPRESS;Database=dikilitest;Trusted_Connection=True;" //"Server=(localdb)\\MSSQLLocalDb;Database=dikilitest;Trusted_Connection=True;MultipleActiveResultSets=true"
+    "CoreContextConnection": "Server=localhost\\SQLEXPRESS;Database=coreapplication;Trusted_Connection=True;" //"Server=(localdb)\\MSSQLLocalDb;Database=dikilitest;Trusted_Connection=True;MultipleActiveResultSets=true"
   },
   "Logging": {
     "LogLevel": {
-      "Default": "Information", //we could have used our project name since loggings will be written out with that
-      "Microsoft": "Warning" // everything that starts with Microsoft will have warning level logging
+      "Default": "Information", 
+      "Microsoft": "Warning" 
     }
   },
   "Tokens": {
@@ -17,3 +17,6 @@
     "Audience": "everybody" 
   } 
 }
+
+// //we could have used our project name since loggings will be written out with that
+// // everything that starts with Microsoft will have warning level logging

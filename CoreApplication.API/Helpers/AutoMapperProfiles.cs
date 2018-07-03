@@ -31,9 +31,9 @@ namespace CoreApplication.API.Helpers
 
           CreateMap<UserForRegisterDto,LoginUser>(); 
           CreateMap<Like,LikeForCreationDto>(); 
-          CreateMap<MessageForCreationDto,Message>().ReverseMap();
+          CreateMap<MessageForCreationDto, Message>().ReverseMap();
           CreateMap<CoreApplication.Data.Helpers.MessageParams,MessageParams>().ReverseMap();
-          CreateMap<Message,MessageToReturnDto>()
+          CreateMap<Message, MessageToReturnDto>()
             .ForMember(m=>m.SenderPhotoUrl, opt => 
                       opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p=>p.IsMain).Url))
             .ForMember(m=>m.ReciepentPhotoUrl, opt => 

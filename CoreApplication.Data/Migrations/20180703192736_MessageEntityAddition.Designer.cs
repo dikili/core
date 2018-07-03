@@ -11,8 +11,8 @@ using System;
 namespace CoreApplication.Data.Migrations
 {
     [DbContext(typeof(CoreContext))]
-    [Migration("20180625151459_MessageEntityCorrected")]
-    partial class MessageEntityCorrected
+    [Migration("20180703192736_MessageEntityAddition")]
+    partial class MessageEntityAddition
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,6 +97,8 @@ namespace CoreApplication.Data.Migrations
 
                     b.Property<bool>("IsRead");
 
+                    b.Property<DateTime?>("LastActivity");
+
                     b.Property<DateTime>("MessageSent");
 
                     b.Property<int>("ReceiverId");
@@ -113,7 +115,7 @@ namespace CoreApplication.Data.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("AllMessages");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("CoreApplication.Data.DataEntities.Photo", b =>

@@ -147,12 +147,12 @@ namespace CoreApplication.Data.Repositories
 
         public async Task<Message> GetMessage(int id)
         {
-            return await _coreContext.AllMessages.FirstOrDefaultAsync(m=>m.Id==id);
+            return await _coreContext.Messages.FirstOrDefaultAsync(m=>m.Id==id);
         }
 
         public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recepientId)
         {
-            var messages=await _coreContext.AllMessages
+            var messages=await _coreContext.Messages
                         .Include(u=>u.Receiver).ThenInclude(p=>p.Photos)
                         .Include(x=>x.Sender).ThenInclude(z=>z.Photos)
                         .Where(m=>(m.ReceiverId==userId && m.ReciepentDeleted==false && m.SenderId==recepientId)
@@ -165,7 +165,7 @@ namespace CoreApplication.Data.Repositories
 
         public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
         {
-           var messages=_coreContext.AllMessages
+           var messages=_coreContext.Messages
                         .Include(u=>u.Receiver).ThenInclude(p=>p.Photos)
                         .Include(x=>x.Sender).ThenInclude(z=>z.Photos)
                         .AsQueryable();

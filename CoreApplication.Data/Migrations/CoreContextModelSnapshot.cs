@@ -114,7 +114,7 @@ namespace CoreApplication.Data.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("AllMessages");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("CoreApplication.Data.DataEntities.Photo", b =>
