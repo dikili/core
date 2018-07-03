@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Http;
 using CoreApplication.API.Helpers;
 using CoreApplication.Data.Settings;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace CoreApplication.API
 {
@@ -58,7 +59,8 @@ namespace CoreApplication.API
             //  services.AddDbContext<CoreContext>(x=>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             var key = Encoding.ASCII.GetBytes(_config.GetSection("AppSettings:Token").Value);
             services.AddDbContext<CoreContext>(options =>
-            options.UseSqlServer(_config.GetConnectionString("CoreContextConnection")));
+            options.UseSqlServer(_config.GetConnectionString("CoreContextConnection"))
+            .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning)));
            
              services.Configure<CloudinarySettings>(_config.GetSection("CloudinarySettings"));
             
