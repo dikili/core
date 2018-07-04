@@ -91,7 +91,43 @@ namespace CoreApplication.API
 
                
         }
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            //  services.AddDbContext<CoreContext>(x=>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            var key = Encoding.ASCII.GetBytes(_config.GetSection("AppSettings:Token").Value);
+            services.AddDbContext<CoreContext>(options =>
+            options.UseSqlServer(_config.GetConnectionString("CoreContextConnection"))
+            .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning)));
+           
+             services.Configure<CloudinarySettings>(_config.GetSection("CloudinarySettings"));
+            
+            services.AddMvc().AddJsonOptions(opt => 
+            {
+              opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+            services.AddCors();
+            
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDatingRepository,DatingRepository>();
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(options =>
+               {
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuerSigningKey = true,
+                       IssuerSigningKey = new SymmetricSecurityKey(key),
+                       ValidateIssuer = false,
+                       ValidateAudience = false
+                   };
+               });
+
+               services.AddTransient<Seed>();
+
+               services.AddAutoMapper();
+
+               
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
@@ -125,7 +161,14 @@ namespace CoreApplication.API
            // seeder.SeedData();
             app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseDefaultFiles(); // for deployment necassary
+            app.UseStaticFiles();
+            app.UseMvc(routes => {
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller ="Fallback", Action="Index"}
+                );
+            });
 
            
         }

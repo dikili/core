@@ -49,15 +49,15 @@ this.users = res.result;
   });
 }
 
-loadUsers2() {
-  this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
-  .subscribe((res: PaginatedResult<User[]>) => {
-this.pagination.currentPage = res.pagination.currentPage;
-this.users = res.result;
-  }, error => {
-    this.alertifyService.error(error);
-  });
-}
+// loadUsers2() {
+//   this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
+//   .subscribe((res: PaginatedResult<User[]>) => {
+// this.pagination.currentPage = res.pagination.currentPage;
+// this.users = res.result;
+//   }, error => {
+//     this.alertifyService.error(error);
+//   });
+// }
 
 resetFilters() {
   this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
@@ -74,8 +74,8 @@ this.loadUsers();
   // commented out to make sure users are loaded before the component so
   // their properties are accessible..
   loadUsersbeforeusingresolvers() {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
+    this.userService.getUsers().subscribe((res: PaginatedResult<User[]>) => {
+      this.users = res.result;
     }, error => this.alertifyService.error(error));
   }
 }

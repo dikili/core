@@ -111,7 +111,7 @@ namespace CoreApplication.API.Controllers
               _userRepo.Add<Like>(like);
 
               if(await _userRepo.SaveAll())
-              return Ok();
+              return Ok(new {});
 
               return BadRequest("Failed to add user");
         }

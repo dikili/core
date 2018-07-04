@@ -1,4 +1,3 @@
-import { AuthModule, AuthConfig } from 'angular2-jwt';
 import { AuthGuard } from './_guards/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -34,9 +33,18 @@ import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessageResolver } from './_resolvers/message.resolver';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule } from '@angular/common/http';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
+export function getAccessToken(): string {
+  return localStorage.getItem('token');
+}
 
-
+export const jwtConfig = {
+  tokenGetter: getAccessToken,
+  whitelistedDomains: ['localhost:8000']
+}
 
 @NgModule({
   declarations: [
@@ -67,7 +75,11 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
     FileUploadModule,
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: jwtConfig
+    })
   ],
   providers: [
      AuthService,
@@ -79,7 +91,8 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
      MemberEditResolver,
      PreventUnsavedChanges,
      ListsResolver,
-     MessageResolver
+     MessageResolver,
+     ErrorInterceptorProvider
     ],
   bootstrap: [AppComponent]
 })
