@@ -50,18 +50,51 @@ namespace CoreApplication.Data.Repositories
            users = users.Where(x=>x.Id!= userParams.UserId);
 
            users = users.Where(x=>x.Gender == userParams.Gender);
+         if(userParams.Likers)
+         {
+             var x =new List<LoginUser>();
+             var userLikers= await GetUserLikes(userParams.UserId,userParams.Likers);
+             foreach(var user in users)
+             {
+                 
+                foreach(var likers in userLikers)
+                {
+                    if(user.Id==likers.LikerId)
+                    {
+                        x.Add(user);
+                    }
+                }
+             }
+             users=x.AsQueryable();
+         }
+           if(userParams.Likees)
+         {
+             var x =new List<LoginUser>();
+             var userLikees= await GetUserLikes(userParams.UserId,userParams.Likers);
+             foreach(var user in users)
+             {
+                 
+                foreach(var likee in userLikees)
+                {
+                    if(user.Id==likee.LikeeId)
+                    {
+                        x.Add(user);
+                    }
+                }
+             }
+             users=x.AsQueryable();
+         }
+            // if(userParams.Likers)
+            // {
+            //     var userLikers= await GetUserLikes(userParams.UserId,userParams.Likers);
+            //     users= users.Where(u=>userLikers.Any(likers=>likers.LikerId==u.Id));
+            // }
 
-            if(userParams.Likers)
-            {
-                var userLikers= await GetUserLikes(userParams.UserId,userParams.Likers);
-                users= users.Where(u=>userLikers.Any(likers=>likers.LikerId==u.Id));
-            }
-
-            if(userParams.Likees)
-            {
-                var userLikees= await GetUserLikes(userParams.UserId,userParams.Likers);
-                users= users.Where(u=>userLikees.Any(likees=>likees.LikeeId==u.Id));
-            }
+            // if(userParams.Likees)
+            // {
+            //     var userLikees= await GetUserLikes(userParams.UserId,userParams.Likers);
+            //     users= users.Where(u=>userLikees.Any(likees=>likees.LikeeId==u.Id));
+            // }
 
 
            if(userParams.MinAge != 18 || userParams.MaxAge != 99) {
@@ -89,7 +122,7 @@ namespace CoreApplication.Data.Repositories
 
            
 
-           return await PagedList<LoginUser>.CreateAsycn(users,userParams.PageNumber,userParams.PageSize);
+           return PagedList<LoginUser>.Create(users,userParams.PageNumber,userParams.PageSize);
         }
 
         public async Task<LoginUser> GetUser(int id)
