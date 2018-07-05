@@ -32,6 +32,8 @@ this.pagination = data['messages'].pagination;
   }
 
   loadMessages() {
+    // tslint:disable-next-line:no-debugger
+    debugger;
     this.userService
     .getMessages(this.authService.decodedToken.nameid,
       this.pagination.currentPage,

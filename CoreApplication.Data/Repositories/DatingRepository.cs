@@ -141,12 +141,15 @@ namespace CoreApplication.Data.Repositories
             .Include(x=>x.Liker)
             .FirstOrDefaultAsync(u=>u.Id==id);
 
+            var likee = user.Likee;
+            var liker = user.Liker;
             if(likers)
-            {
-                return user.Likee.Where(u=>u.LikeeId==id);
+            {   var x=likee.Where(u=>u.LikeeId==id).ToList();
+                return x;//user.Likee.Where(u=>u.LikeeId==id).ToList();
             }
             else{
-                return user.Liker.Where(u=>u.LikerId==id);
+                 var y=liker.Where(u=>u.LikerId==id).ToList();
+                return y;
             }
         }
 
@@ -157,9 +160,9 @@ namespace CoreApplication.Data.Repositories
 
         public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recepientId)
         {
-            var messages=await _coreContext.Messages
-                        .Include(u=>u.Receiver).ThenInclude(p=>p.Photos)
-                        .Include(x=>x.Sender).ThenInclude(z=>z.Photos)
+            var messageList = _coreContext.Messages.Include(u=>u.Receiver).ThenInclude(p=>p.Photos)
+                        .Include(x=>x.Sender).ThenInclude(z=>z.Photos);
+            var messages=await messageList
                         .Where(m=>(m.ReceiverId==userId && m.ReciepentDeleted==false && m.SenderId==recepientId)
                                || (m.ReceiverId==recepientId && m.SenderDeleted==false  && m.SenderId==userId))
                                .OrderByDescending(x=>x.MessageSent)

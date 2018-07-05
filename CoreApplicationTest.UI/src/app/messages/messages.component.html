@@ -24,7 +24,7 @@
       <table class="table table-hover" style="cursor: pointer">
           <tr>
             <th style="width: 40%">Message</th>
-            <th style="width: 20%">From / To</th>
+            <th style="width: 20%">From</th>
             <th style="width: 20%">Sent / Received</th>
             <th style="width: 20%"></th>
           </tr>
@@ -36,7 +36,7 @@
                 <strong>{{message.senderKnownAs}}</strong>
               </div>
               <div *ngIf="messageContainer == 'Outbox'">
-                <img [src]="message.receiverPhotoUrl" class="img-circle">
+                <img [src]="message.senderPhotoUrl" class="img-circle">
                 <strong>{{message.receiverKnownAs}}</strong>
               </div>
             </td>

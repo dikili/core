@@ -44,7 +44,7 @@ export function getAccessToken(): string {
 export const jwtConfig = {
   tokenGetter: getAccessToken,
   whitelistedDomains: ['localhost:8000']
-}
+};
 
 @NgModule({
   declarations: [

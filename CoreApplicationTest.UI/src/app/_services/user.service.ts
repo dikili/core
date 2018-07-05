@@ -123,10 +123,11 @@ sendLike(id: number, receipentId: number) {
 
 getMessages(id: number, page?, itemsPerPage?, messageContainer?: string) {
 const paginatedResult: PaginatedResult<Message[]> = new PaginatedResult<Message[]>();
-
+// tslint:disable-next-line:no-debugger
+debugger;
 let params = new HttpParams();
 
-params.append('MessageContainer', messageContainer);
+params = params.append('MessageContainer', messageContainer);
 
 if (page != null && itemsPerPage != null) {
     params = params.append('pageNumber', page);
