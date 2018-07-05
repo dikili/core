@@ -1,0 +1,5 @@
+C:\Source\CoreApplicationTest\CoreApplication.API
+--output-path=obj\Debug\netcoreapp2.0\
+--application-name=CoreApplication.API
+--content-root=C:\Source\CoreApplicationTest\CoreApplication.API
+--file=

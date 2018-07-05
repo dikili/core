@@ -11,10 +11,11 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthUser } from '../_models/authUser';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
- baseUrl = 'http://localhost:8000/api/auth/';
+ baseUrl = environment.apiUrl;
  userToken: any = {};
  decodedToken: any;
 //  JwtHelper: JwtHelper = new JwtHelper(); line not needed as jwtHelperService
@@ -53,7 +54,7 @@ changeMemberPhoto(photoUrl: string) {
 // }
 
 login(model: any) {
-    return this.http.post<AuthUser>(this.baseUrl + 'login', model, {headers: new HttpHeaders()
+    return this.http.post<AuthUser>(this.baseUrl + 'auth/login', model, {headers: new HttpHeaders()
      .set('Content-Type', 'application/json')})
      .map(user => {
      if (user)  {
@@ -78,7 +79,7 @@ login(model: any) {
 register(user: User) {
     // below line not needed as httpclient implementation is as one below
 // return  this.http.post(this.baseUrl + 'register', user, this.getRequestOptions()).catch(this.handleError);
-return  this.http.post(this.baseUrl + 'register', user, {headers: new HttpHeaders()
+return  this.http.post(this.baseUrl + 'auth/register', user, {headers: new HttpHeaders()
     .set('Content-Type', 'application/json')});
 }
 
