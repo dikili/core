@@ -19,10 +19,12 @@ using System.Text;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using CoreApplication.API.Helpers;
 using CoreApplication.Data.Settings;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+
 
 namespace CoreApplication.API
 {
@@ -64,10 +66,12 @@ namespace CoreApplication.API
            
              services.Configure<CloudinarySettings>(_config.GetSection("CloudinarySettings"));
             
-            services.AddMvc().AddJsonOptions(opt => 
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            .AddJsonOptions(opt => 
             {
               opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+            
             services.AddCors();
             
             services.AddScoped<IAuthRepository, AuthRepository>();

@@ -31,4 +31,5 @@ C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreA
 C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.AssemblyInfo.cs
 C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.dll
 C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.pdb
-C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.csprojResolveAssemblyReference.cache
+C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.csprojAssemblyReference.cache
+C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.0\CoreApplication.Data.csproj.CopyComplete
