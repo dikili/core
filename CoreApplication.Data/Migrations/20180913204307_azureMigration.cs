@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoreApplication.Data.Migrations
 {
-    public partial class InitialMigrationx : Migration
+    public partial class azureMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
