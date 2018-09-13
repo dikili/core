@@ -3,8 +3,7 @@ import { Message } from '../../_models/message';
 import { UserService } from '../../_services/user.service';
 import { AuthService } from '../../_services/auth.service';
 import { AlertifyService } from '../../_services/alertify.service';
-import 'rxjs/add/operator/do';
-import * as _ from 'underscore';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-member-messages',
@@ -12,13 +11,12 @@ import * as _ from 'underscore';
   styleUrls: ['./member-messages.component.css']
 })
 export class MemberMessagesComponent implements OnInit {
-@Input() userId: number;
-messages: Message[];
-newMessage: any = {};
+  @Input() receiverId: number;
+  messages: Message[];
+  newMessage: any = {};
 
-  constructor(private userService: UserService,
-    private authService: AuthService,
-    private alertifyService: AlertifyService) { }
+  constructor(private userService: UserService, private authService: AuthService,
+      private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.loadMessages();
@@ -26,27 +24,31 @@ newMessage: any = {};
 
   loadMessages() {
     const currentUserId = +this.authService.decodedToken.nameid;
-    this.userService.getMessageThread(this.authService.decodedToken.nameid, this.userId)
-    .do(messages => {
-      _.each(messages, (message: Message) => {
-         if (message.isRead === false && message.receiverId === currentUserId) {
-           this.userService.markAsRead(currentUserId, message.id);
-         }
-      });
-    })
-    .subscribe(messages => {
-      this.messages = messages;
-    }, error => { this.alertifyService.error(error);
+    this.userService.getMessageThread(this.authService.decodedToken.nameid, this.receiverId)
+      .pipe(
+        tap(messages => {
+          for (let i = 0; i < messages.length; i++) {
+            if (messages[i].isRead === false && messages[i].receiverId === currentUserId) {
+              this.userService.markAsRead(currentUserId, messages[i].id);
+            }
+          }
+        })
+      )
+      .subscribe(messages => {
+        this.messages = messages;
+    }, error => {
+      this.alertify.error(error);
     });
   }
 
   sendMessage() {
-    this.newMessage.receiverId = this.userId;
-    this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage).subscribe(message => {
-this.messages.unshift(message);
-this.newMessage.content = '';
+    this.newMessage.receiverId = this.receiverId;
+    this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage)
+      .subscribe((message: Message) => {
+        this.messages.unshift(message);
+        this.newMessage.content = '';
     }, error => {
-      this.alertifyService.error(error);
+      this.alertify.error(error);
     });
   }
 

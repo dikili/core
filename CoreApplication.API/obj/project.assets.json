@@ -12443,6 +12443,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "C:\\Source\\CoreApplicationTest\\CoreApplication.API\\CoreApplication.API.csproj",
       "projectName": "CoreApplication.API",
@@ -12483,23 +12486,23 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-            "target": "Package",
-            "version": "[3.2.0, )"
-          },
           "CloudinaryDotNet": {
             "target": "Package",
-            "version": "[1.1.1, )"
+            "version": "1.1.1"
+          },
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "3.2.0"
+          },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "2.1",
+            "autoReferenced": true
           },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[2.1.1, )",
-            "autoReferenced": true
-          },
-          "Microsoft.NETCore.App": {
-            "target": "Package",
-            "version": "[2.1.0, )",
+            "version": "2.1.1",
             "autoReferenced": true
           }
         },

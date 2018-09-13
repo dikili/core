@@ -1,24 +1,26 @@
-import { AuthGuard } from './_guards/auth.guard';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Pipe } from '@angular/core';
-import { BsDropdownModule , TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule } from 'ngx-bootstrap';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule } from 'ngx-bootstrap';
+import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
-
+import { FileUploadModule } from 'ng2-file-upload';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { AppComponent } from './app.component';
-import { ValueComponent } from './value/value.component';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
-import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
@@ -28,28 +30,17 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
-import { FileUploadModule } from 'ng2-file-upload';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessageResolver } from './_resolvers/message.resolver';
-import { TimeAgoPipe } from 'time-ago-pipe';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
-import { JwtModule } from '@auth0/angular-jwt';
-import { HttpClientModule } from '@angular/common/http';
-import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
-export function getAccessToken(): string {
+export function tokenGetter() {
   return localStorage.getItem('token');
 }
-
-export const jwtConfig = {
-  tokenGetter: getAccessToken,
-  whitelistedDomains: ['localhost:8000']
-};
 
 @NgModule({
   declarations: [
     AppComponent,
-    ValueComponent,
     NavComponent,
     HomeComponent,
     RegisterComponent,
@@ -62,38 +53,41 @@ export const jwtConfig = {
     PhotoEditorComponent,
     TimeAgoPipe,
     MemberMessagesComponent
-],
+  ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
+    BsDatepickerModule.forRoot(),
+    ButtonsModule.forRoot(),
+    PaginationModule.forRoot(),
     TabsModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
     NgxGalleryModule,
     FileUploadModule,
-    BsDatepickerModule.forRoot(),
-    PaginationModule.forRoot(),
-    ButtonsModule.forRoot(),
-    HttpClientModule,
     JwtModule.forRoot({
-      config: jwtConfig
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:8000'],
+        blacklistedRoutes: ['localhost:8000/api/auth']
+      }
     })
   ],
   providers: [
-     AuthService,
-     AlertifyService,
-     AuthGuard,
-     UserService,
-     MemberDetailResolver,
-     MemberListResolver,
-     MemberEditResolver,
-     PreventUnsavedChanges,
-     ListsResolver,
-     MessageResolver,
-     ErrorInterceptorProvider
+      AuthService,
+      ErrorInterceptorProvider,
+      AlertifyService,
+      AuthGuard,
+      UserService,
+      MemberDetailResolver,
+      MemberListResolver,
+      MemberEditResolver,
+      PreventUnsavedChanges,
+      ListsResolver,
+      MessageResolver
     ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

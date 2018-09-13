@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './_services/auth.service';
-// import { JwtHelper } from 'angular2-jwt'; no longer needed as JwtHelperService
-import { User } from './_models/User';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { User } from './_models/user';
 
 @Component({
   selector: 'app-root',
@@ -10,34 +9,19 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-//  JwtHelper: JwtHelper = new JwtHelper(); line invalid as JwtHelperService in place
- /**
-  *
-  */
- constructor(private authService: AuthService, private jwtHelperService: JwtHelperService) {
- }
+  jwtHelper = new JwtHelperService();
 
- ngOnInit() {
-   // make sure you assign something to decodedToken to make the variable available
-   // even after page refresh globally ...
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
     const token = localStorage.getItem('token');
-    const userLS = localStorage.getItem('user');
-    if (userLS !== 'undefined') {
-      const user: User = JSON.parse(localStorage.getItem('user'));
-      if (token) {
-        // this.authService.decodedToken = this.JwtHelper.decodeToken(token); jwtHelperService implementation ...
-        this.authService.decodedToken = this.jwtHelperService.decodeToken(token);
-      }
-
-      if (user) {
-        this.authService.currentUser = user;
-        if (this.authService.currentUser.photoUrl !== null) {
-          this.authService.changeMemberPhoto(user.photoUrl);
-        } else {
-          this.authService.changeMemberPhoto('../assets/user.png');
-        }
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    if (token) {
+      this.authService.decodedToken = this.jwtHelper.decodeToken(token);
     }
-
+    if (user) {
+      this.authService.currentUser = user;
+      this.authService.changeMemberPhoto(user.photoUrl);
     }
- }
+  }
 }

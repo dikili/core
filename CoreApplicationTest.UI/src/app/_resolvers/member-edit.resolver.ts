@@ -22,9 +22,12 @@ constructor(private userService: UserService,  private alertify: AlertifyService
 }
 
 resolve(route: ActivatedRouteSnapshot): Observable<User>  {
+  // tslint:disable-next-line:no-debugger
+  debugger;
   return this.userService.getUser(this.authService.decodedToken.nameid)
         .catch(error => {
-      this.alertify.error('Problem retrieving data');
+      console.log(this.authService.decodedToken.nameid);
+      this.alertify.error('Problem retrieving data 3');
       return Observable.of(null);
   });
 }

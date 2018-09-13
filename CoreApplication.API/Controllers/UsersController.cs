@@ -7,116 +7,105 @@ using CoreApplication.API.DTOs;
 using CoreApplication.API.Helpers;
 using CoreApplication.Data.DataEntities;
 using CoreApplication.Data.Helpers;
-using CoreApplication.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CoreApplication.Data.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 
-namespace CoreApplication.API.Controllers
+namespace DatingApp.API.Controllers
 {
-   // [ServiceFilter(typeof(LogUserActivity))]
+    //[ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
-    public class UsersController :Controller
+    [ApiController]
+    public class UsersController : ControllerBase
     {
-        private readonly IDatingRepository _userRepo;
+        private readonly IDatingRepository _repo;
         private readonly IMapper _mapper;
-
-        public UsersController(IDatingRepository repository,IMapper mapper)
+        
+        public UsersController(IDatingRepository repo, IMapper mapper)
         {
-            _userRepo=repository;
-            _mapper=mapper;
+            _mapper = mapper;
+            _repo = repo;
+           
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers(UserParams userParams)
+        public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
         {
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            var currentUserId=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-           
-            var currentUser=await _userRepo.GetUser(currentUserId);
+            var userFromRepo = await _repo.GetUser(currentUserId);
 
             userParams.UserId = currentUserId;
 
-            if(string.IsNullOrEmpty(userParams.Gender))
-            { 
-              userParams.Gender= currentUser.Gender == "male" ? "female" : "male"; 
+            if (string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
             }
-           
 
-            var users= _userRepo.GetUsers(userParams).Result;
+            var users = await _repo.GetUsers(userParams);
 
-            var userToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
+            var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
 
-            Response.AddPagination(users.CurrentPage,users.PageSize,users.TotalCount,users.TotalPages);
+            Response.AddPagination(users.CurrentPage, users.PageSize,
+                users.TotalCount, users.TotalPages);
 
-            return Ok(userToReturn);
+            return Ok(usersToReturn);
         }
 
-        [HttpGet("{id}", Name="GetUser")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var user=await _userRepo.GetUser(id);
+            var user = await _repo.GetUser(id);
 
-            var userToReturn=_mapper.Map<UserForDetailedDto>(user);
+            var userToReturn = _mapper.Map<UserForDetailedDto>(user);
 
             return Ok(userToReturn);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id,[FromBody] UserForUpdateDto user)
+        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
         {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-           
-           // Get the current logged in user's id
-
-            var currentUserId=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-           
-            var mainUser=await _userRepo.GetUser(id);
-
-            if(mainUser.Id!=currentUserId)
-            {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-            }
 
-             _mapper.Map(user, mainUser);
+            var userFromRepo = await _repo.GetUser(id);
 
-            if(await _userRepo.SaveAll())
+            _mapper.Map(userForUpdateDto, userFromRepo);
+
+            if (await _repo.SaveAll())
                 return NoContent();
-           
-           throw new Exception($"Update for userid {id} failed");
+
+            throw new Exception($"Updating user {id} failed on save");
         }
 
-        [HttpPost("{id}/like/{recepientId}")]
-        public async Task<IActionResult> LikeUser(int id,int recepientId)
+        [HttpPost("{id}/like/{recipientId}")]
+        public async Task<IActionResult> LikeUser(int id, int recipientId)
         {
-             var currentUserId=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
-             if(id!=currentUserId)
-               return Unauthorized();
+            var like = await _repo.GetLike(id, recipientId);
 
-             var like=_userRepo.GetLike(id,recepientId).Result;  
-
-             if(like!=null)
-               return BadRequest("You already liked this user!!");
-
-              like  = new Like
-              {
-                  LikerId=id,
-                  LikeeId=recepientId  
-              }; 
+            if (like != null)
+                return BadRequest("You already like this user");
             
-              _userRepo.Add<Like>(like);
+            if (await _repo.GetUser(recipientId) == null)
+                return NotFound();
 
-              if(await _userRepo.SaveAll())
-              return Ok(new {});
+            like = new Like
+            {
+                LikerId = id,
+                LikeeId = recipientId
+            };
 
-              return BadRequest("Failed to add user");
+            _repo.Add<Like>(like);
+
+            if (await _repo.SaveAll())
+                return Ok();
+            
+            return BadRequest("Failed to like user");
         }
-
-        }
-
-  
     }
+}

@@ -6631,6 +6631,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "C:\\Source\\CoreApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj",
       "projectName": "CoreApplication.Data",
@@ -6667,17 +6670,11 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
-            "suppressParent": "All",
+          "MongoDB.Driver": {
             "target": "Package",
-            "version": "2.0.0",
-            "autoReferenced": true
+            "version": "2.4.4"
           },
-          "Microsoft.EntityFrameworkCore.Design": {
-            "target": "Package",
-            "version": "2.0.0"
-          },
-          "Microsoft.EntityFrameworkCore.SqlServer": {
+          "Microsoft.Extensions.Configuration.Json": {
             "target": "Package",
             "version": "2.0.0"
           },
@@ -6685,13 +6682,19 @@
             "target": "Package",
             "version": "2.0.0"
           },
-          "Microsoft.Extensions.Configuration.Json": {
+          "Microsoft.EntityFrameworkCore.Design": {
             "target": "Package",
             "version": "2.0.0"
           },
-          "MongoDB.Driver": {
+          "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
-            "version": "2.4.4"
+            "version": "2.0",
+            "autoReferenced": true
+          },
+          "Microsoft.EntityFrameworkCore.SqlServer": {
+            "target": "Package",
+            "version": "2.0.0"
           }
         },
         "imports": [

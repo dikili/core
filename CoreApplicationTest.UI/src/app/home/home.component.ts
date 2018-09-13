@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,7 @@ import { Http } from '@angular/http';
 export class HomeComponent implements OnInit {
   registerMode= false;
   values: any;
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.getValues();
@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     this.http.get('http://localhost:8000/api/values').subscribe(response => {
       console.log(response);
 
-      this.values = response.json();
+      this.values = response;
     });
   }
 

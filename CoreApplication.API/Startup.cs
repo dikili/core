@@ -71,7 +71,9 @@ namespace CoreApplication.API
             {
               opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-            
+
+            // Will apply any pending migrations to database and will create db if does not already exist when below is done..
+            services.BuildServiceProvider().GetService<CoreContext>().Database.Migrate();
             services.AddCors();
             
             services.AddScoped<IAuthRepository, AuthRepository>();

@@ -22,6 +22,8 @@ likeParams: string;
   private route: ActivatedRoute) { }
 
   ngOnInit() {
+    // tslint:disable-next-line:no-debugger
+    debugger;
     this.route.data.subscribe(data => {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
@@ -29,6 +31,8 @@ likeParams: string;
     this.likeParams = 'Likers';
   }
   loadUsers() {
+    // tslint:disable-next-line:no-debugger
+    debugger;
     this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, null, this.likeParams)
     .subscribe((res: PaginatedResult<User[]>) => {
   this.pagination = res.pagination;
