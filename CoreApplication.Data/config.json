@@ -1,6 +1,9 @@
 ﻿{
   "MailSettings": {
     "ToAddress": "dikili@outlook.com"
+  },
+  "ConnectionStrings": {
+    "CoreContextConnection": "Data Source=localhost\\SQLEXPRESS;Initial Catalog=coreapplication2;Integrated Security=SSPI;"
   }
 
 }
