@@ -34,7 +34,7 @@ namespace CoreApplication.Data
 
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(currentPath)
-                .AddJsonFile("C:/Source/CoreApplicationTest/CoreApplication.Data/config.json")
+                .AddJsonFile("~/../config.json")
                 .Build();
             var builder = new DbContextOptionsBuilder<CoreApplication.Data.CoreContext>();
             var connectionString = configuration.GetConnectionString("CoreContextConnection");

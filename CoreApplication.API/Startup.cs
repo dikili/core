@@ -164,7 +164,7 @@ namespace CoreApplication.API
                 });
             }
            // just enable if you want the seed data to work...
-           // seeder.SeedData();
+            seeder.SeedData();
             app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
             app.UseDefaultFiles(); // for deployment necassary
