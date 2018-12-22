@@ -33,6 +33,7 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessageResolver } from './_resolvers/message.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { ValueComponent } from './value/value.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -52,7 +53,8 @@ export function tokenGetter() {
     MemberEditComponent,
     PhotoEditorComponent,
     TimeAgoPipe,
-    MemberMessagesComponent
+    MemberMessagesComponent,
+    ValueComponent
   ],
   imports: [
     BrowserModule,
