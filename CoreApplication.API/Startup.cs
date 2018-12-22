@@ -137,34 +137,35 @@ namespace CoreApplication.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                //global exception handler if in the production etc..
-                //this is the error that will be seen ...
-                //  
-                app.UseExceptionHandler(builder =>
-                {
-                    builder.Run(async context =>
-                    {
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            app.UseDeveloperExceptionPage();
+            // if (env.IsDevelopment())
+            // {
+            //     app.UseDeveloperExceptionPage();
+            // }
+            // else
+            // {
+            //     //global exception handler if in the production etc..
+            //     //this is the error that will be seen ...
+            //     //  
+            //     app.UseExceptionHandler(builder =>
+            //     {
+            //         builder.Run(async context =>
+            //         {
+            //             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                        var error = context.Features.Get<IExceptionHandlerFeature>();
+            //             var error = context.Features.Get<IExceptionHandlerFeature>();
 
-                        if(error != null)
-                        {
-                            context.Response.AddApplicationErrors(error.Error.Message); //.AddApplicationError(error.Error.Message);
-                            await context.Response.WriteAsync(error.Error.Message);
-                        }
+            //             if(error != null)
+            //             {
+            //                 context.Response.AddApplicationErrors(error.Error.Message); //.AddApplicationError(error.Error.Message);
+            //                 await context.Response.WriteAsync(error.Error.Message);
+            //             }
                         
-                    });
-                });
-            }
+            //         });
+            //     });
+            // }
            // just enable if you want the seed data to work...
-            seeder.SeedData();
+           // seeder.SeedData();
             app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
             app.UseDefaultFiles(); // for deployment necassary

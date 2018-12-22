@@ -1,0 +1,11 @@
+C:\Source\CoreApplicationTest\CoreApplication.Data\bin\Release\netcoreapp2.1\CoreApplication.Data.deps.json
+C:\Source\CoreApplicationTest\CoreApplication.Data\bin\Release\netcoreapp2.1\CoreApplication.Data.runtimeconfig.json
+C:\Source\CoreApplicationTest\CoreApplication.Data\bin\Release\netcoreapp2.1\CoreApplication.Data.runtimeconfig.dev.json
+C:\Source\CoreApplicationTest\CoreApplication.Data\bin\Release\netcoreapp2.1\CoreApplication.Data.dll
+C:\Source\CoreApplicationTest\CoreApplication.Data\bin\Release\netcoreapp2.1\CoreApplication.Data.pdb
+C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Release\netcoreapp2.1\CoreApplication.Data.csprojAssemblyReference.cache
+C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Release\netcoreapp2.1\CoreApplication.Data.csproj.CoreCompileInputs.cache
+C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Release\netcoreapp2.1\CoreApplication.Data.AssemblyInfoInputs.cache
+C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Release\netcoreapp2.1\CoreApplication.Data.AssemblyInfo.cs
+C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Release\netcoreapp2.1\CoreApplication.Data.dll
+C:\Source\CoreApplicationTest\CoreApplication.Data\obj\Release\netcoreapp2.1\CoreApplication.Data.pdb

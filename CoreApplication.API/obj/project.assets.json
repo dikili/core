@@ -4733,10 +4733,11 @@
   },
   "libraries": {
     "AutoMapper/6.1.1": {
-      "sha512": "A+6PAblvzmkXPS20nFBQJvlNSW5oEdyfN5+cxT/Du35fTNyuP5pNDXT64KT/jBgxt7CPduOM0Y7oLnNe0E5IXg==",
+      "sha512": "/5Jj0SwQlvBTThslWFLgaZH4S3mCymOjZZBfEvaM2s4VF3Q4KiJSzJrMRRS8h7nt6I99q8OaZgWg+7WQdACL+A==",
       "type": "package",
       "path": "automapper/6.1.1",
       "files": [
+        ".signature.p7s",
         "automapper.6.1.1.nupkg.sha512",
         "automapper.nuspec",
         "lib/net45/AutoMapper.dll",
@@ -4748,20 +4749,22 @@
       ]
     },
     "AutoMapper.Extensions.Microsoft.DependencyInjection/3.2.0": {
-      "sha512": "528nEpAwniNn8Z6Ae9qTiM/kN4f0BxmWE9mDMEkqKKGxbuElmv6Kj9DVvTXECJkIt6ARerb9+vYbOifNpcwvXQ==",
+      "sha512": "RuYM+6FAGUYvH4LRYQlUBDu2eCkF39MA6dSNq3+bphmBOPNpRX54Vdsh9kiqwNCst/uom3khi5/52GR7lXJwrw==",
       "type": "package",
       "path": "automapper.extensions.microsoft.dependencyinjection/3.2.0",
       "files": [
+        ".signature.p7s",
         "automapper.extensions.microsoft.dependencyinjection.3.2.0.nupkg.sha512",
         "automapper.extensions.microsoft.dependencyinjection.nuspec",
         "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
       ]
     },
     "CloudinaryDotNet/1.1.1": {
-      "sha512": "brssM2vEdYSa7ObvU/moEsD0/svFGmBs8dtKNgiLv43MU9LeGfxnG1nVLM4NOXoUfHMyVdPXzIFNxRqYjykr0Q==",
+      "sha512": "zNUzlTbxDSa19rDCdGiXK8VHyyN97P8cP8eQvXdozmocWIYij25wikVdAPPH2NH/U6eIzd4spqy/bjXHSHaPUg==",
       "type": "package",
       "path": "cloudinarydotnet/1.1.1",
       "files": [
+        ".signature.p7s",
         "cloudinarydotnet.1.1.1.nupkg.sha512",
         "cloudinarydotnet.nuspec",
         "lib/net/net40/Cloudinary.dll",
@@ -7237,10 +7240,11 @@
       ]
     },
     "MongoDB.Bson/2.4.4": {
-      "sha512": "BavFx+rmR5k+dx14tC23KTyjCPkASvTQ1WxzLYHt2w3Mkqel5lJV6+gWzWV3DX9hnTewCC09OKqNqckiJl4sIw==",
+      "sha512": "+RuVwqk3jMbuhPCDd0c91qeH6sev+VrYbEggDjU/H4wW2lhVZHoVLYMRI6iAR0n9X0JlCrjIaf2tGNvE+AQn1A==",
       "type": "package",
       "path": "mongodb.bson/2.4.4",
       "files": [
+        ".signature.p7s",
         "License.rtf",
         "lib/net45/MongoDB.Bson.dll",
         "lib/net45/MongoDB.Bson.xml",
@@ -7251,10 +7255,11 @@
       ]
     },
     "MongoDB.Driver/2.4.4": {
-      "sha512": "sG+4H7732fG3XGCXWsxwuUQBvnbVO/bzzxBVZHtHa5R2UDsRXR7BfQxAS/d9Qk8FlNDHOjTjz+GzWTgzjgopQw==",
+      "sha512": "KLM2jimoyWDdyXAMWKEk642/6US+FnxaAWqH1nrfB1l3MDDQHux5F50TooSWbZIwrXGIMsmRy4sTnQ/obqrezA==",
       "type": "package",
       "path": "mongodb.driver/2.4.4",
       "files": [
+        ".signature.p7s",
         "License.rtf",
         "lib/net45/MongoDB.Driver.dll",
         "lib/net45/MongoDB.Driver.xml",
@@ -7265,10 +7270,11 @@
       ]
     },
     "MongoDB.Driver.Core/2.4.4": {
-      "sha512": "fVjXuQE5Qe2P38xz9wz5V0QhT54+ZT78/JUKMMbIXOKYVFgkzEOE7UU6ZsbC/AbR4lwGIpRQZoiv7wW3rJb3xQ==",
+      "sha512": "q88EiMVzeGdu1PcpmI5+JaLttyXCdpwRbi3H7vGFZMIY0NlgXPChllliPs+hZMwNFQO5UsYDVMXbxV3ruvTa6g==",
       "type": "package",
       "path": "mongodb.driver.core/2.4.4",
       "files": [
+        ".signature.p7s",
         "License.rtf",
         "lib/net45/MongoDB.Driver.Core.dll",
         "lib/net45/MongoDB.Driver.Core.xml",
@@ -7551,10 +7557,11 @@
       ]
     },
     "runtime.native.System.Net.Security/4.0.1": {
-      "sha512": "Az6Ff6rZFb8nYGAaejFR6jr8ktt9f3e1Q/yKdw0pwHNTLaO/1eCAC9vzBoR9YAb0QeZD6fZXl1A9tRB5stpzXA==",
+      "sha512": "pnBEZovOBrJJFp+2ORAs+bYuEQFcO2iYBNbNwRCqzZ9U7Vu66qoTJaekvOGgCyKmslvcevAVLxn7/K9Xc6lwlw==",
       "type": "package",
       "path": "runtime.native.system.net.security/4.0.1",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -9487,10 +9494,11 @@
       ]
     },
     "System.Linq.Queryable/4.3.0": {
-      "sha512": "In1Bmmvl/j52yPu3xgakQSI0YIckPUr870w4K5+Lak3JCCa8hl+my65lABOuKfYs4ugmZy25ScFerC4nz8+b6g==",
+      "sha512": "wdbQgzMijyDkBQySuqYnDcK/V70V6KIUUQdXpkXShHbgQRn0bn9wY3ar0VnsDwCcwu8ig6XBrpC2EU2xK+TuQg==",
       "type": "package",
       "path": "system.linq.queryable/4.3.0",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/monoandroid10/_._",
@@ -9648,10 +9656,11 @@
       ]
     },
     "System.Net.NameResolution/4.0.0": {
-      "sha512": "JdqRdM1Qym3YehqdKIi5LHrpypP4JMfxKQSNCJ2z4WawkG0il+N3XfNeJOxll2XrTnG7WgYYPoeiu/KOwg0DQw==",
+      "sha512": "tzeTP0r8uMf10LVrbwujDiQSTXNJzjlo2LquRV3b5FHeE2ONwe+EZX9xVmG+KFYaJyFNb2sTNBHA1k1tfSUglw==",
       "type": "package",
       "path": "system.net.nameresolution/4.0.0",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -9765,10 +9774,11 @@
       ]
     },
     "System.Net.Security/4.0.0": {
-      "sha512": "uM1JaYJciCc2w7efD6du0EpQ1n5ZQqE6/P43/aI4H5E59qvP+wt3l70KIUF/Ha7NaeXGoGNFPVO0MB80pVHk2g==",
+      "sha512": "e7y/92A7436wJ33VOnUf5XbIlubGgHH7+cODaQkeYwU0xXd/fB/j6KiOdS6VvHcRfBXUYIPsvBOdz3WSNE1siQ==",
       "type": "package",
       "path": "system.net.security/4.0.0",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -11449,10 +11459,11 @@
       ]
     },
     "System.Security.SecureString/4.0.0": {
-      "sha512": "sqzq9GD6/b0yqPuMpgIKBuoLf4VKAj8oAfh4kXSzPaN6eoKY3hRi9C5L27uip25qlU+BGPfb0xh2Rmbwc4jFVA==",
+      "sha512": "7TGOnj9Lr8ljCJbMHjZC34hEw3Z+zRPp7eNhLBg22mbSqO8gQMGLJ/vQkWv8HFYG0t2i53ZulKZ8NNho+jVK7Q==",
       "type": "package",
       "path": "system.security.securestring/4.0.0",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12444,9 +12455,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "C:\\Source\\CoreApplicationTest\\CoreApplication.API\\CoreApplication.API.csproj",
       "projectName": "CoreApplication.API",
@@ -12466,7 +12474,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Source\\MCurie\\MarieCurie.Interview\\MarieCurie.Interview\\lib": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -12487,23 +12494,23 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
-          "CloudinaryDotNet": {
-            "target": "Package",
-            "version": "1.1.1"
-          },
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
-            "version": "3.2.0"
+            "version": "[3.2.0, )"
           },
-          "Microsoft.NETCore.App": {
+          "CloudinaryDotNet": {
             "target": "Package",
-            "version": "2.1",
-            "autoReferenced": true
+            "version": "[1.1.1, )"
           },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.1.1",
+            "version": "[2.1.1, )",
+            "autoReferenced": true
+          },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "[2.1.0, )",
             "autoReferenced": true
           }
         },
