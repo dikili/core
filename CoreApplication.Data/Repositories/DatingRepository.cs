@@ -45,7 +45,7 @@ namespace CoreApplication.Data.Repositories
             // {
             //      return  ctx.LoginUsers.Include(p=>p.Photos);   
             // }
-           var users= _coreContext.LoginUsers.Include(p=>p.Photos).OrderByDescending(x=>x.LastActive).AsQueryable();
+           var users= _coreContext.Users.Include(p=>p.Photos).OrderByDescending(x=>x.LastActive).AsQueryable();
 
            users = users.Where(x=>x.Id!= userParams.UserId);
 
@@ -131,7 +131,7 @@ namespace CoreApplication.Data.Repositories
              // issues so got rid of those
             
            return
-                await _coreContext.LoginUsers.Include(p => p.Photos)
+                await _coreContext.Users.Include(p => p.Photos)
                   .FirstOrDefaultAsync(p => p.Id == id); //await ctx.LoginUsers.Include(p=>p.Photos).FirstOrDefaultAsync(x=>x.Id==id); //.Find(id); //.Where(p=> p.Id == id);
 
 
@@ -169,7 +169,7 @@ namespace CoreApplication.Data.Repositories
 
           private async Task<IEnumerable<Like>> GetUserLikes(int id, bool likers)
         {
-            var user = await _coreContext.LoginUsers
+            var user = await _coreContext.Users
             .Include(x=>x.Likee)
             .Include(x=>x.Liker)
             .FirstOrDefaultAsync(u=>u.Id==id);

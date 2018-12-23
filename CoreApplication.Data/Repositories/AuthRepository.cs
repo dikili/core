@@ -19,13 +19,13 @@ namespace CoreApplication.Data.Repositories
         public async Task<LoginUser> Login(string userName, string password)
         {
             
-          var user=await _coreContext.LoginUsers.Include(p=>p.Photos).FirstOrDefaultAsync(x=>x.UserName==userName);
+          var user=await _coreContext.Users.Include(p=>p.Photos).FirstOrDefaultAsync(x=>x.UserName==userName);
 
           if(user==null)
             return null;
 
-          if(!VerifyPasswordHash(password,user.PasswordHash,user.PasswordSalt))
-            return null;
+          //if(!VerifyPasswordHash(password,user.PasswordHash,user.PasswordSalt))
+          //  return null;
 
             //auth successful
 
@@ -62,10 +62,10 @@ namespace CoreApplication.Data.Repositories
 
             CreatePasswordHash(password,out passwordHash,out passwordSalt);
 
-            user.PasswordHash=passwordHash;
-            user.PasswordSalt=passwordSalt;
+            //user.PasswordHash=passwordHash;
+            //user.PasswordSalt=passwordSalt;
 
-            await _coreContext.LoginUsers.AddAsync(user); 
+            await _coreContext.Users.AddAsync(user); 
             await  _coreContext.SaveChangesAsync();    
 
              return user;
@@ -74,7 +74,7 @@ namespace CoreApplication.Data.Repositories
         public async Task<bool> UserExists(string username)
         {
            //return await _coreContext.LoginUsers.AnyAsync(x=>x.UserName==username);
-           if(await _coreContext.LoginUsers.AnyAsync(x=>x.UserName==username))
+           if(await _coreContext.Users.AnyAsync(x=>x.UserName==username))
              return true;
 
            return false;

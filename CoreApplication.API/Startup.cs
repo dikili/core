@@ -24,7 +24,9 @@ using CoreApplication.API.Helpers;
 using CoreApplication.Data.Settings;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace CoreApplication.API
 {
@@ -63,21 +65,25 @@ namespace CoreApplication.API
             services.AddDbContext<CoreContext>(options =>
             options.UseSqlServer(_config.GetConnectionString("CoreContextConnection"))
             .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning)));
-           
-             services.Configure<CloudinarySettings>(_config.GetSection("CloudinarySettings"));
-            
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-            .AddJsonOptions(opt => 
+
+            services.AddTransient<Seed>();
+            // if this app was MVC rather than the angular app we would use AddIdentity insted
+            IdentityBuilder builder = services.AddIdentityCore<LoginUser>(opt =>
             {
-              opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 4;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
             });
 
-            // Will apply any pending migrations to database and will create db if does not already exist when below is done..
-            services.BuildServiceProvider().GetService<CoreContext>().Database.Migrate();
-            services.AddCors();
-            
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IDatingRepository,DatingRepository>();
+            // if above was AddIdentity none of the below would be needed !!
+            // by default signinmanager,rolemanager,validator would be added
+            builder = new IdentityBuilder(builder.UserType, typeof(Role), builder.Services);
+            builder.AddEntityFrameworkStores<CoreContext>();
+            builder.AddRoleValidator<RoleValidator<Role>>();
+            builder.AddRoleManager<RoleManager<Role>>();
+            builder.AddSignInManager<SignInManager<LoginUser>>();
+
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>
@@ -91,8 +97,31 @@ namespace CoreApplication.API
                    };
                });
 
-               services.AddTransient<Seed>();
 
+
+            services.Configure<CloudinarySettings>(_config.GetSection("CloudinarySettings"));
+            
+            // Add a new Authorize Filter so eliminate the need to add an Authorize attribute each time on the controllers !!
+            services.AddMvc( options =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            }
+                ).SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            .AddJsonOptions(opt => 
+            {
+              opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
+            // Will apply any pending migrations to database and will create db if does not already exist when below is done..
+            services.BuildServiceProvider().GetService<CoreContext>().Database.Migrate();
+            services.AddCors();
+            
+            services.AddScoped<IDatingRepository,DatingRepository>();
+
+            
                services.AddAutoMapper();
 
                
@@ -106,31 +135,54 @@ namespace CoreApplication.API
             .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning)));
            
              services.Configure<CloudinarySettings>(_config.GetSection("CloudinarySettings"));
-            
+
+            services.AddTransient<Seed>();
+
+
+            services.AddTransient<Seed>();
+            // if this app was MVC rather than the angular app we would use AddIdentity insted
+            IdentityBuilder builder = services.AddIdentityCore<LoginUser>(opt =>
+            {
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 4;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+            });
+
+            // if above was AddIdentity none of the below would be needed !!
+            // by default signinmanager,rolemanager,validator would be added
+            builder = new IdentityBuilder(builder.UserType, typeof(Role), builder.Services);
+            builder.AddEntityFrameworkStores<CoreContext>();
+            builder.AddRoleValidator<RoleValidator<Role>>();
+            builder.AddRoleManager<RoleManager<Role>>();
+            builder.AddSignInManager<SignInManager<LoginUser>>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+              .AddJwtBearer(options =>
+              {
+                  options.TokenValidationParameters = new TokenValidationParameters
+                  {
+                      ValidateIssuerSigningKey = true,
+                      IssuerSigningKey = new SymmetricSecurityKey(key),
+                      ValidateIssuer = false,
+                      ValidateAudience = false
+                  };
+              });
+
+
+
             services.AddMvc().AddJsonOptions(opt => 
             {
               opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddCors();
             
-            services.AddScoped<IAuthRepository, AuthRepository>();
+
             services.AddScoped<IDatingRepository,DatingRepository>();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-               .AddJwtBearer(options =>
-               {
-                   options.TokenValidationParameters = new TokenValidationParameters
-                   {
-                       ValidateIssuerSigningKey = true,
-                       IssuerSigningKey = new SymmetricSecurityKey(key),
-                       ValidateIssuer = false,
-                       ValidateAudience = false
-                   };
-               });
-
-               services.AddTransient<Seed>();
-
-               services.AddAutoMapper();
+           
+           
+            services.AddAutoMapper();
 
                
         }
@@ -138,36 +190,37 @@ namespace CoreApplication.API
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             app.UseDeveloperExceptionPage();
-            // if (env.IsDevelopment())
-            // {
-            //     app.UseDeveloperExceptionPage();
-            // }
-            // else
-            // {
-            //     //global exception handler if in the production etc..
-            //     //this is the error that will be seen ...
-            //     //  
-            //     app.UseExceptionHandler(builder =>
-            //     {
-            //         builder.Run(async context =>
-            //         {
-            //             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                //global exception handler if in the production etc..
+                //this is the error that will be seen ...
+                //  
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            //             var error = context.Features.Get<IExceptionHandlerFeature>();
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
 
-            //             if(error != null)
-            //             {
-            //                 context.Response.AddApplicationErrors(error.Error.Message); //.AddApplicationError(error.Error.Message);
-            //                 await context.Response.WriteAsync(error.Error.Message);
-            //             }
-                        
-            //         });
-            //     });
-            // }
-           // just enable if you want the seed data to work...
-           // seeder.SeedData();
+                        if (error != null)
+                        {
+                            context.Response.AddApplicationErrors(error.Error.Message); //.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+
+                    });
+                });
+            }
+            // just enable if you want the seed data to work...
+            seeder.SeedData();
             app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
+          
             app.UseDefaultFiles(); // for deployment necassary
             app.UseStaticFiles();
             app.UseMvc(routes => {

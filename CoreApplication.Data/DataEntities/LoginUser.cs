@@ -5,16 +5,14 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CoreApplication.Data.DataEntities
 {
-    public class LoginUser //:IdentityUser
+    public class LoginUser : IdentityUser<int>
     {
-        public int Id { get; set; }
 
-        public   string  UserName { get; set; }
 
-        public  byte[]  PasswordHash { get; set; }
-
-        public byte[] PasswordSalt { get; set; }
-
+        public LoginUser()
+        {
+            Photos = new Collection<Photo>();
+        }
         public string Gender { get; set; }
 
         public DateTime DateOfBirth { get; set; }
@@ -41,15 +39,12 @@ namespace CoreApplication.Data.DataEntities
 
        public ICollection<Like> Liker { get; set; } //one user can have multiple users likes
 
-    public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesSent { get; set; }
 
-    public ICollection<Message> MessagesReceived { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
 
-    
-       public LoginUser()
-       {
-           Photos=new Collection<Photo>();
-       }
-        
+        public ICollection<UserRole> UserRoles { get; set; }
+
+
     }
 }

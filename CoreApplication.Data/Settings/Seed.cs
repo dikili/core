@@ -1,50 +1,58 @@
 using System.Collections.Generic;
+using System.Linq;
 using CoreApplication.Data.DataEntities;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 
 namespace CoreApplication.Data.Settings
 {
     public class Seed
     {
-        private readonly CoreContext _context;
+        //private readonly CoreContext _context;
 
-        public Seed(CoreContext context)
+        private readonly UserManager<LoginUser> _userManager;
+        public Seed(UserManager<LoginUser> userManager)
         {
-            _context=context;
+            _userManager = userManager;
         }
 
-         public void SeedData() {
+            
+        public void SeedData() {
 
-             _context.LoginUsers.RemoveRange(_context.LoginUsers);
-             _context.SaveChanges();
+            if(!_userManager.Users.Any())
+            {
+                //_userManager.Users.RemoveRange(_userManager.Users);
+                //_userManager.SaveChanges();
 
-             var userData= System.IO.File.ReadAllText("./UserSeedData.json");
-             var users=JsonConvert.DeserializeObject<List<LoginUser>>(userData);
+                var userData = System.IO.File.ReadAllText("./UserSeedData.json");
+                var users = JsonConvert.DeserializeObject<List<LoginUser>>(userData);
 
-             foreach(var user in users)
-             {
-                 byte[] passwordHash, passwordSalt;
+                foreach (var user in users)
+                {
+                    //byte[] passwordHash, passwordSalt;
 
-                 CreatePasswordHash("password",out passwordHash ,out passwordSalt);
+                    //CreatePasswordHash("password", out passwordHash, out passwordSalt);
 
-                 user.PasswordHash= passwordHash;
-                 user.PasswordSalt= passwordSalt;
+                    //user.PasswordHash= passwordHash;
+                    //user.PasswordSalt= passwordSalt;
 
-                 _context.LoginUsers.Add(user);
+                    //  _context.Users.Add(user);
+                    _userManager.CreateAsync(user, "password").Wait();
+                }
 
-             }
-
-             _context.SaveChanges();
+              //  _context.SaveChanges();
+            }
+          
          }
 
-           private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-           using(var hmac=new System.Security.Cryptography.HMACSHA512())
-           {
-               passwordSalt=hmac.Key;
-               passwordHash=hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-           }
+        //   private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        //{
+        //   using(var hmac=new System.Security.Cryptography.HMACSHA512())
+        //   {
+        //       passwordSalt=hmac.Key;
+        //       passwordHash=hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+        //   }
 
-        }
+        //}
     }
 }

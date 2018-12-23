@@ -1,5 +1,6 @@
 ﻿using CoreApplication.Data.DataEntities;
 using CoreApplication.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +8,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace CoreApplication.Data
 {
-    public class CoreContext : DbContext//IdentityDbContext<AdUser>
+    public class CoreContext : IdentityDbContext<LoginUser, Role, int,
+        IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>,
+        IdentityRoleClaim<int>, IdentityUserToken<int>>//DbContext//IdentityDbContext<AdUser>
     {
          private static IConfigurationRoot _config { get; set; }
 
@@ -25,8 +28,8 @@ namespace CoreApplication.Data
         public DbSet<Ad> Ads { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Response> Responses { get; set; }
-
-         public DbSet<LoginUser> LoginUsers{get;set;}
+// below will come from aspnetcore identity now
+    //     public DbSet<LoginUser> LoginUsers{get;set;}
 
         public DbSet<Photo> Photos {get;set;}
 
@@ -36,6 +39,24 @@ namespace CoreApplication.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
+            builder.Entity<UserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+                userRole.HasOne(ur => ur.Role)
+                .WithMany(ur => ur.UserRoles)
+                .HasForeignKey(ur => ur.RoleId)
+                .IsRequired();
+
+                userRole.HasOne(ur => ur.User)
+                .WithMany(ur => ur.UserRoles)
+                .HasForeignKey(ur => ur.UserId)
+                .IsRequired();
+
+
+            });
             builder.Entity<Like>()
             .HasKey(k=> new {k.LikeeId, k.LikerId});
 
