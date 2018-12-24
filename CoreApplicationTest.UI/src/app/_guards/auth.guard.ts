@@ -13,7 +13,17 @@ constructor(private authService: AuthService, private alertifyService: AlertifyS
 
 }
 
-  canActivate(): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(next: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    const roles = next.firstChild.data['roles'] as Array<string>;
+    if (roles) {
+     const match = this.authService.roleMatch(roles);
+     if (match) {
+       return true;
+     } else {
+       this.routeService.navigate(['members']);
+       this.alertifyService.error('You are not authorized to access this area');
+     }
+    }
     if (this.authService.loggedIn()) {
       return true;
     }

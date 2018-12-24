@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -84,7 +85,7 @@ namespace DatingApp.API.Controllers
 
                 return Ok(new
                 {
-                    token = GenerateJwtToken(appUser),//tokenHandler.WriteToken(token),
+                    token = GenerateJwtToken(appUser).Result,//tokenHandler.WriteToken(token),
                     user = userToReturn
                 });
             }
@@ -100,13 +101,22 @@ namespace DatingApp.API.Controllers
             //});
         }
 
-        private string GenerateJwtToken(LoginUser user)
+        private async Task<string> GenerateJwtToken(LoginUser user)
         {
-              var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName)
             };
+
+
+            var roles =  _userManager.GetRolesAsync(user).Result;
+
+            foreach(var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
 
             var key = new SymmetricSecurityKey(Encoding.UTF8
                 .GetBytes(_config.GetSection("AppSettings:Token").Value));
