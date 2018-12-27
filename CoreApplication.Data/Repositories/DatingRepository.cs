@@ -125,21 +125,32 @@ namespace CoreApplication.Data.Repositories
            return PagedList<LoginUser>.Create(users,userParams.PageNumber,userParams.PageSize);
         }
 
-        public async Task<LoginUser> GetUser(int id)
-        {  
-             //context is correctly injected by the DI but somehow async methods seem to have
-             // issues so got rid of those
-            
-           return
-                await _coreContext.Users.Include(p => p.Photos)
-                  .FirstOrDefaultAsync(p => p.Id == id); //await ctx.LoginUsers.Include(p=>p.Photos).FirstOrDefaultAsync(x=>x.Id==id); //.Find(id); //.Where(p=> p.Id == id);
+        public async Task<LoginUser> GetUser(int id, bool isCurrentUser)
+        {
+            //context is correctly injected by the DI but somehow async methods seem to have
+            // issues so got rid of those
+            var query = _coreContext.Users.Include(p => p.Photos).AsQueryable();
+
+            if (isCurrentUser)
+                query = query.IgnoreQueryFilters();
+
+            var user = await query.FirstOrDefaultAsync(u => u.Id == id);
+
+            return user;
+
+           //return
+           //     await _coreContext.Users.Include(p => p.Photos)
+           //       .FirstOrDefaultAsync(p => p.Id == id); //await ctx.LoginUsers.Include(p=>p.Photos).FirstOrDefaultAsync(x=>x.Id==id); //.Find(id); //.Where(p=> p.Id == id);
 
 
         }
-
+        public List<Photo> GetPhotos() {
+            return _coreContext.Photos.Where(p => p.isApproved == false).ToList();
+        }
         public async Task<Photo> GetPhoto(int id)
         {
-            return await _coreContext.Photos.FirstOrDefaultAsync(p=>p.Id==id);
+            return await _coreContext.Photos.IgnoreQueryFilters()
+                .FirstOrDefaultAsync(p=>p.Id==id);
         }
 
         public async Task<Photo> GetMainPhoto(int userId)

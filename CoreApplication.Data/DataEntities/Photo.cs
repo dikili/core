@@ -17,5 +17,7 @@ namespace CoreApplication.Data.DataEntities
         public LoginUser User { get; set; }
 
         public int LoginUserId { get; set; }
+
+        public bool isApproved { get; set; }
     }
 }

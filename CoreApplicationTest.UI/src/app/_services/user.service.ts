@@ -20,7 +20,7 @@ export class UserService {
 
   getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginatedResult<User[]>> {
    // tslint:disable-next-line:no-debugger
-   debugger;
+
     const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
 
     let params = new HttpParams();

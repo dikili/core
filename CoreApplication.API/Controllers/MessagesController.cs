@@ -60,13 +60,15 @@ namespace CoreApplication.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMessage(int userId, [FromBody] MessageForCreationDto messageForCreationDto) 
         {
-           if(userId!= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            var sender = await _userRepo.GetUser(userId, false);
+
+           if(sender.Id!= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             return Unauthorized();
 
             messageForCreationDto.SenderId= userId;
 
-            var recipient = await _userRepo.GetUser(messageForCreationDto.ReceiverId);
-             var sender = await _userRepo.GetUser(messageForCreationDto.SenderId);
+            var recipient = await _userRepo.GetUser(messageForCreationDto.ReceiverId,false);
+            // var sender = await _userRepo.GetUser(messageForCreationDto.SenderId,true);
           
             if(recipient==null)
                 return BadRequest("Could not find user");

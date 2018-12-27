@@ -17,10 +17,10 @@ namespace CoreApplication.Data.Repositories.Interfaces
          Task<PagedList<LoginUser>> GetUsers(UserParams userParams);
 
          Task<Like> GetLike(int userId,int recepientId);
-         
+
         // PagedList<LoginUser> GetUsers();
         // LoginUser GetUser(int id);
-         Task<LoginUser> GetUser(int id);
+        Task<LoginUser> GetUser(int id, bool isCurrentUser);
         // Photo GetPhoto(int id);
 
         Task<Photo> GetPhoto(int id);
@@ -32,7 +32,7 @@ namespace CoreApplication.Data.Repositories.Interfaces
         Task<Message> GetMessage(int id);
 
         Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
-
+    
         Task<IEnumerable<Message>> GetMessageThread(int userId, int recepientId);
     }
 }

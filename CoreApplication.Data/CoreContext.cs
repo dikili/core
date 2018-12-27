@@ -82,6 +82,8 @@ namespace CoreApplication.Data
             .WithMany(x => x.MessagesReceived)
             .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<Photo>().HasQueryFilter(p => p.isApproved);
+
 
         }
         

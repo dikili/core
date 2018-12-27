@@ -37,18 +37,18 @@
 //                 ApiSecret=_options.Value.ApiSecret,
 //                 ApiKey=_options.Value.ApiKey
 //             };
-            
+
 //             _cloudinary=new Cloudinary(acc);
 
 //         }
-      
+
 //       [HttpGet("{id}",Name="GetPhoto")]
 //       public async Task<IActionResult> GetPhoto(int id)
 //       {
 //         var photoFromRepo=await _userRepo.GetPhoto(id);
-        
+
 //         var photo= _mapper.Map<PhotoForReturnDto>(photoFromRepo);
-        
+
 //         return Ok(photo);
 //       }
 
@@ -68,7 +68,7 @@
 //            return Unauthorized();
 
 //           // Now time to upload the photo to cloudinary
-            
+
 //            var file=photoDto.File;
 
 //            var uploadResult= new ImageUploadResult(); 
@@ -91,7 +91,7 @@
 //            photoDto.PublicId=uploadResult.PublicId;
 
 //            var photo= _mapper.Map<Photo>(photoDto);
-          
+
 //            photo.User=user;
 
 //            if(!user.Photos.Any(m=>m.IsMain))
@@ -100,8 +100,8 @@
 //            } 
 
 //            user.Photos.Add(photo);
-           
-          
+
+
 //            if(await _userRepo.SaveAll())
 //            {
 //                 var photoReturnDto=_mapper.Map<PhotoForReturnDto>(photo);
@@ -121,12 +121,12 @@
 //          // So I am thinking a solution where if id is 0 get the last added photo to be the id
 //          // so that it can be changed to the latest main photo
 
-         
+
 
 //           if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
 //              return Unauthorized();
-          
-         
+
+
 //           var photoFromRepo = await _userRepo.GetPhoto(id);
 
 //           if(photoFromRepo==null) return NotFound();
@@ -154,7 +154,7 @@
 //       {
 //         if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
 //           return Unauthorized();
-          
+
 //           var photoFromRepo = await _userRepo.GetPhoto(id);
 
 //           if(photoFromRepo==null) return NotFound();
@@ -189,6 +189,7 @@
 
 //     }
 // }
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -239,7 +240,8 @@ namespace DatingApp.API.Controllers
 
             return Ok(photo);
         }
-
+      
+     
         [HttpPost]
         public async Task<IActionResult> AddPhotoForUser(int userId,
             [FromForm]PhotoForCreationDto photoForCreationDto)
@@ -247,7 +249,7 @@ namespace DatingApp.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var userFromRepo = await _repo.GetUser(userId);
+            var userFromRepo = await _repo.GetUser(userId,true);
 
             var file = photoForCreationDto.File;
 
@@ -293,7 +295,7 @@ namespace DatingApp.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var user = await _repo.GetUser(userId);
+            var user = await _repo.GetUser(userId,true);
 
             if (!user.Photos.Any(p => p.Id == id))
                 return Unauthorized();
@@ -320,7 +322,7 @@ namespace DatingApp.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var user = await _repo.GetUser(userId);
+            var user = await _repo.GetUser(userId,true);
 
             if (!user.Photos.Any(p => p.Id == id))
                 return Unauthorized();
