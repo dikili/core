@@ -14,27 +14,45 @@ import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessageResolver } from './_resolvers/message.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
+// export const appRoutes: Routes = [
+//     {path: 'home', component: HomeComponent},
+//     {
+//         path: '',
+//         runGuardsAndResolvers: 'always',
+//         canActivate: [AuthGuard],
+//         children: [
+//             {path: 'members', component: MemberListComponent,
+//                 resolve: {users: MemberListResolver}},
+//             {path: 'members/:id', component: MemberDetailComponent,
+//                 resolve: {user: MemberDetailResolver}},
+//             {path: 'member/edit', component: MemberEditComponent,
+//                 resolve: {user: MemberEditResolver}, canDeactivate: [PreventUnsavedChanges]},
+//             {path: 'messages', component: MessagesComponent, resolve: {messages: MessageResolver}},
+//             {path: 'lists', component: ListsComponent, resolve: {users: ListsResolver}},
+//             {path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}}
+//         ]
+//     },
+//     {path: '**', redirectTo: 'home', pathMatch: 'full'},
+// ];
 export const appRoutes: Routes = [
-    {path: 'home', component: HomeComponent},
+    { path: '', redirectTo: 'home', pathMatch: 'full'},
+    { path: 'home', component: HomeComponent},
     {
         path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            {path: 'members', component: MemberListComponent,
-                resolve: {users: MemberListResolver}},
-            {path: 'members/:id', component: MemberDetailComponent,
-                resolve: {user: MemberDetailResolver}},
-            {path: 'member/edit', component: MemberEditComponent,
-                resolve: {user: MemberEditResolver}, canDeactivate: [PreventUnsavedChanges]},
-            {path: 'messages', component: MessagesComponent, resolve: {messages: MessageResolver}},
-            {path: 'lists', component: ListsComponent, resolve: {users: ListsResolver}},
-            {path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}},
+            { path: 'members', component: MemberListComponent, resolve: {users: MemberListResolver} },
+            { path: 'members/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver} },
+            { path: 'member/edit', component: MemberEditComponent,
+                resolve: {user: MemberEditResolver}, canDeactivate: [PreventUnsavedChanges] },
+            { path: 'messages', component: MessagesComponent, resolve: {messages: MessageResolver}},
+            { path: 'lists', component: ListsComponent, resolve: {users: ListsResolver}},
+            {path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}}
         ]
     },
-    {path: '**', redirectTo: 'home', pathMatch: 'full'},
+    { path: '**', redirectTo: 'home', pathMatch: 'full'},
 ];
-
 // if not children used it could have been used as below to implement the authentication on the URL
 // {path: 'lists', component: ListsComponent, canActivate: [AuthGuard]},
 // {path: 'members', component: MemberListComponent, canActivate: [AuthGuard]},
