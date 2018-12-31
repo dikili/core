@@ -1,19 +1,19 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+<nav class="navbar navbar-expand-md navbar-custom">
   <div class="container">
-    <a class="navbar-brand" [routerLink]="['/home']">Dating App</a>
+    <a class="navbar-brand navregister" [routerLink]="['/home']">Find your company</a>
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/members']">Matches</a>
+        <a class="nav-link navregister" [routerLink]="['/members']">Members</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/lists']">Lists</a>
+        <a class="nav-link navregister" [routerLink]="['/lists']">Lists</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/messages']">Messages</a>
+        <a class="nav-link navregister" [routerLink]="['/messages']">Messages</a>
       </li>
       <li *appHasRole="['Admin','Moderator']" class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+        <a class="nav-link navregister" [routerLink]="['/admin']">Admin</a>
       </li>
     </ul>
 
