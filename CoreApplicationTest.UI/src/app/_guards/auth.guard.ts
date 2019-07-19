@@ -29,7 +29,7 @@ constructor(private authService: AuthService, private alertifyService: AlertifyS
     }
 
    this.alertifyService.error('You need to be logged in to access this area');
-   this.routeService.navigate(['/home']);
+   this.routeService.navigate(['/news']);
    return false;
   }
 }

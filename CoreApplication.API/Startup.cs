@@ -122,13 +122,13 @@ namespace CoreApplication.API
             // Will apply any pending migrations to database and will create db if does not already exist when below is done..
             services.BuildServiceProvider().GetService<CoreContext>().Database.Migrate();
             services.AddCors();
-            
+
             services.AddScoped<IDatingRepository,DatingRepository>();
 
             
                services.AddAutoMapper();
+            services.AddMemoryCache();
 
-               
         }
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
@@ -141,7 +141,6 @@ namespace CoreApplication.API
              services.Configure<CloudinarySettings>(_config.GetSection("CloudinarySettings"));
 
             services.AddTransient<Seed>();
-
 
             services.AddTransient<Seed>();
             // if this app was MVC rather than the angular app we would use AddIdentity insted
@@ -228,6 +227,7 @@ namespace CoreApplication.API
             // just enable if you want the seed data to work...
             seeder.SeedData();
             app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
+                       
             app.UseAuthentication();
           
             app.UseDefaultFiles(); // for deployment necassary

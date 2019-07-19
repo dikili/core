@@ -27,7 +27,20 @@ namespace CoreApplication.API.DTOs
         public string Interests { get; set; }
 
         public string City { get; set; }
+         public string l39 { get; set; }
+  public string inst { get; set; }
 
+    public string twit { get; set; }
+
+      public string face { get; set; }
+
+      public string businessName { get; set; }
+
+       public string businessPurpose { get; set; }
+
+        public string busCategory { get; set; }
+ public string busExplain { get; set; }
+        public string chessLevel { get; set; }
         public string  Country { get; set; } 
         public string PhotoUrl {get;set;}
         public ICollection<PhotosForDetailedDto> Photos {get;set;}      

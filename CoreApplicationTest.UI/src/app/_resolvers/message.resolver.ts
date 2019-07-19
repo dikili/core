@@ -34,7 +34,6 @@ resolve(route: ActivatedRouteSnapshot): Observable<Message[]>  {
     this.messageContainer)
         .catch(error => {
       this.alertify.error('Problem retrieving data');
-      this.router.navigate(['/home']);
       return Observable.of(null);
   });
 }

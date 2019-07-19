@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor , HttpEvent , HttpHandler , HttpRequest, HttpErrorResponse, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       return next.handle(req).catch(error => {
+          // tslint:disable-next-line:no-debugger
+          debugger;
           if (error instanceof HttpErrorResponse) {
                const applicationError = error.headers.get('Application-Error');
                if (applicationError) {
-                 return Observable.throw(applicationError);
+                 return throwError(applicationError);
                }
                const serverError = error.error;
                let modelStateErrors = '';

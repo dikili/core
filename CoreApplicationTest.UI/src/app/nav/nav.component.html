@@ -1,19 +1,49 @@
 <nav class="navbar navbar-expand-md navbar-custom">
   <div class="container">
-    <a class="navbar-brand navregister" [routerLink]="['/home']">Why Not Mate ?</a>
-
-    <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
+    <div class="row">
+    <!-- <a class="navbar-brand navregister" [routerLink]="['/home']">CW-NPW </a> -->
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active">
+            <a class="button navregister" [routerLink]="['/news']">News</a>
+            <i class="fa fa-newspaper-o"></i>
+          </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link navregister" [routerLink]="['/members']">Members</a>
+        <a class="button navregister" [routerLink]="['/members']">Wharfians </a>
+        <i class="fa fa-user-o"></i>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link navregister" [routerLink]="['/lists']">Lists</a>
+        <a class="button navregister" [routerLink]="['/jobs']">CW-Jobs</a>
+        <i class="fa fa-university"></i>
       </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link navregister" [routerLink]="['/messages']">Messages</a>
+      <li  class="nav-item" routerLinkActive="active">
+        <a class="button navregister" [routerLink]="['/messages']">Message
+        <i class="fa fa-comments"></i>
+        <span *ngIf="isUnRead" class="button__badge"><i style="font-size: 0.7em">New</i></span>
+      </a>
+      <li  class="nav-item" routerLinkActive="active">
+          <a class="button navregister" [routerLink]="['/messages']">Yellow Pages
+          <i class="fa fa-comments"></i>
+          <span *ngIf="isUnRead" class="button__badge"><i style="font-size: 0.7em">New</i></span>
+        </a>
       </li>
+      <li  class="nav-item" routerLinkActive="active">
+          <a class="button navregister" [routerLink]="['/messages']">Events
+          <i class="fa fa-comments"></i>
+          <span *ngIf="isUnRead" class="button__badge"><i style="font-size: 0.7em">New</i></span>
+        </a>
+      </li>
+    
+       <!-- <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link navregister" [routerLink]="['/lists']">Posts</a>
+      </li>  -->
+      <!-- <li  class="nav-item" routerLinkActive="active">
+          <a class="button navregister" [routerLink]="['/admin']">Events</a>
+        </li>
+        <li  class="nav-item" routerLinkActive="active">
+            <a class="button navregister" [routerLink]="['/admin']">Yellow Pages</a>
+          </li> -->
       <li *appHasRole="['Admin','Moderator']" class="nav-item" routerLinkActive="active">
-        <a class="nav-link navregister" [routerLink]="['/admin']">Admin</a>
+        <a class="button navregister" [routerLink]="['/admin']">Admin</a>
       </li>
     </ul>
 
@@ -33,16 +63,36 @@
           <i class="fa fa-sign-out"></i> Logout</a>
       </div>
     </div>
-
+   
+    <div class="container" style="margin-right: 0%">
+      <hr>
     <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
       <input class="form-control mr-sm-2" type="text" name="username" placeholder="Username" required [(ngModel)]="model.username">
       <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
       <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+      <button type="button" class="btn btn-success my-2 my-sm-0" (click)="openModal(register)">Register</button>
     </form>
+  </div>
+  </div>
   </div>
 
 
 </nav>
+
+<ng-template #register>
+    <div class="modal-header" style="background-color:orangered">
+      <!-- <h4 class="modal-title pull-left">Modal</h4> -->
+      <h2 class="text-md-center text-secondary">Register as a Canary Wharfian !</h2>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body formbackground">
+        <app-register (cancelRegister)="cancelRegister($event)"></app-register>
+    </div>
+  </ng-template>
+
+
 <!-- 
 <pre>
 

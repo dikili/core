@@ -11,6 +11,15 @@ export interface User {
     photoUrl: string;
     city: string;
     country: string;
+    l39: string;
+    inst: string;
+    twit: string;
+    face: string;
+    businessName: string;
+    businessPurpose: string;
+    busCategory: string;
+    busExplain: string;
+    chessLevel: string;
     interests?: string;
     introduction?: string;
     lookingFor?: string;

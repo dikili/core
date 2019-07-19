@@ -11889,8 +11889,6 @@
       "type": "package",
       "path": "system.xml.xdocument/4.3.0",
       "files": [
-        "System.Xml.XDocument.4.3.0.nupkg.sha512",
-        "System.Xml.XDocument.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -11949,7 +11947,9 @@
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._"
+        "ref/xamarinwatchos10/_._",
+        "system.xml.xdocument.4.3.0.nupkg.sha512",
+        "system.xml.xdocument.nuspec"
       ]
     },
     "System.Xml.XmlDocument/4.3.0": {
@@ -11957,8 +11957,6 @@
       "type": "package",
       "path": "system.xml.xmldocument/4.3.0",
       "files": [
-        "System.Xml.XmlDocument.4.3.0.nupkg.sha512",
-        "System.Xml.XmlDocument.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -11986,7 +11984,9 @@
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._"
+        "ref/xamarinwatchos10/_._",
+        "system.xml.xmldocument.4.3.0.nupkg.sha512",
+        "system.xml.xmldocument.nuspec"
       ]
     },
     "System.Xml.XmlSerializer/4.3.0": {
@@ -12151,11 +12151,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Source\\CoreApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj",
+      "projectUniqueName": "C:\\Source\\CoreNPWApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj",
       "projectName": "CoreApplication.Data",
-      "projectPath": "C:\\Source\\CoreApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj",
+      "projectPath": "C:\\Source\\CoreNPWApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj",
       "packagesPath": "C:\\Users\\Fatih\\.nuget\\packages\\",
-      "outputPath": "C:\\Source\\CoreApplicationTest\\CoreApplication.Data\\obj\\",
+      "outputPath": "C:\\Source\\CoreNPWApplicationTest\\CoreApplication.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

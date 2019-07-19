@@ -14,8 +14,12 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 model: any = {};
 user: any = {};
+error: string;
+gender= 'NO';
+business = 'NO';
 @Input() ValuesFromHome: any;
 @Output() cancelRegister= new EventEmitter();
+
 registerForm: FormGroup;
 bsConfig: Partial<BsDatepickerConfig>;
 
@@ -34,24 +38,38 @@ bsConfig: Partial<BsDatepickerConfig>;
     // }, this.passwordMatchValidator);
     this.createRegisterForm();
     this.bsConfig = {
-      containerClass: 'theme-red'
+      containerClass: 'theme-green',
+      dateInputFormat: 'DD MMM YYYY'
     };
   }
+  selectChangeHandler (event: any) {
+this.registerForm.patchValue({chessLevel: event.target.value});
 
+  }
   createRegisterForm() {
     this.registerForm = this.fb.group({
-      gender: ['male'],
+   gender: [''],
    username: ['', Validators.required],
    knownAs: ['', Validators.required],
    dateOfBirth: [null, Validators.required],
-   city: ['', Validators.required],
-   country: ['', Validators.required],
+   city: ['', Validators.email],
+   country: [''],
+  inst: [''],
+  twit: [''],
+  face: [''],
    password: [
      '',
-     [Validators.required, Validators.minLength(4), Validators.maxLength(8)]
+     [Validators.required, Validators.minLength(6)]
    ],
-   confirmPassword: ['', Validators.required]
-    }, { validator: this.passwordMatchValidator});
+   confirmPassword: ['', Validators.required],
+   l39: ['Unknown'],
+   business: [''],
+   businessName: [''],
+   businessPurpose: [''],
+   busCategory: [''],
+   busExplain: [''],
+   chessLevel: 'Unknown',
+    }, { validator: this.passwordMatchValidator });
   }
 
   passwordMatchValidator(g: FormGroup) {
@@ -73,20 +91,36 @@ bsConfig: Partial<BsDatepickerConfig>;
     // }
     if (this.registerForm.valid) {
       this.user = Object.assign({}, this.registerForm.value);
+      if (this.user.gender ===   'NO') {
+        this.alertifier.error('Only Canary Wharfians can use this site');
+      } else if (this.user.city === '' ) {
+        this.alertifier.error('Email is required !');
+       } else if (this.user.business === 'YES' && this.user.businessName === '') {
+        this.alertifier.error('Providing Business Name is required while registering a business');
+       } else if (this.user.business === 'YES' && this.user.businessPurpose === '') {
+        this.alertifier.error('Please specify the purpose along with years of experience in the service');
+       } else if (this.user.business === 'YES' && !this.user.busCategory && this.user.busCategory !== 'Other') {
+        this.alertifier.error('Please choose service category');
+       } else if (this.user.business === 'YES' && this.user.busCategory === 'Other' && !this.user.busExplain) {
+        this.alertifier.error('Please explain the service(s) provided in the text field');
+       }else {
       this.authService.register(this.user).subscribe(() => {
         this.alertifier.success('Registered Successfully');
+        this.cancel();
       }, error => {
-        this.alertifier.error(error);
+        console.log(error);
+        this.alertifier.error('Username ' + this.user.username + ' already exists, pls change this');
       },
       () => {
         // if all go well then login the user that is register
         // and route them to members page
         this.authService.login(this.user).subscribe(() => {
-         this.router.navigate(['/members']);
+         this.router.navigate(['/member/edit']);
         });
       }
 
       );
+    }
     }
     console.log(this.registerForm.value);
    }
@@ -94,6 +128,6 @@ bsConfig: Partial<BsDatepickerConfig>;
    cancel() {
      this.cancelRegister.emit(false);
     //  console.log('cancelled');
-    this.alertifier.warning('cancelled warning');
+   // this.alertifier.warning('cancelled warning');
    }
 }

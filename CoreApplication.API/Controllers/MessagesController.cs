@@ -38,7 +38,17 @@ namespace CoreApplication.API.Controllers
 
              return Ok(messageFromRepo);
        }
-
+      
+      [HttpGet("isUnread")]
+       public  IActionResult AreThereUnreadMessages(int userId)
+       {
+            //  if(userId!= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            // return Unauthorized();
+    
+            var areThereUnreadMessages =  _userRepo.AreThereUnreadMessages(userId);
+            var isUnreadAvailable= _mapper.Map<bool>(areThereUnreadMessages);
+             return Ok(isUnreadAvailable);
+       }
        [HttpGet]
 
        public async Task<IActionResult> GetMessagesForUser(int userId,CoreApplication.Data.Helpers.MessageParams messageParams)

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'app-home',
@@ -9,8 +11,13 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent implements OnInit {
   registerMode= false;
   values: any;
-  constructor(private http: HttpClient) { }
+  modalRef: BsModalRef;
 
+  constructor(private http: HttpClient, private modalService: BsModalService) { }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
   ngOnInit() {
    // this.getValues();
   }
@@ -28,5 +35,6 @@ export class HomeComponent implements OnInit {
 
   cancelRegister(cancelFlag: boolean) {
    this.registerMode = cancelFlag;
+   this.modalRef.hide();
   }
 }

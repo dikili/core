@@ -13,6 +13,8 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessageResolver } from './_resolvers/message.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { NewsComponent } from './news/news.component';
+import { JobsComponent } from './Jobs/Jobs.component';
 
 // export const appRoutes: Routes = [
 //     {path: 'home', component: HomeComponent},
@@ -35,8 +37,10 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 //     {path: '**', redirectTo: 'home', pathMatch: 'full'},
 // ];
 export const appRoutes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full'},
+    { path: '', redirectTo: 'news', pathMatch: 'full'},
     { path: 'home', component: HomeComponent},
+    { path: 'news', component: NewsComponent },
+    { path: 'jobs', component: JobsComponent },
     {
         path: '',
         runGuardsAndResolvers: 'always',

@@ -14,15 +14,15 @@ export class ValueComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getValues();
-  }
-
-  getValues() {
-    this.http.get('http://localhost:8000/api/values').subscribe(response => {
-      console.log(response);
-
-      this.values = response.json();
-    });
 
   }
-}
+
+  // getValues() {
+  //   this.http.get('http://localhost:8000/api/values').subscribe(response => {
+  //     console.log(response);
+
+  //     this.values = response.json();
+  //   });
+
+  }
+

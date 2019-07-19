@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject , Observable} from 'rxjs';
 import { User } from '../_models/user';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
@@ -13,11 +13,18 @@ import { Message } from '../_models/message';
 export class UserService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  isMessageNotRead = new BehaviorSubject<boolean>(false);
+  isUnread= this.isMessageNotRead.asObservable();
+
+  constructor(private http: HttpClient) {
+  }
 //  getUsers2(): Observable<User[]> {
 //     return this.http.get<User[]>(this.baseUrl + 'users', httpOptions);
 //   }
 
+updateUnReadToNone() {
+  this.isMessageNotRead.next(false);
+}
   getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginatedResult<User[]>> {
    // tslint:disable-next-line:no-debugger
 
@@ -33,7 +40,7 @@ export class UserService {
     if (userParams != null) {
       params = params.append('minAge', userParams.minAge);
       params = params.append('maxAge', userParams.maxAge);
-      params = params.append('gender', userParams.gender);
+     params = params.append('building',  userParams.building);
       params = params.append('orderBy', userParams.orderBy);
     }
 
@@ -101,6 +108,14 @@ export class UserService {
         })
       );
   }
+  areThereUnReadMessages(id: number) {
+   // this.isMessageNotRead.next(false);
+ this.http.get<boolean>(this.baseUrl + 'users/' + id + '/messages/isUnread').subscribe((response) => {
+  this.isMessageNotRead.next(response);
+  return response;
+    });
+
+   }
 
   getMessageThread(id: number, recipientId: number) {
     return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId);
@@ -117,5 +132,7 @@ export class UserService {
   markAsRead(userId: number, messageId: number) {
     this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + messageId + '/read', {})
       .subscribe();
+
+   // this.areThereUnReadMessages(userId).subscribe(res => this.isMessageNotRead.next(res.valueOf()));
   }
 }

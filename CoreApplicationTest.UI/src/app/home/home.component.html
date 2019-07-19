@@ -1,35 +1,59 @@
-<!-- <div *ngIf="!registerMode" class="text-center">
-    <h1>Find your match</h1>
-    <p class="lead">Come on in to view your matches... All you need to do is sign up!</p>
-    <div class="text-center">
-      <button class="btn btn-primary btn-lg" (click)="registerToggle()" >Register</button>
-      <button class="btn btn-info btn-lg">Learn More</button>
-    </div>
-  </div>
-  
-  <div *ngIf="registerMode" class="container">
-    <div class="col-md-4 col-md-offset-4">
-      <app-register [ValuesFromHome]="values" (cancelRegister)="cancelRegister($event)"></app-register>
-    </div>
-  </div> -->
-
   <div class="container mt-5">
     <div *ngIf="!registerMode" style="text-align: center">
-      <h1>Simply find a mate ,mate :) </h1>
-      <p class="lead">Sign up & Use the site forever for free !! Enjoy advertising any type of service  for free </p>
-      <div class="text-center">
-        <button class="btn btn-primary btn-lg mr-2 navregister" (click)="registerToggle()">Register</button>
-        <button class="btn btn-info btn-lg">Learn more</button>
+      <h1 style="font:bolder; color:orangered"><b><i>Welcome to Canary Wharfians Space Networking Club</i></b> </h1>
+      <p class="lead" style="font:bold; color:orangered">Register Now to network with your neighbours </p>
+      <div class="text-center" style="margin-bottom:5%">
+        <!-- <button class="btn btn-primary btn-lg mr-2 navregister" (click)="registerToggle()">Register</button> -->
+        <button type="button" class="btn btn-primary btn-lg mr-2 navregister" (click)="openModal(register)">Register</button>
+        <button class="btn btn-info btn-lg" (click)="openModal(learnmore)">Learn more</button>
+        
+      </div>
+      <div>
+          <button class="btn btn-danger"  [routerLink]="['/news']">Follow Global ,Local and Custom News from +135 reliable sources for Free !</button>
       </div>
     </div>
   
-    <div *ngIf="registerMode" class="container">
+    <!-- <div *ngIf="registerMode" class="container">
       <div class="row justify-content-center">
         <div class="col-4">
-          <app-register (cancelRegister)="cancelRegister($event)"></app-register>
+            
+         
+         
         </div>
       </div>
     </div>
+ -->
+
+    
   </div>
-  
+
+ 
+
+  <ng-template #register>
+      <div class="modal-header" style="background-color:orangered">
+        <!-- <h4 class="modal-title pull-left">Modal</h4> -->
+        <h2 class="text-md-center text-secondary">Register to Canary Wharfians Club!</h2>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body formbackground">
+          <app-register (cancelRegister)="cancelRegister($event)"></app-register>
+      </div>
+    </ng-template>
+    <ng-template #learnmore>
+        <div class="modal-header" style="background-color:orangered">
+          <!-- <h4 class="modal-title pull-left">Modal</h4> -->
+          <h2 class="text-md-center text-secondary">About Canary Wharf Space</h2>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body formbackground">
+           <div class="container">
+             <p>This is a non-profit community website where canary wharfians can network !</p>
+           </div>
+        </div>
+      </ng-template>
+
   

@@ -97,6 +97,11 @@ export class MemberListComponent implements OnInit {
   users: User[];
   user: User = JSON.parse(localStorage.getItem('user'));
   genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
+  buildingList = [{value: 'Plumber', display: 'Plumber'}, {value: 'Electrician', display: 'Electrician'},
+  {value: 'Cleaner', display: 'Cleaner'}, {value: 'Nanny', display: 'Nanny'},
+  {value: 'Carpenter', display: 'Carpenter'}, {value: 'Massage', display: 'Massage'},
+  {value: 'Dietician', display: 'Dietician'}, {value: 'Handyman', display: 'Handyman'},
+  {value: 'Other', display: 'Other'}];
   userParams: any = {};
   pagination: Pagination;
 
@@ -113,6 +118,7 @@ export class MemberListComponent implements OnInit {
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
     this.userParams.orderBy = 'lastActive';
+    this.userParams.building = '';
   }
 
   pageChanged(event: any): void {
@@ -121,7 +127,7 @@ export class MemberListComponent implements OnInit {
   }
 
   resetFilters() {
-    this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
+    this.userParams.building = '';
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
     this.loadUsers();
