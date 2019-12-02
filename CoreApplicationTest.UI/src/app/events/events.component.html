@@ -1,0 +1,14 @@
+
+
+ <div class="container">
+  <div class="row">
+      <div class="card"   *ngFor="let event of events">
+           <img width="192" height="127" src="{{event?.imgUrl }}"  alt="Canary Wharf Events">
+            <div class="card-body">
+              <h5 class="card-title">{{event.headline }}  - {{ event.dateInfo   }}</h5>
+              <p class="card-text"> {{event.description }}.</p>
+              <a href="{{event.moreLink }}" class="btn btn-primary">For more info check out</a>
+            
+          </div>
+  </div>
+

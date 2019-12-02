@@ -4,6 +4,7 @@ import { JobsService } from '../_services/Jobs.service';
 import { Job } from '../_models/job';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Jobswithdate } from '../_models/jobswithdate';
+import { PageChangedEvent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-jobs',
@@ -12,12 +13,14 @@ import { Jobswithdate } from '../_models/jobswithdate';
 })
 export class JobsComponent implements OnInit {
 jobs: Job[];
+returnedJobs: Job[];
 isWarning = true;
   constructor(private alertifyService: AlertifyService,
     private jobsService: JobsService) { }
 
   ngOnInit() {
     this.getJobs();
+    this.returnedJobs = this.jobs.slice(0, 10);
   }
 
   getJobs() {
@@ -58,6 +61,11 @@ isWarning = true;
         }
     });
     this.jobs = this.jobs;
+}
+pageChanged(event: PageChangedEvent): void {
+  const startItem = (event.page - 1) * event.itemsPerPage;
+  const endItem = event.page * event.itemsPerPage;
+  this.returnedJobs = this.jobs.slice(startItem, endItem);
 }
 
 }

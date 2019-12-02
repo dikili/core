@@ -99,7 +99,7 @@ export class MemberListComponent implements OnInit {
   genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
   buildingList = [{value: 'Plumber', display: 'Plumber'}, {value: 'Electrician', display: 'Electrician'},
   {value: 'Cleaner', display: 'Cleaner'}, {value: 'Nanny', display: 'Nanny'},
-  {value: 'Carpenter', display: 'Carpenter'}, {value: 'Massage', display: 'Massage'},
+  {value: 'Carpenter', display: 'Carpenter'}, {value: 'Baker', display: 'Baker'},
   {value: 'Dietician', display: 'Dietician'}, {value: 'Handyman', display: 'Handyman'},
   {value: 'Other', display: 'Other'}];
   userParams: any = {};

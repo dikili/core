@@ -25,7 +25,7 @@ export class NewsComponent implements OnInit {
   }
 
   onChange(source) {
-
+this.newsphrase = '';
   if (source === 'Local') {this.getLocalNews(); }
   if (source === 'Global') {this.getNews(); }
   }
@@ -36,7 +36,8 @@ export class NewsComponent implements OnInit {
      .subscribe((news) => {
       console.log('global news');
       this.news = news;
-       console.log(this.articles);
+     // this.articles = this.news.articles;
+     //  console.log(this.articles);
      }, error => {
        this.alertifyService.error(error);
      });
@@ -48,8 +49,8 @@ export class NewsComponent implements OnInit {
      .subscribe((news) => {
        console.log('local news');
        this.news = news;
-       this.articles = this.news.articles;
-       console.log(this.articles);
+     //  this.articles = this.news.articles;
+     //  console.log(this.articles);
      }, error => {
        this.alertifyService.error(error);
      });
@@ -62,7 +63,7 @@ export class NewsComponent implements OnInit {
      .subscribe((news) => {
        console.log('local news');
        this.news = news;
-       console.log(this.articles);
+      // console.log(this.articles);
      }, error => {
        this.alertifyService.error(error);
      });

@@ -44,6 +44,9 @@ import { FooterComponent } from './footer/footer.component';
 import { NewsComponent } from './news/news.component';
 import { JobsComponent } from './Jobs/Jobs.component';
 import { NewsService } from './_services/news.service';
+import { EventsComponent } from './events/events.component';
+import { LandingComponent } from './landing/landing.component';
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -72,7 +75,9 @@ export function tokenGetter() {
       RolesModalComponent,
       FooterComponent,
       NewsComponent,
-      JobsComponent
+      JobsComponent,
+      EventsComponent,
+      LandingComponent
    ],
    imports: [
       BrowserModule,
@@ -84,7 +89,7 @@ export function tokenGetter() {
       ButtonsModule.forRoot(),
       PaginationModule.forRoot(),
       TabsModule.forRoot(),
-      RouterModule.forRoot(appRoutes, { useHash: true }),
+      RouterModule.forRoot(appRoutes, { useHash: true}),
       ModalModule.forRoot(),
       NgxGalleryModule,
       FileUploadModule,

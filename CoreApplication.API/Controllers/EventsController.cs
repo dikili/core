@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CoreApplication.API.DTOs;
 using CoreApplication.API.Utility;
+using CoreApplication.API.Utility.Concrete;
+using CoreApplication.API.Utility.Factory;
 using CoreApplication.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -34,10 +37,11 @@ namespace CoreApplication.API.Controllers
             //var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == userId;
 
             //var user = await _repo.GetUser(userId, isCurrentUser);
+            
+           var eventsSection = ExtractorFactory.Resolve("event").GetAllEntities<Event>("https://canarywharf.com/arts-events/events/", "listing future-event");
 
-           var eventsSection= Extractor.ParsePage("https://canarywharf.com/arts-events/events/", ".listing future-event");
-            // jobsToReturn = jobsToReturn.OrderByDescending(x => (x.Date)).ToList(); //_mapper.Map<JobListDto>(jobs);
-            return Ok(eventsSection.Result);
+           
+            return  Ok(eventsSection.ToList<Event>());
         }
     }
 }

@@ -13308,11 +13308,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Source\\CoreNPWApplicationTest\\CoreApplication.API\\CoreApplication.API.csproj",
+      "projectUniqueName": "C:\\Source\\CoreNPWApplicationTest\\CoreApplication.API\\CoreApplication.API.csproj",
       "projectName": "CoreApplication.API",
-      "projectPath": "c:\\Source\\CoreNPWApplicationTest\\CoreApplication.API\\CoreApplication.API.csproj",
+      "projectPath": "C:\\Source\\CoreNPWApplicationTest\\CoreApplication.API\\CoreApplication.API.csproj",
       "packagesPath": "C:\\Users\\Fatih\\.nuget\\packages\\",
-      "outputPath": "c:\\Source\\CoreNPWApplicationTest\\CoreApplication.API\\obj\\",
+      "outputPath": "C:\\Source\\CoreNPWApplicationTest\\CoreApplication.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13331,8 +13331,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "c:\\Source\\CoreNPWApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj": {
-              "projectPath": "c:\\Source\\CoreNPWApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj"
+            "C:\\Source\\CoreNPWApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj": {
+              "projectPath": "C:\\Source\\CoreNPWApplicationTest\\CoreApplication.Data\\CoreApplication.Data.csproj"
             }
           }
         }

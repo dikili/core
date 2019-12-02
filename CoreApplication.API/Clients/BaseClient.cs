@@ -60,8 +60,16 @@ namespace CoreApplication.API.Clients
                 var response = Execute<T>(request); //Get the item from the API call
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                   _cache.Set(cacheKey, response.Content, 30); //Set that item into the cache so we can get it next time
-                    item = JsonConvert.DeserializeObject<T>(response.Content);
+                    _cache.Set(cacheKey, response.Content, 30); //Set that item into the cache so we can get it next time
+
+                    try
+                    {
+                        item = JsonConvert.DeserializeObject<T>(response.Content);
+                    }
+                    catch (Exception ex)
+                    {
+                        item = response.Data;
+                    }
                 }
                 else
                 {

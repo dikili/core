@@ -15,6 +15,8 @@ import { MessageResolver } from './_resolvers/message.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { NewsComponent } from './news/news.component';
 import { JobsComponent } from './Jobs/Jobs.component';
+import { EventsComponent } from './events/events.component';
+import { LandingComponent } from './landing/landing.component';
 
 // export const appRoutes: Routes = [
 //     {path: 'home', component: HomeComponent},
@@ -39,7 +41,9 @@ import { JobsComponent } from './Jobs/Jobs.component';
 export const appRoutes: Routes = [
     { path: '', redirectTo: 'news', pathMatch: 'full'},
     { path: 'home', component: HomeComponent},
+    { path: 'landing', component: LandingComponent},
     { path: 'news', component: NewsComponent },
+    { path: 'events', component: EventsComponent },
     { path: 'jobs', component: JobsComponent },
     {
         path: '',

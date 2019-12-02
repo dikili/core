@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+        <!-- reduced for brevity -->
+        
+        <!-- inline spinner styles to be able to display spinner right away -->
+        <style type="text/css">
+          body, html {
+            height: 100%;
+          }
+          .app-loading {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+          }
+          .app-loading .spinner {
+            height: 200px;
+            width: 200px;
+            animation: rotate 2s linear infinite;
+            transform-origin: center center;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+          }
+          .app-loading .spinner .path {
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            animation: dash 1.5s ease-in-out infinite;
+            stroke-linecap: round;
+            stroke: #ddd;
+          }
+          @keyframes rotate {
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+          @keyframes dash {
+            0% {
+              stroke-dasharray: 1, 200;
+              stroke-dashoffset: 0;
+            }
+            50% {
+              stroke-dasharray: 89, 200;
+              stroke-dashoffset: -35px;
+            }
+            100% {
+              stroke-dasharray: 89, 200;
+              stroke-dashoffset: -124px;
+            }
+          }
+        </style>
+
+  <meta charset="utf-8">
+  <title>Canary Wharf Club</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+  <link rel="shortcut icon" class="glyphicon glyphicon-heart" type="image/png" href="glyphicon glyphicon-heart"/>
+  <link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">
+<link rel="stylesheet" href="styles.1b26a84061211b676b35.css"></head>
+<body class="chess">
+  <app-root>
+      <div class="app-loading">
+          <div class="logo"></div>
+          <svg class="spinner" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+            <img alt="wait" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURUxU/lFT/oA//rW1/oQ9/iFo/qgt/qW6/klX/pg0/m7F/ktW/njD/idm/qIx/iFo/ntB/iBp/qgu/mVK/njD/rom/jZe/qMw/pg0/m/F/qC5/qgu/nFG/uOq/ktV/hts/kpW/r6z/h9p/kJa/qIx/jxd/rIp/qMw/o06/oM+/ow6/lNS/ntB/m1H/lpP/pS9/mFM/qUv/rsn/rK2/3RE/t2r/jpd/hxq/s2v/mZL/jRh/rsm/jxc/sEj/m9H/jVg/sMi/ok8/r4k/mRL/hxq/pA4/oi//1RS/qO5/nRE/sQi/jde/oQ9/nvC/jle/qst/sOx/t+r/sMj/pU2/qQw/pU2/oM//kpV/pE4/klX/nHF/jpe/rMq/kFb/pk0/smx/mxH/rsl/pg1/lNT/mpJ/jhe/qQw/qos/qgu/jJh/pM3/iZm/jRg/lZR/m1H/oq//2lJ/iNn/m5H/pc2/k9U/pc1/r4l/iZm/os7/npC/lFT/r4l/jxd/khX/nNF/i5i/po0/kdY/l1O/nNF/qst/sMj/ryz/5g0/l1N/l5O/mNM/qss/iVm/tOu/j5c/kBa/ow6/oc8/o05/sIj/rEq/qkt/l1P/oU9/jRg/rQp/nBG/iJo/mtJ/pk0/tit/kNa/pwz/jJh/i1j/suw/6u4/ixk/iZl/oQ+/mZK/nVE/sUi/n5A/qws/rIp/rwl/q+2/qkt/j1b/nZE/sSy/x9p/lxO/lhQ/sYi/kxW/jRg/lpP/py7/7Mq/rEq/njD/kBb/jFh/kdY/ihl/sEj/sMi/mRL/mtJ/pA5/ldR/lhR/kRZ/pu7/llP/q8r/kBc/mJM/jNg/pwz/qws/oE//lxP/lJT/om//qYv/oLB/oBA/3BG/kNZ/ntB/sYh/p25/pc1/rgo/sMi/i9i/lNS/iVn/h1q/qMx/lVR/l1O/ok8/qAx/tqs/7Ip/kRZ/kNZ/q0s/pg1/p0z/rYo/nVE/nTF/y5h/oQ+/kFa/pO8/i5j/pU3/rmz/qot/o85/nVE/gAAAO9rh6EAAAEAdFJOUzm8xMg+ucNOgH/N5tnx6j3xgDvyWvDtfe9+yl4+zJ5m1lOf8Z7a7ONmofNY3e3x/tf6Nv+bdp7W6XxbwD1gWviYSX+787mJ8v7y8n70/8T+7PHipE7+f2TpR/P+/v7PitfP5P5Mc6drjqRtTYvjqf+P5vdLkThE/v7+y/5Prb28/v5o/s7+/1s3/v7zcf+r4+CRznJT3dP+2kDk/myyVZKPPrP//v6XrbFTkUKakKTkdFuS/61XStH+/r//Xr1yze/a1ku+xP7+gv6jmZ+wf+RTcn7Xj3PoRP7/g09n/txU/6jG1sj+/q7KUvf/4HHBScNkatT/XuVjV+JEket+swBTPda7AAAACXBIWXMAAA7DAAAOwwHHb6hkAAALJ0lEQVR4Xu2TeXhWxRXGRSEVqRSXKG4UCQaXQpUKKouylorWCMQNASEgssXKJgittJgWbCiLEIFYJLEFrUYEK0uoVCSYpCguEaUWEBEJYgWxVhC1TM8589773Tt35vtueOzj0+fJ74987zln5px3Zm6OU98ytQZqDdQa+D8y0Kzbc1DfKLENfH/Pnj3/CwexDVxBBvbMQBCPU7pdAZWEuAZG8vw9e76HMA5LaX03aDdxDdR7RBiNMAbNZEM9RE7iGpBuRMqGHs9hQ6o7i2lgBrX64BRuGPMzwI098kgzJFzENLBhwoQJM9QH9HcCMsmpxytHz6A/JyPjIqYBTD6ZfjboTFLEKS0cTT8p3iCeAT7KFPodyY2X6lwS+L7E6HP0m+LN4hl4bMmSJdJoKYklIyXnZgMvkouaQSKF33gGTqZGWnHzI1q6OMLz3xc5khTfXBLiGeCWWhWzfExrOzLfm0oyxTcTy8Dn1EcfSalR3P9zBBZkvu+QdIr7imVgVGlp6Sho9T4F66GZ4inr1095HYFaT9XS4QiUMtZaiGVgOPVpB61nJB6hmCeWli4olsCYzwZKIR3EMsCHlgGqePiRa7hp6XUSElMkJOiKiqXm3xXBMaSDWAbO8NrwW3gsGCWeuKaZ0i4ynw2cAemgRgba8YAAC+5EbZS+Fsa/GoESCyAdxDJwO8G/N7AIcU3bM+hvB9XhAh3fTpYCvE6ZG6AdxDIwi/rwLw/7OYsVo0Je2lJKJ8LnV9ehmIRYBrh5B/rlY4oBZsVMnqjhWMILpOTDucPQDmIZ4D4r6LetMeJO7+Jf5UgcvCAFjwzKQLqIZWBx//79eUYH+u0fGrHiAk71nyXBTJYHRGp4fQa0i1gG9lOjmdsOv7opg0dk+K/AiAVtQB3g8kytGTYeCK3EMbBNjpYA4zz2z5q1DfIFLst7COzXK7lIZWDFplncNIRhIIgs9mYeJp3qBZIbOHyg/6+iNEh2qAxeAf0iycXQTpIYWCzNPDIObDpx/7aUL3Ybr31R5DaWopLh7Hgib9c0bXJLysE++3nHJlZ8Ab+QXDJcnZuu0TQddxsycWnC226hE8j2lLsdBhrw7jUNTkRYI8T7cUo6rFlTB1kXdgPSoykd45jgzQ0m8V+hCdJ2rAbeGkyMQ1BzbuHtzCT90+ASFGxYDfDGY59Pn4EevFcdV8dTTqwGetAeyGNjN0/NZXWJyMG7JW3DaaDOKgQOLhm3d3ePHj0G507aWxldykPRupL14B6udlYDr+g9dSpdj1epz5Vg0luogFW5uYm9erGjl9WAyv2bT27E+qq1KIVJ8s6vyAK7A7sBbBHkKRNMt49n3BamcrnVdEQhHAaU2uLdQthA5YNIr92yUmemr9zyMJKtpupUlJVSRhDCaUCtfFBoFXqCD3VyrTlpKgrOS5BuryAI4r4BaWjseVhya213uUpb+BBhhEquQgdxGdDtXkIELuXca65/qKmy5VJEEdj8FugADgOX/pa5ChHoyrmuCGzILpeDlfaa3YB0es246as4+QQCO0ktUuk0yABWAy9Z+3Ay/CZnndS370lnIRDEgXFxHlSJacB+VO79GrRwet9/C31PR4IR79Z/+KlUiPkEp5WXlxufn1JDKFk+BIHw3Z96/BUZxrqZ4cI90AEsBq6ilS2hE3SlbPhVTsd4InAHYvRqBAnu4XQ5giAWAwNp5e+hE1j2/93nbWSYJ2jhQGgwpJB3l5fbPg6LgZa0FDIBn+B+aI+3f+bzY6SYMbT0XGgNdyT+gTCExQA3aDmwcExh8MX5WsyLDRgIXsHdtPRuaI2+gOi7MBYDRx8AhUgwFI6B9PlhgC+QI86NrB0yhtsdRRTGYkC15OVEwMDVFJov8AVmCy8jyRTS4vAbqM+43+UIQtgMqGev5fUP/Akh8SyF5hO++5cAZyPJXG5ZLA5sj2A1oMRAYL6634iJl38S5F1kGb6uyH3ztVwLHcRqgO3eF5rHGUjNd87GZA/kGf4IPoNOwIeyfAY2A0fvI7Yj0BRSBlL4YwQUBFrcCDLBdu5q3CJhMSArjQ+mEaUghWd+ZPAMCgI3gAxwP2V/AJ3AYoC3Hw/tYbY8AXN9TkBBoMXRG9BNwhdLRA3wA0S2mzfw1W8MvkJBcBh4lvKRK4gYeOodIuLzECUhhfMx1+d8FBhu8SZ0iEZUeAraI2LgeFpkPoDOhrbe+OcQNyItbKfFj0OHuMhSMA3UpTXv1EWQgLeGruWOP4S4A2mBF98MHYKbXw/tYRp4fP78+Rb3N1P6ImjNlRgtXImk5hAt7gwd5k2q7IMGpgFaMT96AaoupQ9Bax79XYBHkRR47XxogzlUmQMNDAP7IoPA9VQIG2vzT582SGkuoqXWT0C3Nz4ww4DFooafJvwG6tFeenyv0PmVmkhLjXv2oZJxPsPAQxMnTrQ+X2cqTIT2aXNer17nhY9PVmnhbOgIVLsYEhgGZmPMhbNnGz7YWnfoZOyjdRMvRBAhpYGLxUBnnmacQhr/B0ESuMND0CZ1+XxG0TRQUVEx5yH6U1FhXmN3yrmP5jGbt0Ib7LuVaxVGC/MbkDXCCKR82FxFijuQ+Y41er75jIaBEbKIiV7jl458gp0yow8iE9keKRoGVJ+bwFgkAuyskEqf8YhNFknZ+aVyMbrVNKDGjxjRnVYOQBhi/K3chIr1kQgwjXcRwSPuzMkJnIOKjSEDRAwQObR0GrSBPiTR+GDRCK/5+Gn1DyJ9U9DaWIpzoAmKYhr4JQEZYewArro4iFXCl40pEzAQjjwsBt6glYugLYxdxKNsDNiJJcI0yQVSvAIygMVAH1r5BrSdTxfx4cLkFKEIiiT7KSJiLIWhG9JYDPAluz70BNPq9zk4IIeMNM4ZsKgoMEijXyp4jk8ptlysxUDD6upqyGOliFpUV38UepL6lDFuibEY4L2Qx0bRR9yiugVC0JxSZ0IHsBjg7fyb3aJhtiQI0pbNNrKHyvTq6uZIeKRRLvJSSZ+AfhtKguDcR0N9Py62NueFTIutSPlw5VToABYDBbSSf7nPcsko1YIDMtT8HCSiZA9Lu0yvovF3IRmA0pdBBrEYGJqVlcWD6Sfra51S2fkcCflpJWeeEzjfqdl3VQ3NS9SzsvIs41U2F6CDWAws10v5JytrGJKq6muJU5JfEr7nrQUFcmvDqOY3C2AxIEdfrjAw0e6TkpQeCoZFnp6vJo0s8F7LJ2A1sFmagQIkhVOrNrtM5KcNs30fwV6hVh42A+Kakd0lSPpwNS+v4Gv6zc9nP/lVzy9EzeQu7uBh/YCtBj7RDkrU0/xjflJ5wRxPSIOOMo/3+8dBMozVAN1cZua6efSb149gEaCKUh9Dq48pqIKOsJB3Z9KOdZn9Mp9G0sBhwCeTexgOOIWHKWGtZZR5XOz3CSIHqQy0Fgf/QqR5mlOb6dkXrmPlOJpazsV+zyNykcqAvkZjCN+7j/8aBpulGrZuIaUB9Xy/94j2iDTpnNLQE9uYl8nFlOePY0AtlHHpobO05xQTNubRWtfTXf+dAWIYUKq3tBvUGiFz77JB6emDlt2LMETrZbL+vUGIkxLLgFo2WWhvnWfQsb1ePLkLEsmJZ0B1TNdNB81FwkHZMiycbH+bKDEN+JdAnecGnyJAWRfv7GS0DMmUxDag1K7JvwY9N3aaW5awUdaxS6eNPVEjJm+MPb5GBshCYIqT3k9idTxqZECpuasxxsHqJ+N8p0FqaIDouKv3Dhs0vCOW1ISaG2DK5nbauHp17547dvTs2Xv1xl1Pzq3Bq4c5NgPfILUGag3UGqg1UGvgWzag1H8BAk6Qz+g1gIQAAAAASUVORK5CYII="  />
+          </svg>
+        </div>
+
+  </app-root>
+<script type="text/javascript" src="runtime.a66f828dca56eeb90e02.js"></script><script type="text/javascript" src="polyfills.5e0409d540b1fe160cad.js"></script><script type="text/javascript" src="scripts.9342163bc443dbb876b3.js"></script><script type="text/javascript" src="main.fa2cf57b9d1483e303ae.js"></script></body>
+
+</html>

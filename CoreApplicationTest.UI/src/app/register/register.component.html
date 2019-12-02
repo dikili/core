@@ -1,7 +1,7 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()" class="formbackground">
 <div class="container formbackground">
   <div class="form-group formbackground required">
-      <label class="control-label x" ><b>Do you live/work in Canary Wharf ? </b> </label>
+      <!-- <label class="control-label x" ><b>Do you live/work in Canary Wharf ? </b> </label>
       <label class="radio-inline" style="font:bold;color:white" >
         <input class="mr-1" 
          type="radio" 
@@ -15,7 +15,7 @@
       <label class="radio-inline ml-1" style="font:bold; color:white">
         <input class="mr-1"  type="radio" value="NO" [(ngModel)]="gender" formControlName="gender">
         <label class="control-label"> <b> NO </b></label>  
-      </label>
+      </label> -->
      
     </div>
     <div class="form-group required">
@@ -52,7 +52,7 @@
           <input class="mr-1"  type="radio" value="Carpenter"  [(ngModel)]="busCategory" formControlName="busCategory"> <label class="control-label"> <b> Carpenter</b></label>
         </label>
         <label *ngIf="business=='YES'" class="radio-inline ml-3" style="font:bold; color:white">
-          <input class="mr-1"  type="radio" value="Massage"  [(ngModel)]="busCategory" formControlName="busCategory"> <label class="control-label"> <b> Massage Services</b></label>
+          <input class="mr-1"  type="radio" value="Baker"  [(ngModel)]="busCategory" formControlName="busCategory"> <label class="control-label"> <b> Baking</b></label>
         </label>
         <label *ngIf="business=='YES'" class="radio-inline ml-3" style="font:bold; color:white">
           <input class="mr-1"  type="radio" value="Dietician"  [(ngModel)]="busCategory" formControlName="busCategory"> <label class="control-label"> <b> Dietician</b></label>
@@ -116,34 +116,30 @@
       <div class="invalid-feedback" *ngIf="registerForm.get('knownAs').touched && registerForm.get('knownAs').hasError('required')"><b>Known as is required</b></div>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <input [ngClass]="{'is-invalid': registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched}" class="form-control"
           placeholder="*(required)  Date of Birth" formControlName="dateOfBirth" type="text" bsDatepicker [bsConfig]="bsConfig">
         <div class="invalid-feedback" *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')"><b>Date of Birth is required</b></div>
-      </div>
+      </div> -->
 
-      <div class="form-group">
+      <!-- <div class="form-group">
           <input [ngClass]="{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}" class="form-control"
             placeholder="*(required)  Email" formControlName="city">
           <div class="invalid-feedback" *ngIf="registerForm.get('city').touched && registerForm.get('city').hasError('email')"><b>Email is needed !</b></div>
-        </div>
+        </div> -->
       
-        <div class="form-group">
+        <!-- <div class="form-group">
           <input  class="form-control"
             placeholder="WhatsApp" formControlName="country" type="number">
-            <!-- <div class="invalid-feedback" 
-            *ngIf="registerForm.get('country').hasError('required') 
-              && registerForm.get('country').touched">
-              WhatsApp is needed !
-          </div> -->
+  
           <div class="invalid-feedback" 
           *ngIf="registerForm.get('country').hasError('pattern') 
             && registerForm.get('country').touched">
             WhatsApp needs to be a phone number !
         </div>
-        </div>
+        </div> -->
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <input class="form-control" placeholder="Instagram" formControlName="inst">
           </div>
           <div class="form-group">
@@ -152,7 +148,7 @@
 
             <div class="form-group">
                 <input class="form-control" placeholder="facebook" formControlName="face">
-              </div>    
+              </div>     -->
   <div class="form-group">
     <input type="password" 
       [ngClass]="{'is-invalid': registerForm.get('password').errors 

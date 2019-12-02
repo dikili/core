@@ -37,10 +37,10 @@ bsConfig: Partial<BsDatepickerConfig>;
 
     // }, this.passwordMatchValidator);
     this.createRegisterForm();
-    this.bsConfig = {
-      containerClass: 'theme-green',
-      dateInputFormat: 'DD MMM YYYY'
-    };
+    // this.bsConfig = {
+    //   containerClass: 'theme-green',
+    //   dateInputFormat: 'DD MMM YYYY'
+    // };
   }
   selectChangeHandler (event: any) {
 this.registerForm.patchValue({chessLevel: event.target.value});
@@ -50,9 +50,8 @@ this.registerForm.patchValue({chessLevel: event.target.value});
     this.registerForm = this.fb.group({
    gender: [''],
    username: ['', Validators.required],
-   knownAs: ['', Validators.required],
-   dateOfBirth: [null, Validators.required],
-   city: ['', Validators.email],
+   knownAs: [''],
+   city: [''],
    country: [''],
   inst: [''],
   twit: [''],
@@ -91,11 +90,16 @@ this.registerForm.patchValue({chessLevel: event.target.value});
     // }
     if (this.registerForm.valid) {
       this.user = Object.assign({}, this.registerForm.value);
-      if (this.user.gender ===   'NO') {
-        this.alertifier.error('Only Canary Wharfians can use this site');
-      } else if (this.user.city === '' ) {
-        this.alertifier.error('Email is required !');
-       } else if (this.user.business === 'YES' && this.user.businessName === '') {
+      // this.user.gender = 'null';
+      // this.user.email = 'notgiven';
+      // this.user.dateOfBirth = 'notgiven';
+      // if (this.user.gender ===   'NO') {
+      //   this.alertifier.error('Only Canary Wharfians can use this site');
+      // } else if (this.user.city === '' ) {
+      //   this.alertifier.error('Email is required !');
+      //  }
+      // else
+       if (this.user.business === 'YES' && this.user.businessName === '') {
         this.alertifier.error('Providing Business Name is required while registering a business');
        } else if (this.user.business === 'YES' && this.user.businessPurpose === '') {
         this.alertifier.error('Please specify the purpose along with years of experience in the service');

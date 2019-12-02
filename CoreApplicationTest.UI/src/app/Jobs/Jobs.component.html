@@ -14,10 +14,6 @@
       </div>
     </div>
   </div>
-  
-
-
-
     <div class="container">
       <div class="row">
           <div class="card"   *ngFor="let job of jobs">
@@ -28,7 +24,14 @@
                   <a href="{{job.jobUrl}}" class="btn btn-primary">Full Spec & Apply</a>
                 
               </div>
+  
       </div>
-    </div>
 
+    </div>
+    <div class="d-flex justify-content-center">
+
+      <pagination [totalItems]="90" (pageChanged)="pageChanged($event)"></pagination>
+  </div>
 </div>
+
+
