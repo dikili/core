@@ -1,6 +1,11 @@
 # Node.js with Angular
 - task: DotNetCoreCLI@2
   inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    vstsFeed: 'c7be9d13-6fe0-49da-b563-e0422fd97661'
+- task: DotNetCoreCLI@2
+  inputs:
     command: 'build'
 # Build a Node.js project that uses Angular.
 # Add steps that analyze code, save build artifacts, deploy, and more:
