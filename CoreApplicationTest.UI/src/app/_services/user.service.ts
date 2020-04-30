@@ -53,7 +53,7 @@ updateUnReadToNone() {
     }
 
     return this.http.get<User[]>(this.baseUrl + 'users', { observe: 'response', params})
-      .pipe(
+    .pipe(
         map(response => {
           paginatedResult.result = response.body;
           if (response.headers.get('Pagination') != null) {

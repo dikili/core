@@ -96,8 +96,8 @@ export function tokenGetter() {
       JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,
-          whitelistedDomains:  ['localhost:8000', 'http://webchesssite.azurewebsites.net', 'webchesssite.azurewebsites.net', 'mmcc.space'],
-          blacklistedRoutes: ['localhost:8000/api/auth', 'webchesssite.azurewebsites.net/api/auth', 'mmcc.space/api/auth']
+          whitelistedDomains:  ['localhost:8005', 'http://webchesssite.azurewebsites.net', 'webchesssite.azurewebsites.net', 'mmcc.space'],
+          blacklistedRoutes: ['localhost:8005/api/auth', 'webchesssite.azurewebsites.net/api/auth', 'mmcc.space/api/auth']
         }
       })
    ],
