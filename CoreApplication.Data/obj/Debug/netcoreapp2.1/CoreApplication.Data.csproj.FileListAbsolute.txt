@@ -8,4 +8,7 @@ C:\Source\CoreNPWApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.1\Co
 C:\Source\CoreNPWApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.1\CoreApplication.Data.AssemblyInfo.cs
 C:\Source\CoreNPWApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.1\CoreApplication.Data.dll
 C:\Source\CoreNPWApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.1\CoreApplication.Data.pdb
-C:\Source\CoreNPWApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.1\CoreApplication.Data.csprojAssemblyReference.cache
+C:\source\CoreNPWApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.1\CoreApplication.Data.csproj.AssemblyReference.cache
+C:\source\CoreNPWApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.1\CoreApplication.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\source\CoreNPWApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.1\CoreApplication.Data.sourcelink.json
+C:\source\CoreNPWApplicationTest\CoreApplication.Data\obj\Debug\netcoreapp2.1\CoreApplication.Data.genruntimeconfig.cache

@@ -17,11 +17,15 @@ namespace CoreApplication.API.Clients.NewsClient
 
         public News GetNewsByCache()
         {
-            RestRequest request = new RestRequest("v2/top-headlines", Method.GET);
-            request.AddParameter("country", "gb");
-            request.AddParameter("category", "business");
+            // RestRequest request = new RestRequest("v2/top-headlines", Method.GET);
+            // request.AddParameter("country", "gb");
+            // request.AddParameter("category", "business");
+            // request.AddParameter("apiKey", "8b5df5fd3a5245c9af5c2fabcc9a6e96");
+            RestRequest request = new RestRequest("v2/everything", Method.GET);
+            request.AddParameter("q", "business");
+            request.AddParameter("language", "en");
+            request.AddParameter("sortBy", "publishedAt");
             request.AddParameter("apiKey", "8b5df5fd3a5245c9af5c2fabcc9a6e96");
-    
 
             //request.AddHeader("Authorization", "Basic Yjk3YzBiOTgtYjQzMy00NGI0LTlmNTgtNWQ3NGFiYjMwYjJkOg==");
 
@@ -68,7 +72,7 @@ namespace CoreApplication.API.Clients.NewsClient
 
             //request.AddHeader("Authorization", "Basic Yjk3YzBiOTgtYjQzMy00NGI0LTlmNTgtNWQ3NGFiYjMwYjJkOg==");
 
-            var news= GetFromCache<News>(request, "CustomNews");
+            var news = GetFromCache<News>(request, "CustomNews");
 
             foreach (var w in news.Articles)
             {
