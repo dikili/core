@@ -97,16 +97,17 @@ namespace CoreApplication.API
                    };
                });
 
-    services.AddAuthorization(options =>  {
-                options.AddPolicy("RequireAdminRole", policy=>policy.RequireRole("Admin"));
-                options.AddPolicy("ModeratePhotoRole", policy=>policy.RequireRole("Admin","Moderator"));
-                options.AddPolicy("VipOnly", policy=>policy.RequireRole("VIP"));
-              });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
+                options.AddPolicy("VipOnly", policy => policy.RequireRole("VIP"));
+            });
 
             services.Configure<CloudinarySettings>(_config.GetSection("CloudinarySettings"));
-            
+
             // Add a new Authorize Filter so eliminate the need to add an Authorize attribute each time on the controllers !!
-            services.AddMvc( options =>
+            services.AddMvc(options =>
             {
                 var policy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
@@ -114,21 +115,19 @@ namespace CoreApplication.API
                 options.Filters.Add(new AuthorizeFilter(policy));
             }
                 ).SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-            .AddJsonOptions(opt => 
+            .AddJsonOptions(opt =>
             {
-              opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
             // Will apply any pending migrations to database and will create db if does not already exist when below is done..
             services.BuildServiceProvider().GetService<CoreContext>().Database.Migrate();
             services.AddCors();
-            
-            services.AddScoped<IDatingRepository,DatingRepository>();
 
-            
-               services.AddAutoMapper();
+            services.AddScoped<IDatingRepository, DatingRepository>();
+            services.AddAutoMapper();
+            services.AddMemoryCache();
 
-               
         }
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
@@ -137,11 +136,10 @@ namespace CoreApplication.API
             services.AddDbContext<CoreContext>(options =>
             options.UseSqlServer(_config.GetConnectionString("CoreContextConnection"))
             .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.IncludeIgnoredWarning)));
-           
-             services.Configure<CloudinarySettings>(_config.GetSection("CloudinarySettings"));
+
+            services.Configure<CloudinarySettings>(_config.GetSection("CloudinarySettings"));
 
             services.AddTransient<Seed>();
-
 
             services.AddTransient<Seed>();
             // if this app was MVC rather than the angular app we would use AddIdentity insted
@@ -172,28 +170,29 @@ namespace CoreApplication.API
                       ValidateAudience = false
                   };
               });
-              
-              services.AddAuthorization(options =>  {
-                options.AddPolicy("RequireAdminRole", policy=>policy.RequireRole("Admin"));
-                options.AddPolicy("ModeratePhotoRole", policy=>policy.RequireRole("Admin","Moderator"));
-                options.AddPolicy("VipOnly", policy=>policy.RequireRole("VIP"));
-              });
 
-
-            services.AddMvc().AddJsonOptions(opt => 
+            services.AddAuthorization(options =>
             {
-              opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
+                options.AddPolicy("VipOnly", policy => policy.RequireRole("VIP"));
+            });
+
+
+            services.AddMvc().AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddCors();
-            
 
-            services.AddScoped<IDatingRepository,DatingRepository>();
 
-           
-           
+            services.AddScoped<IDatingRepository, DatingRepository>();
+
+
+
             services.AddAutoMapper();
 
-               
+
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
@@ -207,7 +206,7 @@ namespace CoreApplication.API
             {
                 //global exception handler if in the production etc..
                 //this is the error that will be seen ...
-                //  
+                //
                 app.UseExceptionHandler(builder =>
                 {
                     builder.Run(async context =>
@@ -228,18 +227,20 @@ namespace CoreApplication.API
             // just enable if you want the seed data to work...
             seeder.SeedData();
             app.UseCors(p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
+
             app.UseAuthentication();
-          
+
             app.UseDefaultFiles(); // for deployment necassary
             app.UseStaticFiles();
-            app.UseMvc(routes => {
+            app.UseMvc(routes =>
+            {
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
-                    defaults: new { controller ="Fallback", Action="Index"}
+                    defaults: new { controller = "Fallback", Action = "Index" }
                 );
             });
 
-           
+
         }
     }
 }

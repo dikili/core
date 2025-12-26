@@ -1,3 +1,16 @@
-.navregister {
-    background-color:red;
+.navregister  {
+    background-color:black;
 }
+
+.chess {
+    background-color: aliceblue;
+}
+
+h1 {
+    margin-top: 150px;
+  }
+
+  
+.formbackground {
+    background-color: white;
+   }

@@ -4,7 +4,15 @@
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 @import '../node_modules/alertifyjs/build/css/alertify.css';
 @import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
-@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+
+
+/* .logo {
+  width: 700px;
+  height: 700px;
+  
+ 
+  background: url(./assets/loading.gif) center center no-repeat; 
+} */
 
 .tab-panel {
     border: 1px solid #ddd;
@@ -51,3 +59,13 @@
     border-top: 1px solid #eee;
     padding: 15px 0;
   }
+  
+  
+  .chess  {
+    background: url(../src/assets/npw.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;       
+        height: 100%; 
+   }

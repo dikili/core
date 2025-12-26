@@ -1,0 +1,72 @@
+
+<div class="container">
+    <div class="row">
+    <div class="card">
+        <div class="card-body bg-light">
+            <div class="alert alert-success"  *ngIf="isWarning">
+                <a  (click)="toggleWarning()" [routerLink]="['/news']" class="close"  data-dismiss="alert" aria-label="close">&times;</a>
+                <div>&nbsp;</div>
+                <b>We monitor the top and breaking news headlines and content from more than 100 different, most reliable, mainstream news sources and more than 30K influencers empowering you to follow what you are interested in most by keyword search feature! </b>
+              </div>
+              <div class="alert alert-success"  *ngIf="isAnotherWarning">
+                <a  (click)="toggleAnotherWarning()" [routerLink]="['/news']" class="close"  data-dismiss="alert" aria-label="close">&times;</a>
+                <div>&nbsp;</div>
+                <b>We aim to provide latest news and search news contents that are up to seven days old, if you require more advanced search with older than seven days news, please get in touch with us and we can provide it for you!  </b>
+              </div>
+          <h1 class="card-title text-center">Search Dashboard</h1>
+          <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+          <p class="card-text">
+
+              <label  for="news"><b style="color:orangered">News Source: </b></label>
+        
+              <select  style="margin-left:2%" id="news" (change)="onChange($event.target.value)" 
+                name="news">
+                <option value="Local" >
+                  Canary Wharf Mentioned
+                </option>
+                <option value="Global">
+                Global
+                </option>
+              
+              </select>
+
+
+          </p>
+          <div class="container">
+            <div class="row">
+              <div class="input-group">
+                  <label  for="news"><b style="color:orangered">Search (in all News): </b></label>
+                <input type="text"  [(ngModel)]="newsphrase" class="form-control" style="min-width: 10em" placeholder="enter keyword" aria-label="Search Key"
+                  aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">i.e 'Tesla' </span>
+                </div>
+                <button   type="button" (click)=getCustomNews(newsphrase)   [disabled]="!newsphrase" class="btn btn-success">Fetch my News, Quick!</button>
+              </div>
+            </div>
+           
+          </div>
+         
+          <a  [routerLink]="['/home']" class="card-link">Home Page</a>
+          <a  [routerLink]="['/members']" class="card-link">Members Lounge</a>
+        </div>
+      </div>
+    </div>
+
+
+    <p class="text-center text-uppercase" style="background:orangered">news</p>
+
+      <div class="container">
+        <div class="row">
+            <div class="card"   *ngFor="let article of news?.articles">
+                  <img class="card-img-top"  src="{{article.urlToImage}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">{{article.title}} - {{article.publishedAt | timeAgo}}</h5>
+                    <p class="card-text"> {{article.content}}.</p>
+                    <a href="{{article.url}}" class="btn btn-primary">Check on {{article.source.name}}</a>
+                  </div>
+                </div>
+        </div>
+      </div>
+
+</div>

@@ -29,7 +29,7 @@ namespace CoreApplication.API.Controllers
              tests.Add(test2);
         }
         // GET api/values
-        [Authorize(Roles ="Admin")]
+       // [Authorize(Roles ="Admin")]
         [HttpGet]
         public IActionResult GetValues()
         {   // In case you want to test seed data stuff...
@@ -43,7 +43,7 @@ namespace CoreApplication.API.Controllers
         }
 
         // GET api/values/5
-       [Authorize(Roles ="Member")]
+      // [Authorize(Roles ="Member")]
         [HttpGet("{id}")]
         public IActionResult GetValue(int Id)
         {

@@ -1,7 +1,6 @@
 {
-  "ProjectFilePath": "c:\\Source\\CoreApplicationTest\\CoreApplication.API\\CoreApplication.API.csproj",
-  "TargetFramework": "netcoreapp2.1",
-  "TagHelpers": [],
+  "SerializedFilePath": "e:\\CoreNPWApplicationTest\\CoreApplication.API\\obj\\Debug\\netcoreapp2.1\\project.razor.json",
+  "FilePath": "e:\\CoreNPWApplicationTest\\CoreApplication.API\\CoreApplication.API.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-2.1",
     "LanguageVersion": "2.1",
@@ -10,5 +9,12 @@
         "ExtensionName": "MVC-2.1"
       }
     ]
-  }
+  },
+  "ProjectWorkspaceState": {
+    "TagHelpers": [],
+    "CSharpLanguageVersion": 703
+  },
+  "RootNamespace": "CoreApplication.API",
+  "Documents": [],
+  "SerializationFormat": "0.3"
 }

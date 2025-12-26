@@ -8,7 +8,7 @@ namespace CoreApplication.API.DTOs
         [Required]
         public string Username { get; set; }
         [Required]
-        [StringLength(8,MinimumLength=4,ErrorMessage="You must specify a password between 4 and 8 characters")]
+        // [StringLength(8,MinimumLength=4,ErrorMessage="You must specify a password between 4 and 8 characters")]
         public string Password { get; set; }
         [Required]
         public string Gender { get; set; }
@@ -18,9 +18,18 @@ namespace CoreApplication.API.DTOs
         public DateTime DateOfBirth { get; set; }
         [Required]
         public string City { get; set; }
-        [Required]
+       
         public string Country { get; set; }
+        [Required]
+        public string l39 { get; set; }
 
+          public string businessName { get; set; }
+        public string inst { get; set; }
+        public string twit { get; set; }
+        public string face { get; set; }
+
+        [Required]
+        public string chessLevel { get; set; }
          public DateTime Created { get; set; }
 
          public DateTime LastActive { get; set; }

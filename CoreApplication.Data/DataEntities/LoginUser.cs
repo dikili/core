@@ -15,6 +15,14 @@ namespace CoreApplication.Data.DataEntities
         }
         public string Gender { get; set; }
 
+        public string l39 {get;set;}
+
+           public string businessName {get;set;}
+         public string inst {get;set;}
+
+        public string twit {get;set;} 
+        public string face {get;set;} 
+        public string chessLevel {get;set;}
         public DateTime DateOfBirth { get; set; }
 
         public string KnownAs { get; set; }

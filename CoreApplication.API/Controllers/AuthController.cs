@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,8 +50,6 @@ namespace DatingApp.API.Controllers
 
             var result = await _userManager.CreateAsync(userToCreate,userForRegisterDto.Password);
 
-
-
             // var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
             var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
@@ -59,7 +58,7 @@ namespace DatingApp.API.Controllers
             {
                return CreatedAtRoute("GetUser", new {controller = "Users", id = userToCreate.Id}, userToReturn); 
             }
-        
+        //var errorMsg= result.Errors.ToList().FirstOrDefault().Description;
         return BadRequest(result.Errors);
             
         }
@@ -91,7 +90,7 @@ namespace DatingApp.API.Controllers
             }
 
 
-            return Unauthorized();
+            return  BadRequest("//Unauthorized()");
             //var user = _mapper.Map<UserForListDto>(userFromRepo);
 
             //return Ok(new

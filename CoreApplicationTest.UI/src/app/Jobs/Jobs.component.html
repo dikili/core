@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+  <div class="card">
+      <div class="card-body bg-light">
+        <div class="alert alert-success"  *ngIf="isWarning">
+          <!-- <a  (click)="toggleWarning()" [routerLink]="['/jobs']" class="close"  data-dismiss="alert" aria-label="close">&times;</a> -->
+          <div>&nbsp;</div>
+          <b>We bring canary wharf jobs from different resources to your door! We know you just want jobs based in Canary Wharf ,so here you go ! </b>
+        </div>
+        <h1 class="card-title text-center text-uppercase">Canary Wharf Jobs </h1>
+        <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+    
+    </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+    <div class="container">
+      <div class="row">
+          <div class="card"   *ngFor="let job of jobs">
+               
+                <div class="card-body">
+                  <h5 class="card-title">{{job.jobTitle}}  - {{ job.date  | timeAgo}}</h5>
+                  <p class="card-text"> {{job.jobDescription}}.</p>
+                  <a href="{{job.jobUrl}}" class="btn btn-primary">Full Spec & Apply</a>
+                
+              </div>
+      </div>
+    </div>
+
+</div>

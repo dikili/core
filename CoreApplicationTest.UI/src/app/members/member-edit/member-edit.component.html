@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-4">
-        <h1>Your Profile</h1>
+        <h1 style="color:rgb(255, 94, 0)">Your Profile</h1>
     </div>
     <div class="col-sm-8">
       <div *ngIf="editForm.dirty" class="alert alert-info">
@@ -15,8 +15,8 @@
         <img class="card-img-top img-thumbnail" src="{{photoUrl || '../../../assets/user.png'}}" alt="{{user.knownAs}}">
         <div class="card-body">
           <div>
-            <strong>Location:</strong>
-            <p>{{user.city}}, {{user.country}}</p>
+            <strong>Contact Details:</strong>
+            <p>Instagram : {{user.inst}}, Twitter: {{user.twit}}</p>
           </div>
           <div>
             <strong>Age:</strong>
@@ -40,22 +40,21 @@
       <div class="tab-panel">
         <tabset class="member-tabset">
           <tab heading="Edit Profile">
-
             <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
-                <h4>Description</h4>
+                <h4>Please introduce yourself and/or your business (i.e your career, your flat number and any other details you would like us to know ...) ?</h4>
                 <textarea class="form-control" name="introduction" rows="6" 
                   [(ngModel)]="user.introduction"></textarea>
-                <h4>Looking For</h4>
+                <h4>What are you looking to get from this club ?</h4>
                 <textarea class="form-control" name="lookingFor" rows="6" 
                   [(ngModel)]="user.lookingFor"></textarea>
-                  <h4>Interests</h4>
+                  <h4>Hobbies, Interests , Would you be interested in joining for organized events ?</h4>
                   <textarea class="form-control" name="interests" rows="6" 
                     [(ngModel)]="user.interests"></textarea>
-                  <h4>Location Details:</h4>
+                  <h4>Contact Details:</h4>
                 <div class="form-inline">
-                  <label for="city">City</label>
+                  <label for="city">Email</label>
                   <input type="text" class="form-control" name="city" [(ngModel)]="user.city">
-                  <label for="country">City</label>
+                  <label for="country">WhatsApp</label>
                   <input type="text" class="form-control" name="country" [(ngModel)]="user.country">
                 </div>
                 

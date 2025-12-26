@@ -40,55 +40,63 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { AdminService } from './_services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { FooterComponent } from './footer/footer.component';
+import { NewsComponent } from './news/news.component';
+import { JobsComponent } from './Jobs/Jobs.component';
+import { NewsService } from './_services/news.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    HomeComponent,
-    RegisterComponent,
-    MemberListComponent,
-    ListsComponent,
-    MessagesComponent,
-    MemberCardComponent,
-    MemberDetailComponent,
-    MemberEditComponent,
-    PhotoEditorComponent,
-    TimeAgoPipe,
-    MemberMessagesComponent,
-    ValueComponent,
-    AdminPanelComponent,
-    HasRoleDirective,
-    UserManagementComponent,
-    PhotoManagementComponent,
-    RolesModalComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BsDropdownModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    ButtonsModule.forRoot(),
-    PaginationModule.forRoot(),
-    TabsModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
-    ModalModule.forRoot(),
-    NgxGalleryModule,
-    FileUploadModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: ['localhost:8000'],
-        blacklistedRoutes: ['localhost:8000/api/auth']
-      }
-    })
-  ],
+   declarations: [
+      AppComponent,
+      NavComponent,
+      HomeComponent,
+      RegisterComponent,
+      MemberListComponent,
+      ListsComponent,
+      MessagesComponent,
+      MemberCardComponent,
+      MemberDetailComponent,
+      MemberEditComponent,
+      PhotoEditorComponent,
+      TimeAgoPipe,
+      MemberMessagesComponent,
+      ValueComponent,
+      AdminPanelComponent,
+      HasRoleDirective,
+      UserManagementComponent,
+      PhotoManagementComponent,
+      RolesModalComponent,
+      FooterComponent,
+      NewsComponent,
+      JobsComponent
+   ],
+   imports: [
+      BrowserModule,
+      HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule,
+      BsDropdownModule.forRoot(),
+      BsDatepickerModule.forRoot(),
+      ButtonsModule.forRoot(),
+      PaginationModule.forRoot(),
+      TabsModule.forRoot(),
+      RouterModule.forRoot(appRoutes, { useHash: true }),
+      ModalModule.forRoot(),
+      NgxGalleryModule,
+      FileUploadModule,
+      JwtModule.forRoot({
+        config: {
+          tokenGetter: tokenGetter,
+          whitelistedDomains:  ['localhost:8000', 'http://webchesssite.azurewebsites.net', 'webchesssite.azurewebsites.net', 'mmcc.space'],
+          blacklistedRoutes: ['localhost:8000/api/auth', 'webchesssite.azurewebsites.net/api/auth', 'mmcc.space/api/auth']
+        }
+      })
+   ],
+
   providers: [
       AuthService,
       ErrorInterceptorProvider,
@@ -101,7 +109,8 @@ export function tokenGetter() {
       PreventUnsavedChanges,
       ListsResolver,
       MessageResolver,
-      AdminService
+      AdminService,
+      NewsService
     ],
     entryComponents: [
       RolesModalComponent

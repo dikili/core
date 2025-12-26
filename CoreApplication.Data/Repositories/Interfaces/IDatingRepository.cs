@@ -34,5 +34,7 @@ namespace CoreApplication.Data.Repositories.Interfaces
         Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
     
         Task<IEnumerable<Message>> GetMessageThread(int userId, int recepientId);
+
+        bool AreThereUnreadMessages(int userId);
     }
 }

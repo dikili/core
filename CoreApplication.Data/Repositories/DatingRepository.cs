@@ -48,42 +48,42 @@ namespace CoreApplication.Data.Repositories
            var users= _coreContext.Users.Include(p=>p.Photos).OrderByDescending(x=>x.LastActive).AsQueryable();
 
            users = users.Where(x=>x.Id!= userParams.UserId);
-
-           users = users.Where(x=>x.Gender == userParams.Gender);
-         if(userParams.Likers)
-         {
-             var x =new List<LoginUser>();
-             var userLikers= await GetUserLikes(userParams.UserId,userParams.Likers);
-             foreach(var user in users)
-             {
+          if(!string.IsNullOrEmpty(userParams.Building))
+          users = users.Where(x=>x.chessLevel == userParams.Building);
+        //  if(userParams.Likers)
+        //  {
+        //      var x =new List<LoginUser>();
+        //      var userLikers= await GetUserLikes(userParams.UserId,userParams.Likers);
+        //      foreach(var user in users)
+        //      {
                  
-                foreach(var likers in userLikers)
-                {
-                    if(user.Id==likers.LikerId)
-                    {
-                        x.Add(user);
-                    }
-                }
-             }
-             users=x.AsQueryable();
-         }
-           if(userParams.Likees)
-         {
-             var x =new List<LoginUser>();
-             var userLikees= await GetUserLikes(userParams.UserId,userParams.Likers);
-             foreach(var user in users)
-             {
+        //         foreach(var likers in userLikers)
+        //         {
+        //             if(user.Id==likers.LikerId)
+        //             {
+        //                 x.Add(user);
+        //             }
+        //         }
+        //      }
+        //      users=x.AsQueryable();
+        //  }
+        //    if(userParams.Likees)
+        //  {
+        //      var x =new List<LoginUser>();
+        //      var userLikees= await GetUserLikes(userParams.UserId,userParams.Likers);
+        //      foreach(var user in users)
+        //      {
                  
-                foreach(var likee in userLikees)
-                {
-                    if(user.Id==likee.LikeeId)
-                    {
-                        x.Add(user);
-                    }
-                }
-             }
-             users=x.AsQueryable();
-         }
+        //         foreach(var likee in userLikees)
+        //         {
+        //             if(user.Id==likee.LikeeId)
+        //             {
+        //                 x.Add(user);
+        //             }
+        //         }
+        //      }
+        //      users=x.AsQueryable();
+        //  }
             // if(userParams.Likers)
             // {
             //     var userLikers= await GetUserLikes(userParams.UserId,userParams.Likers);
@@ -214,7 +214,16 @@ namespace CoreApplication.Data.Repositories
 
               return messages;                 
         }
+        
+        public bool AreThereUnreadMessages(int userId)
+        {
+           var messages=_coreContext.Messages
+                        .Include(u=>u.Receiver)
+                        .AsQueryable();
 
+           return  messages.Where(u=>u.ReceiverId==userId && u.ReciepentDeleted == false && u.IsRead == false).Count()>0;
+  
+        }
         public async Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams)
         {
            var messages=_coreContext.Messages

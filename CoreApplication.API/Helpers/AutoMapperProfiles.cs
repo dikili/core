@@ -1,6 +1,7 @@
 using System.Linq;
 using AutoMapper;
 using CoreApplication.API.DTOs;
+using CoreApplication.API.ServiceModels;
 using CoreApplication.Data.DataEntities;
 
 namespace CoreApplication.API.Helpers
@@ -40,6 +41,8 @@ namespace CoreApplication.API.Helpers
                       opt.MapFrom(u => u.Receiver.Photos.FirstOrDefault(p=>p.IsMain).Url))
               .ForMember(m=>m.ReceiverKnownAs, opt => 
                       opt.MapFrom(u => u.Receiver.KnownAs));
+            CreateMap<Job, JobDto>();
+ 
 
         }
         

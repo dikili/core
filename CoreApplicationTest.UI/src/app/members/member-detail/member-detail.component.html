@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <div class="row">
-    <h1>{{user.knownAs}}'s Profile</h1>
+    <h1 style="color:rgb(255, 38, 0)" >{{user.knownAs}}'s Profile</h1>
   </div>
   <div class="row">
     <div class="col-sm-4">
@@ -8,12 +8,11 @@
         <img class="card-img-top img-thumbnail" src="{{user.photoUrl || '../../../assets/user.png'}}" alt="{{user.knownAs}}">
         <div class="card-body">
           <div>
-            <strong>Location:</strong>
-            <p>{{user.city}}, {{user.country}}</p>
-          </div>
-          <div>
-            <strong>Age:</strong>
-            <p>{{user.age}}</p>
+            <strong>Contact Details:</strong>
+            <p *ngIf="user.inst!=''">Instagram :{{user.inst}}</p>
+            <p *ngIf="user.twit!=''">Twitter: {{user.twit}}</p>
+            <p  *ngIf="user.country!=''" >WhatsApp: {{user.country}}</p>
+            <p  *ngIf="user.businessName!=''" >Company: {{user.businessName}}</p>
           </div>
           <div>
             <strong>Last Active:</strong>
@@ -23,10 +22,15 @@
             <strong>Member Since:</strong>
             <p>{{user.created | date: 'mediumDate'}}</p>
           </div>
+      
+          <div>
+              <strong>Building</strong>
+              <p>{{user.chessLevel}}</p>
+            </div>
         </div>
         <div class="card-footer">
           <div class="btn-group d-flex">
-            <button class="btn btn-primary w-100">Like</button>
+            <!-- <button class="btn btn-primary w-100">Like</button> -->
             <button class="btn btn-success w-100" (click)="selectTab(3)">Message</button>
           </div>
         </div>
@@ -36,9 +40,9 @@
       <div class="tab-panel">
         <tabset class="member-tabset" #memberTabs>
           <tab heading="About {{user.knownAs}}">
-            <h4>Description</h4>
+            <h4>Introduction</h4>
             <p>{{user.introduction}}</p>
-            <h4>Looking For</h4>
+            <h4>What can you give to and expect from club</h4>
             <p>{{user.lookingFor}}</p>
           </tab>
           <tab heading="Interests">

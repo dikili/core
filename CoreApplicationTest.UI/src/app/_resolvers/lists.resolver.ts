@@ -20,7 +20,7 @@ export class ListsResolver implements Resolve<User[]> {
         return this.userService.getUsers(this.pageNumber, this.pageSize, null, this.likesParam).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
-                this.router.navigate(['/home']);
+                // this.router.navigate(['/home']);
                 return of(null);
             })
         );

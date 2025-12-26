@@ -1,0 +1,17 @@
+.chess {
+    background-color:white;
+}
+.invalid-feedback {
+    color:yellow;
+}
+.control-label {
+    color:greenyellow;
+    font-display: bold;
+    padding-right: 0.5em
+}
+
+.formbackground {
+ background-color:orangered;
+ margin-top: 2em;
+ 
+}

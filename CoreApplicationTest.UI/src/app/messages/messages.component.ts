@@ -19,8 +19,8 @@ pagination: Pagination;
 messageContainer: 'Unread';
 
   constructor(private userService: UserService,
-     private alertifyService: AlertifyService,
-    private route: ActivatedRoute,
+  private alertifyService: AlertifyService,
+  private route: ActivatedRoute,
   private authService: AuthService) { }
 
   ngOnInit() {
@@ -29,10 +29,11 @@ messageContainer: 'Unread';
 this.messages = data['messages'].result;
 this.pagination = data['messages'].pagination;
    });
+   this.userService.updateUnReadToNone();
   }
 
   loadMessages() {
-    // tslint:disable-next-line:no-debugger
+
     this.userService
     .getMessages(this.authService.decodedToken.nameid,
       this.pagination.currentPage,

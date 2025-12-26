@@ -108,6 +108,18 @@ namespace CoreApplication.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
+                    b.Property<string>("businessName");
+
+                    b.Property<string>("chessLevel");
+
+                    b.Property<string>("face");
+
+                    b.Property<string>("inst");
+
+                    b.Property<string>("l39");
+
+                    b.Property<string>("twit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
