@@ -14,6 +14,7 @@
 .idea/
 .env
 .env.*
+**/old_UI/
 
 # .NET Core / SDK
 **/*.sourcelink.json

@@ -69,3 +69,131 @@
         background-size: cover;       
         height: 100%; 
    }
+
+/* === FINAL BLACK / WHITE / GOLD THEME === */
+body { background:#000 !important; color:#fff !important; }
+h1,h2,h3,h4,h5,h6,label,p,span,strong { color:#fff !important; }
+
+.card,.panel,.container { background:#000 !important; color:#fff !important; }
+
+.alert,.alert-info,.alert-warning {
+  background:#c9a227 !important;
+  color:#000 !important;
+  border:none;
+}
+
+/* Pagination */
+.pagination .page-item.active .page-link{
+  background:#c9a227 !important;
+  border-color:#c9a227 !important;
+  color:#000 !important;
+}
+.pagination .page-link{
+  color:#c9a227 !important;
+}
+.pagination .page-link:hover{
+  background:rgba(201,162,39,.35) !important;
+}
+
+/* Inputs */
+.form-control, select, textarea{
+  background:#000 !important;
+  color:#fff !important;
+  border:1px solid #c9a227 !important;
+}
+
+/* Buttons */
+.btn-primary{
+  background:#c9a227 !important;
+  border-color:#c9a227 !important;
+  color:#000 !important;
+}
+
+
+/* === OVERRIDES: remove Bootswatch United orange + use richer gold === */
+:root {
+  --accent-gold: #d4af37;
+  --accent-gold-2: #c46b2a;
+}
+
+/* Navbar/top bar must be black, not orange */
+.navbar, .navbar-custom, .navbar-inverse, .navbar-default {
+  background: #000 !important;
+  border-color: rgba(212,175,55,.35) !important;
+}
+.navbar .navbar-nav > li > a,
+.navbar a, .navbar .button, .navbar .nav-link {
+  color: var(--accent-gold) !important;
+  font-weight: 800 !important;
+}
+.navbar .navbar-nav > li > a:hover,
+.navbar a:hover, .navbar .button:hover {
+  color: var(--accent-gold-2) !important;
+}
+
+/* Remove bootstrap bg-light etc that makes odd bars */
+.bg-light, .bg-white {
+  background: #000 !important;
+}
+
+/* Alerts (including alert-success) -> gold */
+.alert-success, .alert-danger, .alert-primary {
+  background: var(--accent-gold) !important;
+  color: #000 !important;
+  border: none !important;
+}
+
+/* Pagination: richer gold / reddish-gold active */
+.pagination .page-item.active .page-link{
+  background: var(--accent-gold-2) !important;
+  border-color: var(--accent-gold-2) !important;
+  color: #000 !important;
+}
+.pagination .page-link{ color: var(--accent-gold) !important; }
+.pagination .page-link:hover{ background: rgba(196,107,42,.28) !important; }
+
+/* Primary buttons use gold */
+.btn-primary{
+  background: var(--accent-gold-2) !important;
+  border-color: var(--accent-gold-2) !important;
+  color:#000 !important;
+}
+.btn-primary:hover{
+  background: var(--accent-gold) !important;
+  border-color: var(--accent-gold) !important;
+}
+
+/* Inputs */
+.form-control, select, textarea{
+  border: 1px solid var(--accent-gold) !important;
+}
+
+
+/* === Force auth buttons to gold (remove green) === */
+.btn-success,
+.btn-register,
+.btn-login {
+  background: #d4af37 !important;
+  border-color: #d4af37 !important;
+  color: #000 !important;
+}
+.btn-success:hover,
+.btn-register:hover,
+.btn-login:hover {
+  background: #c46b2a !important;
+  border-color: #c46b2a !important;
+}
+
+
+/* Gold borders for cards (Jobs, News, etc.) */
+.card{
+  border: 1px solid var(--accent-gold, #d4af37) !important;
+  background:#000 !important;
+}
+.card-body{
+  background:#000 !important;
+}
+
+.news-card, .news-article, .news-item{
+  border: 1px solid var(--accent-gold, #d4af37) !important;
+}

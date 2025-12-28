@@ -4,3 +4,24 @@
    }
 
 
+
+
+/* News article card separation */
+.news-card,
+.card.news-item,
+.news-article {
+  border: 1px solid #d4af37 !important;
+}
+
+/* Buttons inside news articles */
+.news-card .btn,
+.news-article .btn {
+  background: #d4af37 !important;
+  border-color: #d4af37 !important;
+  color: #000 !important;
+}
+.news-card .btn:hover,
+.news-article .btn:hover {
+  background: #c46b2a !important;
+  border-color: #c46b2a !important;
+}
