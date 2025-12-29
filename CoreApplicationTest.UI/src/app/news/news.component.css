@@ -1,10 +1,6 @@
-  
 .formbackground {
-    background-color: white;
-   }
-
-
-
+  background-color: white;
+}
 
 /* News article card separation */
 .news-card,
@@ -22,6 +18,11 @@
 }
 .news-card .btn:hover,
 .news-article .btn:hover {
-  background: #c46b2a !important;
-  border-color: #c46b2a !important;
+  background: #d4af37 !important;
+  border-color: #d4af37 !important;
+}
+#basic-addon2 {
+  background-color: #d4af37 !important;
+  border-color: #d4af37 !important;
+  color: #000 !important;
 }

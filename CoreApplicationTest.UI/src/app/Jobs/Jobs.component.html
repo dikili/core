@@ -1,37 +1,39 @@
 <div class="container">
   <div class="row">
-  <div class="card">
-      <div class="card-body">
-        <div class="alert app-alert"  *ngIf="isWarning">
+    <div class="cardc">
+      <div class="card-bodyc">
+        <div class="alert app-alert" *ngIf="isWarning">
           <!-- <a  (click)="toggleWarning()" [routerLink]="['/jobs']" class="close"  data-dismiss="alert" aria-label="close">&times;</a> -->
           <div>&nbsp;</div>
-          <b>We bring canary wharf jobs from different resources to your door! We know you just want jobs based in Canary Wharf ,so here you go ! </b>
+          <b
+            >CANARY WHARF JOBS DASHBOARD - We monitor the latest job postings
+            from more than 50 reliable sources and job boards empowering you to
+            follow the latest job opportunities in and around canary wharf
+          </b>
         </div>
-        <h1 class="card-title text-center text-uppercase">Canary Wharf Jobs </h1>
+        <h1 class="card-title text-center text-uppercase">Canary Wharf Jobs</h1>
         <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-    
-    </div>
       </div>
     </div>
-  </div>
-    <div class="container">
-      <div class="row">
-          <div class="card"   *ngFor="let job of returnedJobs">
-               
-                <div class="card-body">
-                  <h5 class="card-title">{{job.jobTitle}}  - {{ job.date  | timeAgo}}</h5>
-                  <p class="card-text"> {{job.jobDescription}}.</p>
-                  <a href="{{job.jobUrl}}" class="btn btn-primary">Full Spec & Apply</a>
-                
-              </div>
-  
-      </div>
-
-    </div>
-    <div class="d-flex justify-content-center">
-
-      <pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)"></pagination>
   </div>
 </div>
-
-
+<div class="container">
+  <div class="row">
+    <div class="card" *ngFor="let job of returnedJobs">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ job.jobTitle }} - {{ job.date | timeAgo }}
+        </h5>
+        <p class="card-text">{{ job.jobDescription }}.</p>
+        <a href="{{ job.jobUrl }}" class="btn btn-primary">Full Spec & Apply</a>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <pagination
+      [totalItems]="totalItems"
+      [itemsPerPage]="itemsPerPage"
+      (pageChanged)="pageChanged($event)"
+    ></pagination>
+  </div>
+</div>
