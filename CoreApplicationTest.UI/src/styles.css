@@ -1,114 +1,138 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-@import '../node_modules/bootswatch/dist/united/bootstrap.min.css';
-@import '../node_modules/font-awesome/css/font-awesome.min.css';
-@import '../node_modules/alertifyjs/build/css/alertify.css';
-@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
-
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/bootswatch/dist/united/bootstrap.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import "../node_modules/alertifyjs/build/css/alertify.css";
+@import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
 
 /* .logo {
   width: 700px;
   height: 700px;
-  
- 
-  background: url(./assets/loading.gif) center center no-repeat; 
+
+
+  background: url(./assets/loading.gif) center center no-repeat;
 } */
 
 .tab-panel {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 4px;
-  }
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+}
 
-  .nav-tabs > li.open, .member-tabset > .nav-tabs > li:hover {
-    border-bottom: 4px solid #fbcdcf;
-  }
+.nav-tabs > li.open,
+.member-tabset > .nav-tabs > li:hover {
+  border-bottom: 4px solid #fbcdcf;
+}
 
-  .member-tabset > .nav-tabs > li.open > a, .member-tabset > .nav-tabs > li:hover > a {
-    border: 0;
-    background: none !important;
-    color: #333333;
-  }
+.member-tabset > .nav-tabs > li.open > a,
+.member-tabset > .nav-tabs > li:hover > a {
+  border: 0;
+  background: none !important;
+  color: #333333;
+}
 
-  .member-tabset > .nav-tabs > li.open > a > i, .member-tabset > .nav-tabs > li:hover > a > i {
-    color: #a6a6a6;
-  }
+.member-tabset > .nav-tabs > li.open > a > i,
+.member-tabset > .nav-tabs > li:hover > a > i {
+  color: #a6a6a6;
+}
 
-  .member-tabset > .nav-tabs > li.open .dropdown-menu, .member-tabset > .nav-tabs > li:hover .dropdown-menu {
-    margin-top: 0px;
-  }
+.member-tabset > .nav-tabs > li.open .dropdown-menu,
+.member-tabset > .nav-tabs > li:hover .dropdown-menu {
+  margin-top: 0px;
+}
 
-  .member-tabset > .nav-tabs > li.active {
-    border-bottom: 4px solid #E95420;
-    position: relative;
-  }
+.member-tabset > .nav-tabs > li.active {
+  border-bottom: 4px solid #e95420;
+  position: relative;
+}
 
-  .member-tabset > .nav-tabs > li.active > a {
-    border: 0 !important;
-    color: #333333;
-  }
+.member-tabset > .nav-tabs > li.active > a {
+  border: 0 !important;
+  color: #333333;
+}
 
-  .member-tabset > .nav-tabs > li.active > a > i {
-    color: #404040;
-  }
+.member-tabset > .nav-tabs > li.active > a > i {
+  color: #404040;
+}
 
-  .member-tabset > .tab-content {
-    margin-top: -3px;
-    background-color: #fff;
-    border: 0;
-    border-top: 1px solid #eee;
-    padding: 15px 0;
-  }
-  
-  
-  .chess  {
-    background: url(../src/assets/npw.jpg) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;       
-        height: 100%; 
-   }
+.member-tabset > .tab-content {
+  margin-top: -3px;
+  background-color: #fff;
+  border: 0;
+  border-top: 1px solid #eee;
+  padding: 15px 0;
+}
+
+.chess {
+  background: url(../src/assets/npw.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+}
 
 /* === FINAL BLACK / WHITE / GOLD THEME === */
-body { background:#000 !important; color:#fff !important; }
-h1,h2,h3,h4,h5,h6,label,p,span,strong { color:#fff !important; }
+body {
+  background: #000 !important;
+  color: #fff !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+p,
+span,
+strong {
+  color: #fff !important;
+}
 
-.card,.panel,.container { background:#000 !important; color:#fff !important; }
+.card,
+.panel,
+.container {
+  background: #000 !important;
+  color: #fff !important;
+}
 
-.alert,.alert-info,.alert-warning {
-  background:#c9a227 !important;
-  color:#000 !important;
-  border:none;
+.alert,
+.alert-info,
+.alert-warning {
+  background: #c9a227 !important;
+  color: #000 !important;
+  border: none;
 }
 
 /* Pagination */
-.pagination .page-item.active .page-link{
-  background:#c9a227 !important;
-  border-color:#c9a227 !important;
-  color:#000 !important;
+.pagination .page-item.active .page-link {
+  background: #c9a227 !important;
+  border-color: #c9a227 !important;
+  color: #000 !important;
 }
-.pagination .page-link{
-  color:#c9a227 !important;
+.pagination .page-link {
+  color: #c9a227 !important;
 }
-.pagination .page-link:hover{
-  background:rgba(201,162,39,.35) !important;
+.pagination .page-link:hover {
+  background: rgba(201, 162, 39, 0.35) !important;
 }
 
 /* Inputs */
-.form-control, select, textarea{
-  background:#000 !important;
-  color:#fff !important;
-  border:1px solid #c9a227 !important;
+.form-control,
+select,
+textarea {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #c9a227 !important;
 }
 
 /* Buttons */
-.btn-primary{
-  background:#c9a227 !important;
-  border-color:#c9a227 !important;
-  color:#000 !important;
+.btn-primary {
+  background: #c9a227 !important;
+  border-color: #c9a227 !important;
+  color: #000 !important;
 }
-
 
 /* === OVERRIDES: remove Bootswatch United orange + use richer gold === */
 :root {
@@ -117,60 +141,76 @@ h1,h2,h3,h4,h5,h6,label,p,span,strong { color:#fff !important; }
 }
 
 /* Navbar/top bar must be black, not orange */
-.navbar, .navbar-custom, .navbar-inverse, .navbar-default {
+.navbar,
+.navbar-custom,
+.navbar-inverse,
+.navbar-default {
   background: #000 !important;
-  border-color: rgba(212,175,55,.35) !important;
+  border-color: rgba(212, 175, 55, 0.35) !important;
 }
 .navbar .navbar-nav > li > a,
-.navbar a, .navbar .button, .navbar .nav-link {
+.navbar a,
+.navbar .button,
+.navbar .nav-link {
   color: var(--accent-gold) !important;
   font-weight: 800 !important;
 }
 .navbar .navbar-nav > li > a:hover,
-.navbar a:hover, .navbar .button:hover {
+.navbar a:hover,
+.navbar .button:hover {
   color: var(--accent-gold-2) !important;
 }
 
 /* Remove bootstrap bg-light etc that makes odd bars */
-.bg-light, .bg-white {
+.bg-light,
+.bg-white {
   background: #000 !important;
 }
 
 /* Alerts (including alert-success) -> gold */
-.alert-success, .alert-danger, .alert-primary {
+.alert-success,
+.alert-danger,
+.alert-primary {
   background: var(--accent-gold) !important;
   color: #000 !important;
   border: none !important;
 }
 
 /* Pagination: richer gold / reddish-gold active */
-.pagination .page-item.active .page-link{
+.pagination .page-item.active .page-link {
   background: var(--accent-gold-2) !important;
   border-color: var(--accent-gold-2) !important;
   color: #000 !important;
 }
-.pagination .page-link{ color: var(--accent-gold) !important; }
-.pagination .page-link:hover{ background: rgba(196,107,42,.28) !important; }
+.pagination .page-link {
+  color: var(--accent-gold) !important;
+}
+.pagination .page-link:hover {
+  background: rgba(196, 107, 42, 0.28) !important;
+}
 
 /* Primary buttons use gold */
-.btn-primary{
+.btn-primary {
   background: var(--accent-gold-2) !important;
   border-color: var(--accent-gold-2) !important;
-  color:#000 !important;
+  color: #000 !important;
 }
-.btn-primary:hover{
+.btn-primary:hover {
   background: var(--accent-gold) !important;
   border-color: var(--accent-gold) !important;
 }
 
 /* Inputs */
-.form-control, select, textarea{
+.form-control,
+select,
+textarea {
   border: 1px solid var(--accent-gold) !important;
 }
 
-
 /* === Force auth buttons to gold (remove green) === */
 .btn-success,
+.btn-primary,
+.btn-primary:hover,
 .btn-register,
 .btn-login {
   background: #d4af37 !important;
@@ -184,16 +224,17 @@ h1,h2,h3,h4,h5,h6,label,p,span,strong { color:#fff !important; }
   border-color: #c46b2a !important;
 }
 
-
 /* Gold borders for cards (Jobs, News, etc.) */
-.card{
+.card {
   border: 1px solid var(--accent-gold, #d4af37) !important;
-  background:#000 !important;
+  background: #000 !important;
 }
-.card-body{
-  background:#000 !important;
+.card-body {
+  background: #000 !important;
 }
 
-.news-card, .news-article, .news-item{
+.news-card,
+.news-article,
+.news-item {
   border: 1px solid var(--accent-gold, #d4af37) !important;
 }
